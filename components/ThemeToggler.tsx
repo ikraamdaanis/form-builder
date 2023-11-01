@@ -7,12 +7,13 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger
 } from "components/ui/dropdown-menu";
-import { Moon, Sun } from "lucide-react";
+import { Check, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { cn } from "utils/cn";
 
 /** Toggler for light/dark themes. */
 export const ThemeToggler = () => {
-  const { setTheme } = useTheme();
+  const { theme: currentTheme, setTheme, themes } = useTheme();
 
   return (
     <DropdownMenu>
@@ -24,15 +25,30 @@ export const ThemeToggler = () => {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          System
-        </DropdownMenuItem>
+        {themes.map(theme => {
+          return (
+            <DropdownMenuItem
+              key={theme}
+              onClick={() => {
+                setTimeout(() => {
+                  setTheme(theme);
+                }, 200);
+              }}
+              className={cn(
+                "capitalize",
+                theme === currentTheme && "font-medium"
+              )}
+            >
+              <Check
+                className={cn(
+                  "mr-2 h-5 w-5 opacity-0 transition",
+                  theme === currentTheme && "opacity-100"
+                )}
+              />{" "}
+              {theme}
+            </DropdownMenuItem>
+          );
+        })}
       </DropdownMenuContent>
     </DropdownMenu>
   );
