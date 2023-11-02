@@ -1,7 +1,7 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import "app/globals.css";
 import type { Metadata } from "next";
-import { Inter as Manrope } from "next/font/google";
+import { Manrope } from "next/font/google";
 import { ThemeProvider } from "providers/ThemeProvider";
 import { ReactNode } from "react";
 
