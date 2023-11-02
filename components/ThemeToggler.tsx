@@ -35,8 +35,8 @@ export const ThemeToggler = () => {
                 }, 200);
               }}
               className={cn(
-                "capitalize",
-                theme === currentTheme && "font-medium"
+                "font-medium capitalize",
+                theme === currentTheme && "font-bold"
               )}
             >
               <Check

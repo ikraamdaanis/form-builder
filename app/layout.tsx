@@ -1,7 +1,7 @@
-import { ClerkProvider } from "@clerk/nextjs";
 import "app/globals.css";
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
+import { ClerkProvider } from "providers/ClerkProvider";
 import { ThemeProvider } from "providers/ThemeProvider";
 import { ReactNode } from "react";
 
@@ -18,32 +18,12 @@ type Props = {
 
 export default function RootLayout({ children }: Props) {
   return (
-    <ClerkProvider
-      appearance={{
-        variables: {
-          colorPrimary: "#F6565F"
-        },
-        elements: {
-          userButtonPopoverActionButton: "tracking-normal",
-          userButtonPopoverFooter: "hidden",
-          navbarButton: "tracking-normal",
-          card: "overflow-hidden tracking normal"
-        }
-      }}
-    >
-      <html lang="en" suppressHydrationWarning>
-        <body className={manrope.className}>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-            storageKey="form-builder-theme"
-          >
-            {children}
-          </ThemeProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en" suppressHydrationWarning>
+      <body className={manrope.className}>
+        <ThemeProvider>
+          <ClerkProvider>{children}</ClerkProvider>
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }
