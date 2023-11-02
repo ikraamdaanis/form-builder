@@ -21,11 +21,11 @@ export const ClerkProvider = ({ children }: Props) => {
           colorPrimary: "#F6565F"
         },
         elements: {
-          card: "overflow-hidden tracking normal border border-zinc-300 dark:border-zinc-600",
+          card: "overflow-hidden tracking normal",
           navbarButton: "tracking-normal",
           userButtonPopoverActionButton: "tracking-normal px-4",
           userButtonPopoverCard:
-            "rounded-md border border-zinc-300 dark:border-zinc-600 shadow-md py-4",
+            "rounded-md shadow-none py-4  border border-zinc-300 dark:border-zinc-800",
           userButtonPopoverFooter: "hidden",
           userPreview: "px-4"
         }
