@@ -26,8 +26,8 @@ export default function RootLayout({ children }: Props) {
         elements: {
           userButtonPopoverActionButton: "tracking-normal",
           userButtonPopoverFooter: "hidden",
-          card: "bg-backgroundDark2",
-          navbarButton: "tracking-normal"
+          navbarButton: "tracking-normal",
+          card: "overflow-hidden tracking normal"
         }
       }}
     >

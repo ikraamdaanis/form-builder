@@ -1,4 +1,4 @@
-import { SignOutButton, SignUp, UserButton } from "@clerk/nextjs";
+import { UserButton } from "@clerk/nextjs";
 import { ThemeToggler } from "components/ThemeToggler";
 
 const HomePage = async () => {
@@ -7,8 +7,6 @@ const HomePage = async () => {
       Home
       <ThemeToggler />
       <UserButton afterSignOutUrl="/" />
-      <SignUp />
-      <SignOutButton />
     </div>
   );
 };
