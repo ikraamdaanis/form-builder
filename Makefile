@@ -2,10 +2,13 @@
 include .env.local
 
 install: 
-	bun install 
+	npm install 
 
 dev:
-	PORT="${CLIENT_PORT}" bun dev
+	PORT="${CLIENT_PORT}" npm run dev
 
 ts-lint:
-	bun ts-lint
+	npm run ts-lint
+
+update-db:
+	npm run update-db
