@@ -1,36 +1,52 @@
-import { boolean, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { relations } from "drizzle-orm";
+import {
+  boolean,
+  integer,
+  pgTable,
+  text,
+  timestamp,
+  uuid,
+  varchar
+} from "drizzle-orm/pg-core";
+import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
 export const forms = pgTable("forms", {
-  id: uuid("id").defaultRandom().primaryKey(),
-  name: text("name").notNull().default("default_name"),
-  published: boolean("published").default(false),
+  id: uuid("id").defaultRandom().primaryKey().unique().notNull(),
+  name: varchar("name", { length: 256 }).default("default_name").notNull(),
+  published: boolean("published").default(false).notNull(),
+  description: text("description"),
+  content: text("content").default("[]"),
+  visits: integer("visits").default(0).notNull(),
+  shareUrl: uuid("share_url").defaultRandom().notNull(),
+  submissions: integer("submissions").default(0).notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull()
 });
 
-// model Form {
-//   id          String   @id @default(uuid())
-//   userId      String
-//   createdAt   DateTime @default(now())
-//   published   Boolean  @default(false)
-//   name        String
-//   description String   @default("")
-//   content     String   @default("[]")
+export const selectFormsSchema = createSelectSchema(forms);
+export const insertFormSchema = createInsertSchema(forms);
 
-//   visits      Int @default(0)
-//   submissions Int @default(0)
+export const formsRelations = relations(forms, ({ many }) => ({
+  formSubmissions: many(formSubmissions)
+}));
 
-//   shareURL        String            @unique @default(uuid())
-//   FormSubmissions FormSubmissions[]
+export const formSubmissions = pgTable("formSumissions", {
+  id: uuid("id").defaultRandom().primaryKey().unique().notNull(),
+  formId: uuid("form_id").notNull(),
+  content: text("content"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull()
+});
 
-//   @@unique([name, userId])
-// }
+export const selectFormsSubmissionsSchema = createSelectSchema(formSubmissions);
+export const insertFormSubmissionSchema = createInsertSchema(formSubmissions);
 
-// model FormSubmissions {
-//   id        String   @id @default(uuid())
-//   createdAt DateTime @default(now())
-//   formId    String
-//   form      Form     @relation(fields: [formId], references: [id])
-
-//   content String
-// }
+export const formSubmissionsRelations = relations(
+  formSubmissions,
+  ({ one }) => ({
+    form: one(forms, {
+      fields: [formSubmissions.formId],
+      references: [forms.id]
+    })
+  })
+);
