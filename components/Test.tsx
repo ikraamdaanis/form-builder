@@ -1,6 +1,6 @@
 "use client";
 
-import { handleClick } from "components/handle";
+import { handleClick } from "actions/handle";
 import { Button } from "components/ui/button";
 
 export const Test = () => {

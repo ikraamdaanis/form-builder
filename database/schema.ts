@@ -1,4 +1,4 @@
-import { relations } from "drizzle-orm";
+import { InferSelectModel, relations } from "drizzle-orm";
 import {
   boolean,
   integer,
@@ -23,6 +23,10 @@ export const forms = pgTable("forms", {
   updatedAt: timestamp("updated_at").defaultNow().notNull()
 });
 
+export type Form = InferSelectModel<typeof forms> & {
+  formSubmissions?: FormSubmission[];
+};
+
 export const selectFormsSchema = createSelectSchema(forms);
 export const insertFormSchema = createInsertSchema(forms);
 
@@ -37,6 +41,10 @@ export const formSubmissions = pgTable("formSumissions", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull()
 });
+
+export type FormSubmission = InferSelectModel<typeof formSubmissions> & {
+  form?: Form;
+};
 
 export const selectFormsSubmissionsSchema = createSelectSchema(formSubmissions);
 export const insertFormSubmissionSchema = createInsertSchema(formSubmissions);
