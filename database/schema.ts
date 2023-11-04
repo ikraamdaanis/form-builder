@@ -12,6 +12,7 @@ import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 
 export const forms = pgTable("forms", {
   id: uuid("id").defaultRandom().primaryKey().unique().notNull(),
+  userId: text("user_id").notNull(),
   name: varchar("name", { length: 256 }).default("default_name").notNull(),
   published: boolean("published").default(false).notNull(),
   description: text("description"),
@@ -36,7 +37,9 @@ export const formsRelations = relations(forms, ({ many }) => ({
 
 export const formSubmissions = pgTable("formSumissions", {
   id: uuid("id").defaultRandom().primaryKey().unique().notNull(),
-  formId: uuid("form_id").notNull(),
+  formId: uuid("form_id")
+    .references(() => forms.id, { onDelete: "cascade" })
+    .notNull(),
   content: text("content"),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull()
