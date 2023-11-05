@@ -1,5 +1,7 @@
 import { Separator } from "components/ui/separator";
 import { CreateFormButton } from "features/forms/components/CreateFormButton";
+import { FormCardLoader } from "features/forms/components/FormCard";
+import { FormsContainer } from "features/forms/components/FormsContainer";
 import { StatsCards } from "features/stats/components/StatsCards";
 import { StatsCardsWrapper } from "features/stats/components/StatsCardsWrapper";
 import { Suspense } from "react";
@@ -11,18 +13,19 @@ const HomePage = async () => {
         <StatsCardsWrapper />
       </Suspense>
       <Separator className="my-6" />
-      <h2 className="col-span-2 px-4 text-4xl font-bold">Your forms</h2>
+      <div className="flex items-center justify-between px-4">
+        <h2 className="col-span-2 px-4 text-4xl font-bold">Your forms</h2>
+        <CreateFormButton />
+      </div>
       <Separator className="my-6" />
       <div className="grid grid-cols-1 gap-6 px-4 md:grid-cols-2 lg:grid-cols-3">
-        <CreateFormButton />
-        {/* 
         <Suspense
-          fallback={[1, 2, 3, 4].map((el) => (
-            <FormCardSkeleton key={el} />
+          fallback={[1, 2, 3, 4].map(el => (
+            <FormCardLoader key={el} />
           ))}
         >
-          <FormCards />
-        </Suspense> */}
+          <FormsContainer />
+        </Suspense>
       </div>
     </div>
   );
