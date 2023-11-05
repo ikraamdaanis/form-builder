@@ -16,6 +16,7 @@ import { toast } from "components/ui/use-toast";
 import { createForm } from "features/forms/actions/createForm";
 import { CreateFormSchema, createFormSchema } from "features/forms/types";
 import { Loader } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 
 type Props = {
@@ -23,6 +24,8 @@ type Props = {
 };
 
 export const CreateFormForm = ({ closeModal }: Props) => {
+  const router = useRouter();
+
   const form = useForm<CreateFormSchema>({
     resolver: zodResolver(createFormSchema),
     values: {
@@ -42,6 +45,7 @@ export const CreateFormForm = ({ closeModal }: Props) => {
       console.log(formId);
 
       closeModal();
+      router.refresh();
       // router.push(`/builder/${formId}`);
     } catch (error) {
       const errorMessage = error as Error;
