@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "components/ui/card";
 import { Skeleton } from "components/ui/skeleton";
 import { ReactNode } from "react";
+import { cn } from "utils/cn";
 
 type Props = {
   title: string;
@@ -24,9 +25,9 @@ export function StatsCard({
   className
 }: Props) {
   return (
-    <Card className={className}>
+    <Card className={cn("border-zinc-900 bg-zinc-800", className)}>
       <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="text-sm font-medium text-muted-foreground">
+        <CardTitle className="text-md font-semibold text-muted-foreground">
           {title}
         </CardTitle>
         {icon}
@@ -40,7 +41,9 @@ export function StatsCard({
           )}
           {!loading && value}
         </div>
-        <p className="pt-1 text-xs text-muted-foreground">{helperText}</p>
+        <p className="pt-1 text-sm font-medium text-muted-foreground">
+          {helperText}
+        </p>
       </CardContent>
     </Card>
   );

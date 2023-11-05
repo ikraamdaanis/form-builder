@@ -24,12 +24,16 @@ type Props = {
 export const FormCard = ({ form }: Props) => {
   return (
     <div className="flex h-full">
-      <Card className="flex flex-1 flex-col">
+      <Card className="flex flex-1 flex-col bg-zinc-800">
         <CardHeader>
           <CardTitle className="flex items-center justify-between gap-2">
             <span className="truncate font-bold">{form.name}</span>
-            {form.published && <Badge>Published</Badge>}
-            {!form.published && <Badge variant={"destructive"}>Draft</Badge>}
+            <Badge
+              variant={!form.published ? "destructive" : "default"}
+              className="cursor-default"
+            >
+              {!form.published ? "Draft" : "Published"}
+            </Badge>
           </CardTitle>
           <CardDescription className="flex items-center justify-between text-sm text-muted-foreground">
             {form.published && (
@@ -49,18 +53,18 @@ export const FormCard = ({ form }: Props) => {
           {form.published && (
             <Button asChild className="text-md mt-2 w-full gap-4">
               <Link href={`/forms/${form.id}`}>
-                View submissions <ArrowRight />
+                View submissions <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>
           )}
           {!form.published && (
             <Button
               asChild
-              variant={"secondary"}
-              className="text-md mt-2 w-full gap-4"
+              variant="secondary"
+              className="text-md mt-2 w-full gap-4 bg-zinc-900 hover:bg-zinc-900 hover:brightness-110"
             >
               <Link href={`/builder/${form.id}`}>
-                Edit form <Edit />
+                Edit form <Edit className="h-4 w-4" />
               </Link>
             </Button>
           )}
@@ -74,5 +78,5 @@ export const FormCard = ({ form }: Props) => {
  * A component that displays a loading skeleton while waiting for form data.
  */
 export const FormCardLoader = () => {
-  return <Skeleton className="border-primary-/20 h-[190px] w-full border-2" />;
+  return <Skeleton className="border-primary-/20 h-[148px] w-full border-2" />;
 };

@@ -8,8 +8,8 @@ import { cn } from "utils/cn";
 export const Header = () => {
   const { isLoaded, isSignedIn } = useUser();
   return (
-    <header className="fixed top-0 h-16 w-full border-b border-b-zinc-300 bg-primary bg-white dark:border-b-zinc-600 dark:bg-zinc-800">
-      <nav className="mx-auto flex h-full w-full max-w-screen-xl items-center justify-between">
+    <header className="fixed top-0 h-16 w-full border-b border-b-zinc-300 bg-primary bg-white dark:border-b-zinc-700 dark:bg-zinc-900">
+      <nav className="mx-auto flex h-full w-full items-center justify-between px-4">
         <h1 className="text-lg font-semibold text-black dark:text-white">
           Form Builder
         </h1>
