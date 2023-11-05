@@ -1,4 +1,5 @@
 import { getFormById } from "features/builder/actions/getFormById";
+import { FormBuilder } from "features/builder/components/FormBuilder";
 
 type Props = {
   params: {
@@ -13,7 +14,11 @@ const BuilderPage = async ({ params }: Props) => {
     throw new Error("Form not found");
   }
 
-  return <div className="">{form?.name}</div>;
+  return (
+    <section className="">
+      <FormBuilder form={form} />
+    </section>
+  );
 };
 
 export default BuilderPage;
