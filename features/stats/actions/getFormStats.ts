@@ -1,3 +1,5 @@
+"use server";
+
 import { currentUser } from "@clerk/nextjs";
 import { db } from "database/db";
 import { forms } from "database/schema";

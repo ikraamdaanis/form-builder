@@ -1,4 +1,4 @@
-import { getFormStats } from "actions/forms";
+import { getFormStats } from "features/stats/actions/getFormStats";
 import { StatsCards } from "features/stats/components/StatsCards";
 
 /**

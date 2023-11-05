@@ -1,4 +1,5 @@
 import "app/globals.css";
+import { Toaster } from "components/ui/toaster";
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import { ClerkProvider } from "providers/ClerkProvider";
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: Props) {
     <html lang="en" suppressHydrationWarning>
       <body className={manrope.className}>
         <ThemeProvider>
+          <Toaster />
           <ClerkProvider>{children}</ClerkProvider>
         </ThemeProvider>
       </body>

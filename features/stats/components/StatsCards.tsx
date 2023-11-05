@@ -1,4 +1,4 @@
-import { getFormStats } from "actions/forms";
+import { getFormStats } from "features/stats/actions/getFormStats";
 import { StatsCard } from "features/stats/components/StatsCard";
 import { PiIcon } from "lucide-react";
 
