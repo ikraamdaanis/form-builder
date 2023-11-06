@@ -15,7 +15,7 @@ const BuilderPage = async ({ params }: Props) => {
   }
 
   return (
-    <section className="">
+    <section className="h-full">
       <FormBuilder form={form} />
     </section>
   );

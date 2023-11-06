@@ -5,5 +5,9 @@ type Props = {
 };
 
 export default function BuilderLayout({ children }: Props) {
-  return <main className="h-full w-full bg-zinc-900 pt-16">{children}</main>;
+  return (
+    <main className="h-full w-full bg-zinc-50 pt-16 dark:bg-zinc-900">
+      {children}
+    </main>
+  );
 }
