@@ -1,17 +1,39 @@
-import { useDroppable } from "@dnd-kit/core";
+import { DragEndEvent, useDndMonitor, useDroppable } from "@dnd-kit/core";
+import { EditorElementWrapper } from "features/builder/components/EditorElementWrapper";
 import { EditorSidebar } from "features/builder/components/EditorSidebar";
-import { FormElementInstance } from "features/types";
-import { useState } from "react";
+import { useEditor } from "features/builder/hooks/useEditor";
+import { ElementsType, FormElements } from "features/types";
 import { cn } from "utils/cn";
 
 /** Editor for the forms. */
 export const Editor = () => {
-  const [elements, setElements] = useState<FormElementInstance[]>([]);
+  const { elements, addElement } = useEditor();
 
   const droppable = useDroppable({
     id: "editor-drop-area",
     data: {
       isEditorDropArea: true
+    }
+  });
+
+  useDndMonitor({
+    onDragEnd: (event: DragEndEvent) => {
+      const { active, over } = event;
+
+      if (!active || !over) return;
+
+      const isEditorButton = active.data.current?.isEditorButton;
+
+      if (isEditorButton) {
+        const type = active.data?.current?.type;
+        const newElement = FormElements[type as ElementsType].construct(
+          crypto.randomUUID()
+        );
+
+        console.log(newElement);
+
+        addElement(0, newElement);
+      }
     }
   });
 
@@ -25,14 +47,23 @@ export const Editor = () => {
             droppable.isOver && "ring-2 ring-primary/20"
           )}
         >
-          {!droppable.isOver && (
+          {!droppable.isOver && elements.length === 0 && (
             <p className="flex flex-grow items-center text-3xl font-bold text-muted-foreground">
               Drop here
             </p>
           )}
-          {droppable.isOver && (
+          {droppable.isOver && elements.length === 0 && (
             <div className="w-full p-4">
               <div className="h-[120px] rounded-md bg-primary/20"></div>
+            </div>
+          )}
+          {elements.length > 0 && (
+            <div className="flex w-full flex-col gap-2 p-4">
+              {elements.map(element => {
+                return (
+                  <EditorElementWrapper key={element.id} element={element} />
+                );
+              })}
             </div>
           )}
         </div>

@@ -24,7 +24,7 @@ export type FormElement = {
     icon: ReactNode;
     label: string;
   };
-  designerComponent: () => JSX.Element;
+  designerComponent: (props: { element: FormElementInstance }) => JSX.Element;
   formComponent: () => JSX.Element;
   propertiesComponent: () => JSX.Element;
 };
