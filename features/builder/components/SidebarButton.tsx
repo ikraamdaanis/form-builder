@@ -1,7 +1,6 @@
 import { useDraggable } from "@dnd-kit/core";
 import { Button } from "components/ui/button";
 import { FormElement } from "features/types";
-import React from "react";
 import { cn } from "utils/cn";
 
 type Props = {
