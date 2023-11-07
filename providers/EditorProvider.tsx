@@ -1,10 +1,17 @@
 "use client";
 
 import { FormElementInstance } from "features/types";
-import { ReactNode, createContext, useState } from "react";
+import {
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  createContext,
+  useState
+} from "react";
 
 type EditorContextType = {
   elements: FormElementInstance[];
+  setElements: Dispatch<SetStateAction<FormElementInstance[]>>;
   addElement: (index: number, element: FormElementInstance) => void;
 };
 
@@ -26,7 +33,7 @@ export const EditorProvider = ({ children }: Props) => {
   }
 
   return (
-    <EditorContext.Provider value={{ elements, addElement }}>
+    <EditorContext.Provider value={{ elements, setElements, addElement }}>
       {children}
     </EditorContext.Provider>
   );

@@ -1,4 +1,9 @@
 import { DragEndEvent, useDndMonitor, useDroppable } from "@dnd-kit/core";
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+  arrayMove
+} from "@dnd-kit/sortable";
 import { EditorElementWrapper } from "features/builder/components/EditorElementWrapper";
 import { EditorSidebar } from "features/builder/components/EditorSidebar";
 import { useEditor } from "features/builder/hooks/useEditor";
@@ -7,7 +12,7 @@ import { cn } from "utils/cn";
 
 /** Editor for the forms. */
 export const Editor = () => {
-  const { elements, addElement } = useEditor();
+  const { elements, setElements, addElement } = useEditor();
 
   const droppable = useDroppable({
     id: "editor-drop-area",
@@ -22,7 +27,9 @@ export const Editor = () => {
 
       if (!active || !over) return;
 
-      const isEditorButton = active.data.current?.isEditorButton;
+      const activeElement = active.data.current;
+      const isEditorButton = activeElement?.isEditorButton;
+      const isSortable = activeElement?.sortable;
 
       if (isEditorButton) {
         const type = active.data?.current?.type;
@@ -30,9 +37,34 @@ export const Editor = () => {
           crypto.randomUUID()
         );
 
-        console.log(newElement);
+        const overElement = over.data.current;
+        const overElementIndex = elements.findIndex(
+          element => element.id === overElement?.elementId
+        );
+        const isTopHalf = overElement?.isTopHalf;
+        const isBottomHalf = overElement?.isBottomHalf;
 
-        addElement(0, newElement);
+        const indexChange = isTopHalf ? -1 : isBottomHalf ? 1 : 0;
+
+        const finalIndex =
+          overElementIndex < 0
+            ? -1
+            : (indexChange < 0 ? 0 : indexChange) + overElementIndex;
+
+        console.log(overElement, overElementIndex);
+
+        addElement(finalIndex, newElement);
+
+        return;
+      }
+
+      if (isSortable) {
+        setElements(items => {
+          const oldIndex = items.findIndex(element => element.id === active.id);
+          const newIndex = items.findIndex(element => element.id === over.id);
+
+          return arrayMove(items, oldIndex, newIndex);
+        });
       }
     }
   });
@@ -58,12 +90,17 @@ export const Editor = () => {
             </div>
           )}
           {elements.length > 0 && (
-            <div className="flex w-full flex-col gap-2 p-4">
-              {elements.map(element => {
-                return (
-                  <EditorElementWrapper key={element.id} element={element} />
-                );
-              })}
+            <div className="flex w-full flex-col gap-2 space-y-2 p-4">
+              <SortableContext
+                items={elements}
+                strategy={verticalListSortingStrategy}
+              >
+                {elements.map(element => {
+                  return (
+                    <EditorElementWrapper key={element.id} element={element} />
+                  );
+                })}
+              </SortableContext>
             </div>
           )}
         </div>
