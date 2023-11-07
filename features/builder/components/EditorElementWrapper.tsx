@@ -3,6 +3,8 @@ import { FormElementInstance, FormElements } from "features/types";
 import { cn } from "utils/cn";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { useEditor } from "features/builder/hooks/useEditor";
+import { forwardRef } from "react";
 
 type Props = {
   element: FormElementInstance;
@@ -10,6 +12,7 @@ type Props = {
 
 export const EditorElementWrapper = ({ element }: Props) => {
   const EditorElement = FormElements[element.type].designerComponent;
+  const { setActiveElement } = useEditor();
 
   const topHalf = useDroppable({
     id: element.id + "-top",
@@ -38,12 +41,13 @@ export const EditorElementWrapper = ({ element }: Props) => {
   };
 
   return (
-    <div
+    <Item
       className="relative cursor-pointer"
       ref={setNodeRef}
       style={style}
       {...attributes}
       {...listeners}
+      onClick={() => setActiveElement(element)}
     >
       <div
         ref={topHalf.setNodeRef}
@@ -64,6 +68,16 @@ export const EditorElementWrapper = ({ element }: Props) => {
       {bottomHalf.isOver && (
         <div className="absolute bottom-0 h-1 w-full bg-primary" />
       )}
-    </div>
+    </Item>
   );
 };
+
+export const Item = forwardRef<HTMLDivElement, JSX.IntrinsicElements["div"]>(
+  function Item(props, ref) {
+    return (
+      <div {...props} ref={ref}>
+        {props.children}
+      </div>
+    );
+  }
+);

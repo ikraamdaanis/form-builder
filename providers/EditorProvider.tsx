@@ -13,6 +13,8 @@ type EditorContextType = {
   elements: FormElementInstance[];
   setElements: Dispatch<SetStateAction<FormElementInstance[]>>;
   addElement: (index: number, element: FormElementInstance) => void;
+  activeElement: FormElementInstance | null;
+  setActiveElement: Dispatch<SetStateAction<FormElementInstance | null>>;
 };
 
 export const EditorContext = createContext<EditorContextType | null>(null);
@@ -23,6 +25,8 @@ type Props = {
 
 export const EditorProvider = ({ children }: Props) => {
   const [elements, setElements] = useState<FormElementInstance[]>([]);
+  const [activeElement, setActiveElement] =
+    useState<FormElementInstance | null>(null);
 
   function addElement(index: number, element: FormElementInstance) {
     setElements(prev => {
@@ -33,7 +37,15 @@ export const EditorProvider = ({ children }: Props) => {
   }
 
   return (
-    <EditorContext.Provider value={{ elements, setElements, addElement }}>
+    <EditorContext.Provider
+      value={{
+        elements,
+        setElements,
+        addElement,
+        activeElement,
+        setActiveElement
+      }}
+    >
       {children}
     </EditorContext.Provider>
   );

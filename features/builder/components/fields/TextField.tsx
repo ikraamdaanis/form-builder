@@ -33,7 +33,7 @@ export const TextFieldElement: FormElement = {
   }
 };
 
-type CustomFormElementInstance = FormElementInstance & {
+export type CustomFormElementInstance = FormElementInstance & {
   extraAttributes: typeof extraAttributes;
 };
 

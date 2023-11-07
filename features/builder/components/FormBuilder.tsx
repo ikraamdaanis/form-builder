@@ -24,7 +24,12 @@ export const FormBuilder = ({ form }: Props) => {
   const [isMounted, setIsMounted] = useState(false);
 
   const sensors = useSensors(
-    useSensor(PointerSensor),
+    useSensor(PointerSensor, {
+      // Allows for items to have a click event if it's not being dragged.
+      activationConstraint: {
+        distance: 8
+      }
+    }),
     useSensor(KeyboardSensor, {
       coordinateGetter: sortableKeyboardCoordinates
     })
