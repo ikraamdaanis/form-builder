@@ -37,21 +37,24 @@ export const Editor = () => {
           crypto.randomUUID()
         );
 
+        // Find the existing element it's currently above.
         const overElement = over.data.current;
         const overElementIndex = elements.findIndex(
           element => element.id === overElement?.elementId
         );
+
+        // Check if it's on the top or bottom half of that element.
         const isTopHalf = overElement?.isTopHalf;
         const isBottomHalf = overElement?.isBottomHalf;
 
+        // If it's on the top half, put the new element above, if not, then below.
         const indexChange = isTopHalf ? -1 : isBottomHalf ? 1 : 0;
 
+        // If it's not above an existing element, put it at the bottom.
         const finalIndex =
           overElementIndex < 0
-            ? -1
+            ? elements.length
             : (indexChange < 0 ? 0 : indexChange) + overElementIndex;
-
-        console.log(overElement, overElementIndex);
 
         addElement(finalIndex, newElement);
 

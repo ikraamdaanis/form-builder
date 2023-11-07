@@ -39,7 +39,7 @@ export const EditorElementWrapper = ({ element }: Props) => {
 
   return (
     <div
-      className="relative"
+      className="relative cursor-pointer"
       ref={setNodeRef}
       style={style}
       {...attributes}
