@@ -40,12 +40,16 @@ function EditorComponent({ element }: { element: FormElementInstance }) {
     elementInstance.extraAttributes;
 
   return (
-    <div className="flex w-full flex-col gap-2">
+    <div className="flex w-full flex-col gap-2 rounded-sm border border-transparent hover:border-blue-300">
       <Label>
         {label}
         {required && "*"}
       </Label>
-      <Input readOnly disabled placeholder={placeholder} />
+      <Input
+        readOnly
+        placeholder={placeholder}
+        className="pointer-events-none cursor-default"
+      />
       {helperText && (
         <p className="text-[0.8rem] text-muted-foreground">{helperText}</p>
       )}
