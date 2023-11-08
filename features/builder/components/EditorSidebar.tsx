@@ -1,22 +1,24 @@
 "use client";
 
+import { ELEMENT_WRAPPER_CLASSNAME } from "features/builder/components/EditorElementWrapper";
 import { SidebarButton } from "features/builder/components/SidebarButton";
-import { CustomFormElementInstance } from "features/builder/components/fields/TextField";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
 import { FormElements } from "features/types";
 import { useOnClickOutside } from "hooks/outOutsideClick";
 import { useRef } from "react";
 
 export const EditorSidebar = () => {
-  const [activeElement, setActiveElement] = useEditorStore(state => [
-    state.activeElement,
-    state.setActiveElement
-  ]);
-
-  const attributes = activeElement as CustomFormElementInstance;
+  const [setActiveElement] = useEditorStore(state => [state.setActiveElement]);
 
   const ref = useRef<HTMLElement>(null);
-  useOnClickOutside(ref, () => setActiveElement(null));
+  useOnClickOutside(ref, event => {
+    const target = event.target as HTMLElement;
+
+    if (target.parentElement?.className.includes(ELEMENT_WRAPPER_CLASSNAME))
+      return;
+
+    setActiveElement(null);
+  });
 
   return (
     <aside
@@ -25,7 +27,18 @@ export const EditorSidebar = () => {
     >
       Sidebar
       <SidebarButton formElement={FormElements.TextField} />
-      {activeElement && <div>{attributes.extraAttributes.placeholder}</div>}
+      <PropertiesForm />
     </aside>
   );
+};
+
+const PropertiesForm = () => {
+  const [activeElement] = useEditorStore(state => [state.activeElement]);
+
+  if (!activeElement) return null;
+
+  const ElementPropertiesForm =
+    FormElements[activeElement?.type]?.propertiesComponent;
+
+  return <ElementPropertiesForm />;
 };

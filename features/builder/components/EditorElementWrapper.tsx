@@ -10,6 +10,8 @@ type Props = {
   element: FormElementInstance;
 };
 
+export const ELEMENT_WRAPPER_CLASSNAME = "element-wrapper-classname";
+
 export const EditorElementWrapper = ({ element }: Props) => {
   const EditorElement = FormElements[element.type].designerComponent;
   const [setActiveElement] = useEditorStore(state => [state.setActiveElement]);
@@ -46,12 +48,19 @@ export const EditorElementWrapper = ({ element }: Props) => {
 
   return (
     <Item
-      className="group relative cursor-pointer rounded-sm outline-none"
+      className={cn(
+        "group relative cursor-pointer rounded-sm outline-none",
+        ELEMENT_WRAPPER_CLASSNAME
+      )}
       ref={setNodeRef}
       style={style}
       {...attributes}
       {...listeners}
-      onClick={() => setActiveElement(element)}
+      onClick={e => {
+        e.stopPropagation();
+        setActiveElement(element);
+      }}
+      data-item="true"
     >
       <div className="absolute left-1/2 top-1/2 h-[calc(100%+20px)] w-[calc(100%+20px)] -translate-x-1/2 -translate-y-1/2 rounded-sm border border-transparent group-hover:border-blue-300" />
       <div
