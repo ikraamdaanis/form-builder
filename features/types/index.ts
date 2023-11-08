@@ -24,7 +24,10 @@ export type FormElement = {
     icon: ReactNode;
     label: string;
   };
-  designerComponent: (props: { element: FormElementInstance }) => JSX.Element;
+  designerComponent: (props: {
+    element: FormElementInstance;
+    isOverlay?: boolean;
+  }) => JSX.Element;
   formComponent: () => JSX.Element;
   propertiesComponent: () => JSX.Element;
 };

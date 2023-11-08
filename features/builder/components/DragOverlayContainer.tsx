@@ -34,7 +34,7 @@ export const DragOverlayContainer = () => {
   const element = elements.find(element => element.id === draggedItem.id);
 
   if (element) {
-    node = <EditorComponent element={element} />;
+    node = <EditorComponent element={element} isOverlay />;
   }
 
   return <DragOverlay>{node}</DragOverlay>;

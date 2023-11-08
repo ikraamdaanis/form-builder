@@ -37,7 +37,13 @@ export type CustomFormElementInstance = FormElementInstance & {
   extraAttributes: typeof extraAttributes;
 };
 
-export function EditorComponent({ element }: { element: FormElementInstance }) {
+export function EditorComponent({
+  element,
+  isOverlay
+}: {
+  element: FormElementInstance;
+  isOverlay?: boolean;
+}) {
   const elementInstance = element as CustomFormElementInstance;
   const { label, required, placeholder, helperText } =
     elementInstance.extraAttributes;
@@ -56,8 +62,9 @@ export function EditorComponent({ element }: { element: FormElementInstance }) {
   return (
     <div
       className={cn(
-        "flex w-full flex-col gap-2 rounded-sm bg-zinc-50 dark:bg-zinc-900",
-        isDragging && "opacity-0 "
+        "flex w-full flex-col gap-2 rounded-sm bg-zinc-50 outline-0 ring-0 focus-visible:outline-none dark:bg-zinc-900",
+        isDragging && "opacity-0",
+        isOverlay && "bg-blue-100 p-4 opacity-50 dark:bg-blue-900"
       )}
     >
       <Label>

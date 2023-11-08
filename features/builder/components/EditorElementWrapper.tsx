@@ -40,15 +40,20 @@ export const EditorElementWrapper = ({ element }: Props) => {
     transition
   };
 
+  const isEditorButton = topHalf.active?.id
+    .toString()
+    .includes("editor-button");
+
   return (
     <Item
-      className="relative cursor-pointer rounded-sm border border-transparent hover:border-blue-300"
+      className="group relative cursor-pointer rounded-sm outline-none"
       ref={setNodeRef}
       style={style}
       {...attributes}
       {...listeners}
       onClick={() => setActiveElement(element)}
     >
+      <div className="absolute left-1/2 top-1/2 h-[calc(100%+20px)] w-[calc(100%+20px)] -translate-x-1/2 -translate-y-1/2 rounded-sm border border-transparent group-hover:border-blue-300" />
       <div
         ref={topHalf.setNodeRef}
         className="absolute top-0 h-1/2 w-full rounded-t-md"
@@ -57,15 +62,18 @@ export const EditorElementWrapper = ({ element }: Props) => {
         ref={bottomHalf.setNodeRef}
         className="absolute bottom-0 h-1/2 w-full rounded-b-md"
       />
-      {topHalf.isOver && (
+      {isEditorButton && topHalf.isOver && (
         <div className="absolute top-0 h-1 w-full bg-primary" />
       )}
       <div
-        className={cn(topHalf.isOver && "mt-2", bottomHalf.isOver && "mb-2")}
+        className={cn(
+          isEditorButton && topHalf.isOver && "mt-2",
+          isEditorButton && bottomHalf.isOver && "mb-2"
+        )}
       >
         <EditorElement element={element} />
       </div>
-      {bottomHalf.isOver && (
+      {isEditorButton && bottomHalf.isOver && (
         <div className="absolute bottom-0 h-1 w-full bg-primary" />
       )}
     </Item>
