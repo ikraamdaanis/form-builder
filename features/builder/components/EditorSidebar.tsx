@@ -14,7 +14,7 @@ export const EditorSidebar = () => {
   useOnClickOutside(ref, event => {
     const target = event.target as HTMLElement;
 
-    if (target.parentElement?.className.includes(ELEMENT_WRAPPER_CLASSNAME))
+    if (target?.parentElement?.className?.includes?.(ELEMENT_WRAPPER_CLASSNAME))
       return;
 
     setActiveElement(null);
