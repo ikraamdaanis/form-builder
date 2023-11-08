@@ -1,18 +1,22 @@
 import { DragEndEvent, useDndMonitor, useDroppable } from "@dnd-kit/core";
 import {
   SortableContext,
-  verticalListSortingStrategy,
-  arrayMove
+  arrayMove,
+  verticalListSortingStrategy
 } from "@dnd-kit/sortable";
 import { EditorElementWrapper } from "features/builder/components/EditorElementWrapper";
 import { EditorSidebar } from "features/builder/components/EditorSidebar";
-import { useEditor } from "features/builder/hooks/useEditor";
+import { useEditorStore } from "features/builder/hooks/useEditorStore";
 import { ElementsType, FormElements } from "features/types";
 import { cn } from "utils/cn";
 
 /** Editor for the forms. */
 export const Editor = () => {
-  const { elements, setElements, addElement } = useEditor();
+  const [elements, setElements, addElement] = useEditorStore(state => [
+    state.elements,
+    state.setElements,
+    state.addElement
+  ]);
 
   const droppable = useDroppable({
     id: "editor-drop-area",
@@ -62,12 +66,11 @@ export const Editor = () => {
       }
 
       if (isSortable) {
-        setElements(items => {
-          const oldIndex = items.findIndex(element => element.id === active.id);
-          const newIndex = items.findIndex(element => element.id === over.id);
-
-          return arrayMove(items, oldIndex, newIndex);
-        });
+        const oldIndex = elements.findIndex(
+          element => element.id === active.id
+        );
+        const newIndex = elements.findIndex(element => element.id === over.id);
+        setElements(arrayMove(elements, oldIndex, newIndex));
       }
     }
   });

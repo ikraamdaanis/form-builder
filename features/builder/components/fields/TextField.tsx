@@ -56,8 +56,8 @@ export function EditorComponent({ element }: { element: FormElementInstance }) {
   return (
     <div
       className={cn(
-        "flex w-full flex-col gap-2 rounded-sm border border-transparent bg-zinc-50 hover:border-blue-300 dark:bg-zinc-900",
-        isDragging && "opacity-0"
+        "flex w-full flex-col gap-2 rounded-sm bg-zinc-50 dark:bg-zinc-900",
+        isDragging && "opacity-0 "
       )}
     >
       <Label>

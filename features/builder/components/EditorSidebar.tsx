@@ -2,13 +2,16 @@
 
 import { SidebarButton } from "features/builder/components/SidebarButton";
 import { CustomFormElementInstance } from "features/builder/components/fields/TextField";
-import { useEditor } from "features/builder/hooks/useEditor";
+import { useEditorStore } from "features/builder/hooks/useEditorStore";
 import { FormElements } from "features/types";
 import { useOnClickOutside } from "hooks/outOutsideClick";
 import { useRef } from "react";
 
 export const EditorSidebar = () => {
-  const { activeElement, setActiveElement } = useEditor();
+  const [activeElement, setActiveElement] = useEditorStore(state => [
+    state.activeElement,
+    state.setActiveElement
+  ]);
 
   const attributes = activeElement as CustomFormElementInstance;
 

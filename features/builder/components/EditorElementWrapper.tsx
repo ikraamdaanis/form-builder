@@ -1,10 +1,10 @@
 import { useDroppable } from "@dnd-kit/core";
-import { FormElementInstance, FormElements } from "features/types";
-import { cn } from "utils/cn";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { useEditor } from "features/builder/hooks/useEditor";
+import { useEditorStore } from "features/builder/hooks/useEditorStore";
+import { FormElementInstance, FormElements } from "features/types";
 import { forwardRef } from "react";
+import { cn } from "utils/cn";
 
 type Props = {
   element: FormElementInstance;
@@ -12,7 +12,7 @@ type Props = {
 
 export const EditorElementWrapper = ({ element }: Props) => {
   const EditorElement = FormElements[element.type].designerComponent;
-  const { setActiveElement } = useEditor();
+  const [setActiveElement] = useEditorStore(state => [state.setActiveElement]);
 
   const topHalf = useDroppable({
     id: element.id + "-top",
@@ -42,7 +42,7 @@ export const EditorElementWrapper = ({ element }: Props) => {
 
   return (
     <Item
-      className="relative cursor-pointer"
+      className="relative cursor-pointer rounded-sm border border-transparent hover:border-blue-300"
       ref={setNodeRef}
       style={style}
       {...attributes}
