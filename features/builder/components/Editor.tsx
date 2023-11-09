@@ -29,7 +29,7 @@ export const Editor = () => {
     onDragEnd: (event: DragEndEvent) => {
       const { active, over } = event;
 
-      if (!active || !over) return;
+      if (!active || !over || active.id === over.id) return;
 
       const activeElement = active.data.current;
       const isEditorButton = activeElement?.isEditorButton;
