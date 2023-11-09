@@ -12,7 +12,7 @@ type Props = {
 };
 
 /** Text field component displayed in the editor. */
-export const EditorComponent = ({ element, isOverlay }: Props) => {
+export const TextFieldEditor = ({ element, isOverlay }: Props) => {
   const elementInstance = element as TextFieldElement;
 
   const { label, required, placeholder, helperText } =

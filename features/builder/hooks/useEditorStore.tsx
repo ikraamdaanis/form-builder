@@ -9,6 +9,7 @@ type EditorStore = {
   addElement: (index: number, element: FormElementInstance) => void;
   activeElement: FormElementInstance | null;
   setActiveElement: (element: FormElementInstance | null) => void;
+  updateElement: (elementId: string, element: FormElementInstance) => void;
 };
 
 /** Store for the editor to handle state. */
@@ -27,5 +28,17 @@ export const useEditorStore = create<EditorStore>(set => ({
   activeElement: null,
   setActiveElement: (element: FormElementInstance | null) => {
     set({ activeElement: element });
+  },
+  updateElement: (elementId: string, element: FormElementInstance) => {
+    set(state => {
+      const newElements = [...state.elements].map(currElement => {
+        if (currElement.id === elementId) {
+          return element;
+        }
+
+        return currElement;
+      });
+      return { elements: newElements };
+    });
   }
 }));

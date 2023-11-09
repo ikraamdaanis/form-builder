@@ -1,6 +1,7 @@
 "use client";
 
-import { EditorComponent } from "features/builder/components/fields/TextField/TextFieldEditor";
+import { TextFieldEditor } from "features/builder/components/fields/TextField/TextFieldEditor";
+import { TextFieldProperties } from "features/builder/components/fields/TextField/TextFieldProperties";
 import { ElementsType, FormElement, FormElementInstance } from "features/types";
 import { Text } from "lucide-react";
 
@@ -22,9 +23,9 @@ export const TextFieldElement: FormElement = {
     type,
     extraAttributes: textFieldAttributes
   }),
-  editorComponent: EditorComponent,
+  editorComponent: TextFieldEditor,
+  propertiesComponent: TextFieldProperties,
   formComponent: () => <div>Form</div>,
-  propertiesComponent: () => <div>Properties</div>,
   designerButton: {
     icon: <Text className="h-5 w-5 cursor-grab text-primary" />,
     label: "Text Field"

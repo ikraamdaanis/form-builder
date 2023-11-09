@@ -10,8 +10,6 @@ type Props = {
   element: FormElementInstance;
 };
 
-export const ELEMENT_WRAPPER_CLASSNAME = "element-wrapper-classname";
-
 /**
  * Wrapper for an element in the editor which allows it to be dragged in the
  * editor. If an element button overs over it, it would show a border at the
@@ -55,10 +53,7 @@ export const EditorElementWrapper = ({ element }: Props) => {
 
   return (
     <Item
-      className={cn(
-        "group relative cursor-pointer rounded-sm outline-none",
-        ELEMENT_WRAPPER_CLASSNAME
-      )}
+      className="group relative cursor-pointer rounded-sm outline-none"
       ref={setNodeRef}
       style={style}
       {...attributes}

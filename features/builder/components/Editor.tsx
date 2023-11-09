@@ -70,7 +70,7 @@ export const Editor = () => {
             : (indexChange < 0 ? 0 : indexChange) + overElementIndex;
 
         addElement(finalIndex, newElement);
-
+        setActiveElement(newElement);
         return;
       }
 

@@ -1,7 +1,7 @@
 import "app/globals.css";
 import { Toaster } from "components/ui/toaster";
 import type { Metadata } from "next";
-import { Manrope } from "next/font/google";
+import { Manrope as Manrope } from "next/font/google";
 import { ClerkProvider } from "providers/ClerkProvider";
 import { ThemeProvider } from "providers/ThemeProvider";
 import { ReactNode } from "react";
