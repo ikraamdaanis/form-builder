@@ -1,4 +1,4 @@
-import { DragEndEvent, useDndMonitor, useDroppable } from "@dnd-kit/core";
+import { useDndMonitor, useDroppable } from "@dnd-kit/core";
 import {
   SortableContext,
   arrayMove,
@@ -12,11 +12,14 @@ import { cn } from "utils/cn";
 
 /** Editor for the forms. */
 export const Editor = () => {
-  const [elements, setElements, addElement] = useEditorStore(state => [
-    state.elements,
-    state.setElements,
-    state.addElement
-  ]);
+  const [elements, setElements, addElement, setActiveElement] = useEditorStore(
+    state => [
+      state.elements,
+      state.setElements,
+      state.addElement,
+      state.setActiveElement
+    ]
+  );
 
   const droppable = useDroppable({
     id: "editor-drop-area",
@@ -26,7 +29,13 @@ export const Editor = () => {
   });
 
   useDndMonitor({
-    onDragEnd: (event: DragEndEvent) => {
+    onDragStart: event => {
+      // If an element is being dragged set it to the active element.
+      const element =
+        elements.find(element => element.id === event.active.id) || null;
+      setActiveElement(element);
+    },
+    onDragEnd: event => {
       const { active, over } = event;
 
       if (!active || !over || active.id === over.id) return;

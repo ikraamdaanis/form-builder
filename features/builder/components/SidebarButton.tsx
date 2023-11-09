@@ -36,15 +36,11 @@ export const SidebarButton = ({ formElement }: Props) => {
 };
 
 export const SidebarButtonDragOverlay = ({ formElement }: Props) => {
-  const { icon, label } = formElement.designerButton;
+  const Element = formElement.editorComponent;
 
   return (
-    <Button
-      className="flex h-[120px] w-[120px] cursor-grab flex-col gap-2"
-      variant="outline"
-    >
-      {icon}
-      <span>{label}</span>
-    </Button>
+    <div className="min-w-[400px]">
+      <Element element={formElement.construct(crypto.randomUUID())} isOverlay />
+    </div>
   );
 };

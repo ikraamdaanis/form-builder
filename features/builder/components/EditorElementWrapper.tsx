@@ -12,9 +12,17 @@ type Props = {
 
 export const ELEMENT_WRAPPER_CLASSNAME = "element-wrapper-classname";
 
+/**
+ * Wrapper for an element in the editor which allows it to be dragged in the
+ * editor. If an element button overs over it, it would show a border at the
+ * top or bottom depending on the position of the element drag button.
+ */
 export const EditorElementWrapper = ({ element }: Props) => {
-  const EditorElement = FormElements[element.type].designerComponent;
+  const EditorElement = FormElements[element.type].editorComponent;
   const [setActiveElement] = useEditorStore(state => [state.setActiveElement]);
+
+  const [activeElement] = useEditorStore(state => [state.activeElement]);
+  const isActiveElement = activeElement?.id === element.id;
 
   const topHalf = useDroppable({
     id: element.id + "-top",
@@ -34,12 +42,11 @@ export const EditorElementWrapper = ({ element }: Props) => {
     }
   });
 
-  const { attributes, listeners, setNodeRef, transform, transition } =
+  const { attributes, listeners, setNodeRef, transform, isDragging } =
     useSortable({ id: element.id });
 
   const style = {
-    transform: CSS.Transform.toString(transform),
-    transition
+    transform: CSS.Transform.toString(transform)
   };
 
   const isEditorButton = topHalf.active?.id
@@ -62,7 +69,12 @@ export const EditorElementWrapper = ({ element }: Props) => {
       }}
       data-item="true"
     >
-      <div className="absolute left-1/2 top-1/2 h-[calc(100%+20px)] w-[calc(100%+20px)] -translate-x-1/2 -translate-y-1/2 rounded-sm border border-transparent group-hover:border-blue-300" />
+      <div
+        className={cn(
+          "absolute h-full w-full border border-transparent group-hover:border-blue-300",
+          isActiveElement && !isDragging && "border-blue-300"
+        )}
+      />
       <div
         ref={topHalf.setNodeRef}
         className="absolute top-0 h-1/2 w-full rounded-t-md"

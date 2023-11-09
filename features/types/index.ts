@@ -1,4 +1,4 @@
-import { TextFieldElement } from "features/builder/components/fields/TextField";
+import { TextFieldElement } from "features/builder/components/fields/TextField/TextField";
 import { ReactNode } from "react";
 
 export type ElementsType = "TextField";
@@ -17,14 +17,12 @@ export type SubmitFunction = (key: string, value: string) => void;
 
 export type FormElement = {
   type: ElementsType;
-
   construct: (id: string) => FormElementInstance;
-
   designerButton: {
     icon: ReactNode;
     label: string;
   };
-  designerComponent: (props: {
+  editorComponent: (props: {
     element: FormElementInstance;
     isOverlay?: boolean;
   }) => JSX.Element;
@@ -40,9 +38,8 @@ export const FormElements: FormElementsType = {
   TextField: TextFieldElement
 };
 
-export type FormElementInstance = {
+export type FormElementInstance<T = Record<string, any>> = {
   id: string;
   type: ElementsType;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  extraAttributes?: Record<string, any>;
+  extraAttributes: T;
 };
