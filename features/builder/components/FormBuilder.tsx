@@ -42,10 +42,8 @@ export const FormBuilder = ({ form }: Props) => {
     const isSortable = activeElement?.sortable;
 
     if (isEditorButton) {
-      const type = active.data?.current?.type;
-      const newElement = FormElements[type as ElementsType].construct(
-        crypto.randomUUID()
-      );
+      const type = active.data?.current?.type as ElementsType;
+      const newElement = FormElements[type].construct(crypto.randomUUID());
 
       // Find the existing element it's currently above.
       const overElement = over.data.current;
@@ -75,6 +73,7 @@ export const FormBuilder = ({ form }: Props) => {
       setElements(arrayMove(elements, oldIndex, newIndex));
     }
   }
+
   return (
     <SortableContainer onDragStart={onDragStart} onDragEnd={onDragEnd}>
       <section className="flex h-full w-full flex-col">

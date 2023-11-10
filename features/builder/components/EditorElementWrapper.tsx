@@ -54,7 +54,10 @@ export const EditorElementWrapper = ({ element, isOverlay }: Props) => {
 
   return (
     <Item
-      className="group relative cursor-pointer rounded-sm outline-none"
+      className={cn(
+        "group relative cursor-pointer border border-transparent outline-none group-hover:border-blue-300",
+        isActiveElement && !isDragging && "border-blue-300"
+      )}
       ref={setNodeRef}
       style={style}
       {...attributes}
@@ -65,22 +68,21 @@ export const EditorElementWrapper = ({ element, isOverlay }: Props) => {
       }}
       data-item="true"
     >
-      <div
-        className={cn(
-          "absolute h-full w-full border border-transparent group-hover:border-blue-300",
-          isActiveElement && !isDragging && "border-blue-300"
-        )}
-      />
-      <div
-        ref={topHalf.setNodeRef}
-        className="absolute top-0 h-1/2 w-full rounded-t-md"
-      />
-      <div
-        ref={bottomHalf.setNodeRef}
-        className="absolute bottom-0 h-1/2 w-full rounded-b-md"
-      />
+      <div />
+      {isEditorButton && (
+        <>
+          <div
+            ref={topHalf.setNodeRef}
+            className="absolute top-0 h-1/2 w-full rounded-t-md"
+          />
+          <div
+            ref={bottomHalf.setNodeRef}
+            className="absolute bottom-0 h-1/2 w-full rounded-b-md"
+          />
+        </>
+      )}
       {isEditorButton && topHalf.isOver && (
-        <div className="absolute top-0 h-1 w-full bg-primary" />
+        <div className="absolute top-0 h-0.5 w-full bg-primary" />
       )}
       <div
         className={cn(
@@ -91,7 +93,7 @@ export const EditorElementWrapper = ({ element, isOverlay }: Props) => {
         <EditorElement element={element} isOverlay={isOverlay} />
       </div>
       {isEditorButton && bottomHalf.isOver && (
-        <div className="absolute bottom-0 h-1 w-full bg-primary" />
+        <div className="absolute bottom-0 h-0.5 w-full bg-primary" />
       )}
     </Item>
   );
