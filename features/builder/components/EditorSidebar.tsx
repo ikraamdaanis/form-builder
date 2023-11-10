@@ -15,7 +15,12 @@ export const EditorSidebar = () => {
 
   return (
     <aside className="flex h-full w-[260px] max-w-[260px] flex-grow flex-col gap-2 overflow-y-auto border-l-2 border-muted bg-zinc-50 p-4 dark:bg-zinc-900">
-      {!activeElement && <SidebarButton formElement={FormElements.TextField} />}
+      {!activeElement && (
+        <>
+          <SidebarButton formElement={FormElements.TextField} />
+          <SidebarButton formElement={FormElements.Heading} />
+        </>
+      )}
       <PropertiesForm />
     </aside>
   );

@@ -8,6 +8,7 @@ import { cn } from "utils/cn";
 
 type Props = {
   element: FormElementInstance;
+  isOverlay?: boolean;
 };
 
 /**
@@ -15,7 +16,7 @@ type Props = {
  * editor. If an element button overs over it, it would show a border at the
  * top or bottom depending on the position of the element drag button.
  */
-export const EditorElementWrapper = ({ element }: Props) => {
+export const EditorElementWrapper = ({ element, isOverlay }: Props) => {
   const EditorElement = FormElements[element.type].editorComponent;
   const [setActiveElement] = useEditorStore(state => [state.setActiveElement]);
 
@@ -87,7 +88,7 @@ export const EditorElementWrapper = ({ element }: Props) => {
           isEditorButton && bottomHalf.isOver && "mb-2"
         )}
       >
-        <EditorElement element={element} />
+        <EditorElement element={element} isOverlay={isOverlay} />
       </div>
       {isEditorButton && bottomHalf.isOver && (
         <div className="absolute bottom-0 h-1 w-full bg-primary" />

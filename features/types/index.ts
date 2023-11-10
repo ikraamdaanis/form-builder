@@ -1,7 +1,8 @@
+import { HeadingElement } from "features/builder/components/fields/Heading/Heading";
 import { TextFieldElement } from "features/builder/components/fields/TextField/TextField";
 import { ReactNode } from "react";
 
-export type ElementsType = "TextField";
+export type ElementsType = "TextField" | "Heading";
 // | "TitleField"
 // | "SubTitleField"
 // | "ParagraphField"
@@ -35,7 +36,8 @@ type FormElementsType = {
 };
 
 export const FormElements: FormElementsType = {
-  TextField: TextFieldElement
+  TextField: TextFieldElement,
+  Heading: HeadingElement
 };
 
 export type FormElementInstance<T = Record<string, any>> = {
