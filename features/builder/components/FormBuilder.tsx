@@ -44,7 +44,7 @@ export const FormBuilder = ({ form }: Props) => {
   return (
     <DndContext sensors={sensors}>
       <section className="flex h-full w-full flex-col">
-        <nav className="flex items-center justify-between gap-3 border-b-2 bg-zinc-50 p-4 dark:bg-zinc-800">
+        <nav className="flex items-center justify-between gap-3 border-b border-b-zinc-300 bg-primary bg-white px-4 py-2 dark:border-b-zinc-700 dark:bg-zinc-900">
           <h2 className="truncate font-medium">
             <span className="mr-2 text-muted-foreground">Form:</span>
             {form.name}
