@@ -66,10 +66,9 @@ export const EditorElementWrapper = ({ element, isOverlay }: Props) => {
         e.stopPropagation();
         setActiveElement(element);
       }}
-      data-item="true"
     >
       <div />
-      {isEditorButton && (
+      {/* {isEditorButton && (
         <>
           <div
             ref={topHalf.setNodeRef}
@@ -80,7 +79,7 @@ export const EditorElementWrapper = ({ element, isOverlay }: Props) => {
             className="absolute bottom-0 h-1/2 w-full rounded-b-md"
           />
         </>
-      )}
+      )} */}
       {isEditorButton && topHalf.isOver && (
         <div className="absolute top-0 h-0.5 w-full bg-primary" />
       )}
