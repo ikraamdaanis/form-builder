@@ -23,7 +23,7 @@ export const SidebarButton = ({ formElement }: Props) => {
       ref={draggable.setNodeRef}
       className={cn(
         "flex h-[120px] w-[120px] cursor-grab flex-col gap-2",
-        draggable.isDragging && "ring-2 ring-primary"
+        draggable.isDragging && "ring-2 ring-blue-400"
       )}
       variant="outline"
       {...draggable.listeners}

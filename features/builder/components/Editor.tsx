@@ -22,6 +22,9 @@ export const Editor = () => {
     }
   });
 
+  const isOverEditor =
+    droppable.active?.data?.current?.isEditorButton && droppable.over;
+
   return (
     <div className="flex h-full w-full">
       <div className="w-full p-4">
@@ -29,7 +32,7 @@ export const Editor = () => {
           ref={droppable.setNodeRef}
           className={cn(
             "m-auto flex h-full max-w-[920px] flex-1 flex-grow flex-col items-center justify-start overflow-y-auto rounded-xl bg-zinc-50 dark:bg-zinc-900",
-            droppable.isOver && "ring-2 ring-primary/20"
+            isOverEditor && "ring-2 ring-blue-400"
           )}
           onClick={e => {
             e.stopPropagation();
