@@ -13,7 +13,7 @@ export const AttributeSelectItem = React.forwardRef<
   <SelectItem
     ref={ref}
     className={cn(
-      "selector cursor-pointer hover:dark:bg-zinc-900 aria-[selected=false]:dark:bg-transparent data-[highlighted]:dark:bg-zinc-900",
+      "selector cursor-pointer text-xs hover:dark:bg-zinc-900 aria-[selected=false]:dark:bg-transparent data-[highlighted]:dark:bg-zinc-900",
       className
     )}
     {...props}

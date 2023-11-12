@@ -13,7 +13,7 @@ export const AttributeSelectTrigger = React.forwardRef<
   <SelectTrigger
     ref={ref}
     className={cn(
-      "ml-auto w-[200px] rounded-sm px-2 py-1 text-sm focus:ring-1 focus:ring-blue-300 focus:ring-offset-0 dark:bg-zinc-800 dark:focus:ring-blue-400",
+      "bg-red ml-auto h-[unset] w-[200px] rounded-sm border border-zinc-300 px-2 py-2 text-xs focus:ring-1 focus:ring-blue-300 focus:ring-offset-0 dark:border-zinc-700 dark:bg-zinc-800 dark:focus:ring-blue-500",
       className
     )}
     {...props}
