@@ -37,7 +37,6 @@ export const TextFieldEditor = ({ element }: Props) => {
     >
       <div className={cn(isDragging && "opacity-0")}>
         <Label>
-          {element.id.slice(0, 6)}
           {label}
           {required && "*"}
         </Label>
