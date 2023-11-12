@@ -1,7 +1,7 @@
 "use client";
 
-import { DragEndEvent, DragStartEvent } from "@dnd-kit/core";
-import { arrayMove } from "@dnd-kit/sortable";
+import { DragEndEvent, DragOverEvent, MeasuringStrategy } from "@dnd-kit/core";
+import { SortableData, arrayMove } from "@dnd-kit/sortable";
 import { Form } from "database/schema";
 import { Editor } from "features/builder/components/Editor";
 import { PreviewDialogButton } from "features/builder/components/PreviewDialogButton";
@@ -16,23 +16,68 @@ type Props = {
 };
 
 export const FormBuilder = ({ form }: Props) => {
-  const [elements, setElements, addElement, setActiveElement] = useEditorStore(
-    state => [
-      state.elements,
-      state.setElements,
-      state.addElement,
-      state.setActiveElement
-    ]
-  );
+  const [elements, setElements, addElement] = useEditorStore(state => [
+    state.elements,
+    state.setElements,
+    state.addElement
+  ]);
 
-  function onDragStart(event: DragStartEvent) {
-    // If an element is being dragged set it to the active element.
-    const element =
-      elements.find(element => element.id === event.active.id) || null;
-    setActiveElement(element);
+  function onDragStart() {}
+
+  function onDragOver(event: DragOverEvent) {
+    const { active, over } = event;
+
+    if (!active || !over || active.id === over.id) return;
+
+    const activeElement = active.data.current;
+
+    const isSortableElement = !!activeElement?.sortable;
+    const isEditorButton = !!activeElement?.isEditorButton;
+
+    const overSortable = over.data.current
+      ?.sortable as SortableData["sortable"];
+    const overCanvas = over.id === "editor-drop-area";
+
+    if (isEditorButton) {
+      const type = active.data?.current?.type as ElementsType;
+      const newElement = FormElements[type].construct("spacer");
+
+      // If an element is being dropped in and is hovering another element, insert
+      // it at the same index.
+      if (overSortable) {
+        const nextIndex =
+          overSortable.index > -1 ? overSortable.index : elements.length;
+
+        setElements(elements.filter(element => !element.id.includes("spacer")));
+        return addElement(nextIndex, newElement);
+      }
+
+      // If an element is being dropped in and isn't above an existing element,
+      // put it right at the bottom.
+      if (overCanvas) {
+        const nextIndex = elements.length;
+
+        setElements(elements.filter(element => !element.id.includes("spacer")));
+        return addElement(nextIndex, newElement);
+      }
+    }
+
+    // If an element is being re-ordered but it's not over any other element,
+    // put it right at the bottom.
+    if (isSortableElement && overCanvas) {
+      const activeIndex = elements.findIndex(
+        element => element.id === active.id
+      );
+
+      const newArray = arrayMove([...elements], activeIndex, elements.length);
+
+      setElements(newArray);
+    }
   }
 
   function onDragEnd(event: DragEndEvent) {
+    setElements(elements.filter(element => !element.id.includes("spacer")));
+
     const { active, over } = event;
 
     if (!active || !over || active.id === over.id) return;
@@ -45,26 +90,18 @@ export const FormBuilder = ({ form }: Props) => {
       const type = active.data?.current?.type as ElementsType;
       const newElement = FormElements[type].construct(crypto.randomUUID());
 
-      // Find the existing element it's currently above.
-      const overElement = over.data.current;
-      const overElementIndex = elements.findIndex(
-        element => element.id === overElement?.elementId
+      const spaceElementIndex = elements.findIndex(
+        element => element.id === "spacer"
       );
 
-      // Check if it's on the top or bottom half of that element.
-      const isTopHalf = overElement?.isTopHalf;
-      const isBottomHalf = overElement?.isBottomHalf;
+      if (spaceElementIndex > -1) {
+        const updatedElements = [...elements];
+        updatedElements[spaceElementIndex] = newElement;
 
-      // If it's on the top half, put the new element above, if not, then below.
-      const indexChange = isTopHalf ? -1 : isBottomHalf ? 1 : 0;
+        return setElements(updatedElements);
+      }
 
-      // If it's not above an existing element, put it at the bottom.
-      const finalIndex =
-        overElementIndex < 0
-          ? elements.length
-          : (indexChange < 0 ? 0 : indexChange) + overElementIndex;
-
-      return addElement(finalIndex, newElement);
+      return addElement(spaceElementIndex, newElement);
     }
 
     if (isSortable) {
@@ -74,8 +111,23 @@ export const FormBuilder = ({ form }: Props) => {
     }
   }
 
+  function onDragCancel() {
+    setElements(elements.filter(element => !element.id.includes("spacer")));
+  }
+
   return (
-    <SortableContainer onDragStart={onDragStart} onDragEnd={onDragEnd}>
+    <SortableContainer
+      onDragStart={onDragStart}
+      onDragOver={onDragOver}
+      onDragEnd={onDragEnd}
+      onDragCancel={onDragCancel}
+      measuring={{
+        droppable: {
+          strategy: MeasuringStrategy.Always
+        }
+      }}
+      // collisionDetection={collisionDetectionStrategy}
+    >
       <section className="flex h-full w-full flex-col">
         <nav className="flex items-center justify-between gap-3 border-b border-b-zinc-300 bg-primary bg-white px-4 py-2 dark:border-b-zinc-700 dark:bg-zinc-900">
           <h2 className="truncate font-medium">

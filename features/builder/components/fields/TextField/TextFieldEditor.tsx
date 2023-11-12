@@ -8,11 +8,10 @@ import { cn } from "utils/cn";
 
 type Props = {
   element: FormElementInstance;
-  isOverlay?: boolean;
 };
 
 /** Text field component displayed in the editor. */
-export const TextFieldEditor = ({ element, isOverlay }: Props) => {
+export const TextFieldEditor = ({ element }: Props) => {
   const elementInstance = element as TextFieldElement;
 
   const { label, required, placeholder, helperText } =
@@ -33,8 +32,7 @@ export const TextFieldEditor = ({ element, isOverlay }: Props) => {
     <div
       className={cn(
         "flex w-full flex-col gap-2 bg-zinc-50 outline-0 ring-0 focus-visible:outline-none dark:bg-zinc-900",
-        isDragging && "border border-dashed border-blue-300",
-        isOverlay && "border border-blue-200 dark:border-blue-300"
+        isDragging && "border border-dashed border-blue-300"
       )}
     >
       <div className={cn(isDragging && "opacity-0")}>

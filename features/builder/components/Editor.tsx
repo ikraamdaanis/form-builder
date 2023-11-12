@@ -47,18 +47,18 @@ export const Editor = () => {
             </div>
           )}
           {elements.length > 0 && (
-            <div className="flex h-full w-full flex-col gap-2 space-y-2 p-4">
-              <SortableContext
-                items={elements}
-                strategy={verticalListSortingStrategy}
-              >
+            <SortableContext
+              items={elements}
+              strategy={verticalListSortingStrategy}
+            >
+              <div className="flex h-full w-full flex-col gap-2 space-y-2 p-4">
                 {elements.map(element => {
                   return (
                     <EditorElementWrapper key={element.id} element={element} />
                   );
                 })}
-              </SortableContext>
-            </div>
+              </div>
+            </SortableContext>
           )}
         </div>
       </div>
