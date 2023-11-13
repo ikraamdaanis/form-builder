@@ -3,19 +3,20 @@ import {
   SortableContext,
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
-import { EditorElementWrapper } from "features/builder/components/EditorElementWrapper";
+import { Show } from "components/Show";
 import { EditorSidebar } from "features/builder/components/EditorSidebar";
+import { ElementWrapper } from "features/builder/components/ElementWrapper";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
 import { cn } from "utils/cn";
 import { useShallow } from "zustand/react/shallow";
 
-/** Editor for the forms. */
-export const Editor = () => {
-  // const [elements, setActiveElement] = useEditorStore(state => [
-  //   state.elements,
-  //   state.setActiveElement
-  // ]);
-
+/**
+ * The Editor Canvas serves as the main editor for forms, providing a canvas
+ * where form elements can be manipulated and arranged using drag-and-drop
+ * functionality. It integrates with the @dnd-kit library for handling
+ * drag-and-drop operations.
+ */
+export const EditorCanvas = () => {
   const { elements, setActiveElement } = useEditorStore(
     useShallow(state => ({
       elements: state.elements,
@@ -47,30 +48,23 @@ export const Editor = () => {
             setActiveElement(null);
           }}
         >
-          {!droppable.isOver && elements.length === 0 && (
+          <Show when={!droppable.isOver && elements.length === 0}>
             <p className="flex flex-grow items-center text-3xl font-bold text-muted-foreground">
               Drop here
             </p>
-          )}
-          {droppable.isOver && elements.length === 0 && (
-            <div className="w-full p-4">
-              <div className="h-[120px] rounded-md bg-primary/20"></div>
-            </div>
-          )}
-          {elements.length > 0 && (
+          </Show>
+          <Show when={elements.length > 0}>
             <SortableContext
               items={elements}
               strategy={verticalListSortingStrategy}
             >
               <div className="flex h-full w-full flex-col gap-2 space-y-2 p-4">
                 {elements.map(element => {
-                  return (
-                    <EditorElementWrapper key={element.id} element={element} />
-                  );
+                  return <ElementWrapper key={element.id} element={element} />;
                 })}
               </div>
             </SortableContext>
-          )}
+          </Show>
         </div>
       </div>
       <EditorSidebar />

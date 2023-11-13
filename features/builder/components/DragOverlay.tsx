@@ -1,14 +1,19 @@
-import { Active, DragOverlay, useDndMonitor } from "@dnd-kit/core";
-import { EditorElementWrapper } from "features/builder/components/EditorElementWrapper";
+import {
+  Active,
+  DragOverlay as DragOverlayContainer,
+  useDndMonitor
+} from "@dnd-kit/core";
+import { ElementWrapper } from "features/builder/components/ElementWrapper";
 import { SidebarButtonDragOverlay } from "features/builder/components/SidebarButton";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
 import { ElementsType, FormElements } from "features/types";
 import { useState } from "react";
 
 /**
- * Overlay container that displays components that are being dragged.
+ * Overlay container that displays elements that are being dragged from the
+ * sidebar or elements being re-ordered in the canvas.
  */
-export const DragOverlayContainer = () => {
+export const DragOverlay = () => {
   const [elements] = useEditorStore(state => [state.elements]);
   const [draggedItem, setDraggedItem] = useState<Active | null>(null);
 
@@ -37,8 +42,8 @@ export const DragOverlayContainer = () => {
   const element = elements.find(element => element.id === draggedItem.id);
 
   if (element) {
-    node = <EditorElementWrapper element={element} isOverlay />;
+    node = <ElementWrapper element={element} isOverlay />;
   }
 
-  return <DragOverlay>{node}</DragOverlay>;
+  return <DragOverlayContainer>{node}</DragOverlayContainer>;
 };

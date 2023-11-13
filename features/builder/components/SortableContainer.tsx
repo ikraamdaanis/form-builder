@@ -7,7 +7,7 @@ import {
   useSensors
 } from "@dnd-kit/core";
 import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
-import { DragOverlayContainer } from "features/builder/components/DragOverlayContainer";
+import { DragOverlay } from "features/builder/components/DragOverlay";
 import { useEffect, useState } from "react";
 
 /**
@@ -37,7 +37,7 @@ export const SortableContainer = (props: DndContextProps) => {
   return (
     <DndContext sensors={sensors} {...props}>
       {props.children}
-      <DragOverlayContainer />
+      <DragOverlay />
     </DndContext>
   );
 };

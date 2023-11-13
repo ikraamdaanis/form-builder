@@ -2,12 +2,19 @@
 
 import { DragEndEvent, DragOverEvent, MeasuringStrategy } from "@dnd-kit/core";
 import { SortableData, arrayMove } from "@dnd-kit/sortable";
-import { Editor } from "features/builder/components/Editor";
+import { EditorCanvas } from "features/builder/components/EditorCanvas";
 import { SortableContainer } from "features/builder/components/SortableContainer";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
 import { ElementsType, FormElements } from "features/types";
 import { useShallow } from "zustand/react/shallow";
 
+/**
+ * The `FormBuilder` component is a higher-level container that orchestrates the
+ * form-building process, integrating with the @dnd-kit library to handle
+ * drag-and-drop interactions for form elements. It utilizes the `EditorCanvas`
+ * component for the main form editor interface and `SortableContainer`
+ * for managing the sortable behavior of form elements.
+ */
 export const FormBuilder = () => {
   const { elements, setElements, addElement } = useEditorStore(
     useShallow(state => ({
@@ -123,7 +130,7 @@ export const FormBuilder = () => {
       }}
     >
       <div className="relative flex h-[200px] w-full flex-grow items-center justify-center overflow-y-auto bg-accent bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)]">
-        <Editor />
+        <EditorCanvas />
       </div>
     </SortableContainer>
   );

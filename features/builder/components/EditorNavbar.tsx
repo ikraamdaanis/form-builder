@@ -1,5 +1,6 @@
 "use client";
 
+import { Show } from "components/Show";
 import { Form } from "database/schema";
 import { PreviewDialogButton } from "features/builder/components/PreviewDialogButton";
 import { PublishFormButton } from "features/builder/components/PublishFormButton";
@@ -9,7 +10,10 @@ type Props = {
   form: Form;
 };
 
-/** Navbar for the editor. */
+/** The `EditorNavbar` component represents the navigation bar for the form
+ * editor, displaying essential controls and information such as the form
+ * name, preview button, and form-saving options.
+ */
 export const EditorNavbar = ({ form }: Props) => {
   return (
     <nav className="flex items-center justify-between gap-3 border-b border-b-zinc-300 bg-primary bg-white px-4 py-2 dark:border-b-zinc-700 dark:bg-zinc-900">
@@ -19,12 +23,10 @@ export const EditorNavbar = ({ form }: Props) => {
       </h2>
       <div className="flex items-center gap-2">
         <PreviewDialogButton />
-        {!form.published && (
-          <>
-            <SaveFormButton formId={form.id} />
-            <PublishFormButton formId={form.id} />
-          </>
-        )}
+        <Show when={!form.published}>
+          <SaveFormButton formId={form.id} />
+          <PublishFormButton formId={form.id} />
+        </Show>
       </div>
     </nav>
   );

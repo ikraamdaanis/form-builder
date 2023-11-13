@@ -12,9 +12,9 @@ type Props = {
 
 /**
  * Wrapper for an element in the editor which allows it to be dragged in the
- * editor.
+ * editor canvas.
  */
-export const EditorElementWrapper = ({ element, isOverlay }: Props) => {
+export const ElementWrapper = ({ element, isOverlay }: Props) => {
   const EditorElement = FormElements[element.type].editorComponent;
   const [setActiveElement] = useEditorStore(state => [state.setActiveElement]);
 
