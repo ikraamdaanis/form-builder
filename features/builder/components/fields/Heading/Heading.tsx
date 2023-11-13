@@ -11,9 +11,10 @@ export const fontWeights = ["300", "400", "500", "600", "700"] as const;
 
 export const headingAttributes = {
   content: "Heading",
-  size: "16px",
-  weight: "400",
-  lineHeight: "1.5"
+  fontSize: "16px",
+  fontWeight: "400",
+  lineHeight: "1.5",
+  padding: "0px 0px 0px 0px"
 };
 
 export type HeadingElement = FormElementInstance<typeof headingAttributes> & {

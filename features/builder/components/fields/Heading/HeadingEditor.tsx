@@ -13,7 +13,13 @@ type Props = {
 export const HeadingEditor = ({ element, isOverlay }: Props) => {
   const elementInstance = element as HeadingElement;
 
-  const { content, size, weight, lineHeight } = elementInstance.extraAttributes;
+  const {
+    content,
+    fontSize: size,
+    fontWeight: weight,
+    lineHeight,
+    padding
+  } = elementInstance.extraAttributes;
 
   const [isDragging, setIsDragging] = useState(false);
 
@@ -39,7 +45,8 @@ export const HeadingEditor = ({ element, isOverlay }: Props) => {
         style={{
           fontSize: `${size || "16px"}`,
           fontWeight: `${weight || "400"}`,
-          lineHeight: `${lineHeight || "1.5"}`
+          lineHeight: `${lineHeight || "1.5"}`,
+          padding: `${padding || "0px 0px 0px 0px"}`
         }}
       >
         {content}

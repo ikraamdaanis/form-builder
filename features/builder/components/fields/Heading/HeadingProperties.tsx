@@ -19,12 +19,14 @@ import {
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { Separator } from "components/ui/separator";
 
 const propertiesSchema = z.object({
   content: z.string().max(200),
-  size: z.string(),
-  weight: z.string(),
-  lineHeight: z.string()
+  fontSize: z.string(),
+  fontWeight: z.string(),
+  lineHeight: z.string(),
+  padding: z.string()
 });
 
 type PropertiesSchema = z.infer<typeof propertiesSchema>;
@@ -39,21 +41,19 @@ export const HeadingProperties = () => {
   ]);
   const element = activeElement as HeadingElement;
 
+  const values = {
+    content: element.extraAttributes.content,
+    fontSize: element.extraAttributes.fontSize,
+    fontWeight: element.extraAttributes.fontWeight,
+    lineHeight: element.extraAttributes.lineHeight,
+    padding: element.extraAttributes.padding
+  };
+
   const form = useForm<PropertiesSchema>({
     resolver: zodResolver(propertiesSchema),
     mode: "onChange",
-    defaultValues: {
-      content: element.extraAttributes.content,
-      size: element.extraAttributes.size,
-      weight: element.extraAttributes.weight,
-      lineHeight: element.extraAttributes.lineHeight
-    },
-    values: {
-      content: element.extraAttributes.content,
-      size: element.extraAttributes.size,
-      weight: element.extraAttributes.weight,
-      lineHeight: element.extraAttributes.lineHeight
-    }
+    defaultValues: values,
+    values
   });
 
   function applyChanges(values: PropertiesSchema) {
@@ -91,15 +91,22 @@ export const HeadingProperties = () => {
         />
         <FormField
           control={form.control}
-          name="size"
+          name="fontSize"
           render={({ field }) => (
             <FormItem className="flex flex-col">
               <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
                 <AttributeLabelTooltip message="The font-size CSS property sets the size of the font for the heading. Changing the font size also updates the sizes of the font size-relative units, such as em, ex, and so forth.">
-                  <AttributeLabel>Size</AttributeLabel>
+                  <AttributeLabel>Font Size</AttributeLabel>
                 </AttributeLabelTooltip>
                 <FormControl>
-                  <AttributeInput {...field} />
+                  <AttributeInput
+                    {...field}
+                    onBlur={({ target: { value } }) => {
+                      if (!value.length) {
+                        field.onChange(values.fontSize);
+                      }
+                    }}
+                  />
                 </FormControl>
               </div>
               <FormMessage />
@@ -108,7 +115,7 @@ export const HeadingProperties = () => {
         />
         <FormField
           control={form.control}
-          name="weight"
+          name="fontWeight"
           render={({ field }) => (
             <FormItem className="flex items-center gap-2 space-y-0 rounded-sm p-0">
               <AttributeLabelTooltip message="The font-weight CSS property sets the weight (or boldness) of the font.">
@@ -143,7 +150,40 @@ export const HeadingProperties = () => {
                   <AttributeLabel>Line Height</AttributeLabel>
                 </AttributeLabelTooltip>
                 <FormControl>
-                  <AttributeInput {...field} />
+                  <AttributeInput
+                    {...field}
+                    onBlur={({ target: { value } }) => {
+                      if (!value.length) {
+                        field.onChange(values.lineHeight);
+                      }
+                    }}
+                  />
+                </FormControl>
+              </div>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Separator className="bg-zinc-800" />
+        <p className="text-sm font-semibold">Layout</p>
+        <FormField
+          control={form.control}
+          name="padding"
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
+                <AttributeLabelTooltip message="Padding">
+                  <AttributeLabel>Padding</AttributeLabel>
+                </AttributeLabelTooltip>
+                <FormControl>
+                  <AttributeInput
+                    {...field}
+                    onBlur={({ target: { value } }) => {
+                      if (!value.length) {
+                        field.onChange(values.padding);
+                      }
+                    }}
+                  />
                 </FormControl>
               </div>
               <FormMessage />
