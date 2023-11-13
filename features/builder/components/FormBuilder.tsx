@@ -2,25 +2,20 @@
 
 import { DragEndEvent, DragOverEvent, MeasuringStrategy } from "@dnd-kit/core";
 import { SortableData, arrayMove } from "@dnd-kit/sortable";
-import { Form } from "database/schema";
 import { Editor } from "features/builder/components/Editor";
-import { PreviewDialogButton } from "features/builder/components/PreviewDialogButton";
-import { PublishFormButton } from "features/builder/components/PublishFormButton";
-import { SaveFormButton } from "features/builder/components/SaveFormButton";
 import { SortableContainer } from "features/builder/components/SortableContainer";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
 import { ElementsType, FormElements } from "features/types";
+import { useShallow } from "zustand/react/shallow";
 
-type Props = {
-  form: Form;
-};
-
-export const FormBuilder = ({ form }: Props) => {
-  const [elements, setElements, addElement] = useEditorStore(state => [
-    state.elements,
-    state.setElements,
-    state.addElement
-  ]);
+export const FormBuilder = () => {
+  const { elements, setElements, addElement } = useEditorStore(
+    useShallow(state => ({
+      elements: state.elements,
+      setElements: state.setElements,
+      addElement: state.addElement
+    }))
+  );
 
   function onDragStart() {}
 
@@ -126,28 +121,10 @@ export const FormBuilder = ({ form }: Props) => {
           strategy: MeasuringStrategy.Always
         }
       }}
-      // collisionDetection={collisionDetectionStrategy}
     >
-      <section className="flex h-full w-full flex-col">
-        <nav className="flex items-center justify-between gap-3 border-b border-b-zinc-300 bg-primary bg-white px-4 py-2 dark:border-b-zinc-700 dark:bg-zinc-900">
-          <h2 className="truncate font-medium">
-            <span className="mr-2 text-muted-foreground">Form:</span>
-            {form.name}
-          </h2>
-          <div className="flex items-center gap-2">
-            <PreviewDialogButton />
-            {!form.published && (
-              <>
-                <SaveFormButton formId={form.id} />
-                <PublishFormButton formId={form.id} />
-              </>
-            )}
-          </div>
-        </nav>
-        <div className="relative flex h-[200px] w-full flex-grow items-center justify-center overflow-y-auto bg-accent bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)]">
-          <Editor />
-        </div>
-      </section>
+      <div className="relative flex h-[200px] w-full flex-grow items-center justify-center overflow-y-auto bg-accent bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)]">
+        <Editor />
+      </div>
     </SortableContainer>
   );
 };

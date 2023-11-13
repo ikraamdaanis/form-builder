@@ -1,4 +1,5 @@
 import { getFormById } from "features/builder/actions/getFormById";
+import { EditorNavbar } from "features/builder/components/EditorNavbar";
 import { FormBuilder } from "features/builder/components/FormBuilder";
 
 type Props = {
@@ -15,8 +16,9 @@ const BuilderPage = async ({ params }: Props) => {
   }
 
   return (
-    <section className="h-full">
-      <FormBuilder form={form} />
+    <section className="flex h-full w-full flex-col">
+      <EditorNavbar form={form} />
+      <FormBuilder />
     </section>
   );
 };

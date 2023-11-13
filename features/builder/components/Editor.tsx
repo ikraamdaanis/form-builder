@@ -7,13 +7,21 @@ import { EditorElementWrapper } from "features/builder/components/EditorElementW
 import { EditorSidebar } from "features/builder/components/EditorSidebar";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
 import { cn } from "utils/cn";
+import { useShallow } from "zustand/react/shallow";
 
 /** Editor for the forms. */
 export const Editor = () => {
-  const [elements, setActiveElement] = useEditorStore(state => [
-    state.elements,
-    state.setActiveElement
-  ]);
+  // const [elements, setActiveElement] = useEditorStore(state => [
+  //   state.elements,
+  //   state.setActiveElement
+  // ]);
+
+  const { elements, setActiveElement } = useEditorStore(
+    useShallow(state => ({
+      elements: state.elements,
+      setActiveElement: state.setActiveElement
+    }))
+  );
 
   const droppable = useDroppable({
     id: "editor-drop-area",
