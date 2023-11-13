@@ -13,7 +13,7 @@ type Props = {
 export const HeadingEditor = ({ element, isOverlay }: Props) => {
   const elementInstance = element as HeadingElement;
 
-  const { text, size, weight } = elementInstance.extraAttributes;
+  const { content, size, weight, lineHeight } = elementInstance.extraAttributes;
 
   const [isDragging, setIsDragging] = useState(false);
 
@@ -35,13 +35,14 @@ export const HeadingEditor = ({ element, isOverlay }: Props) => {
       )}
     >
       <h1
-        className={cn("", isDragging && "opacity-0")}
+        className={cn("leading-normal", isDragging && "opacity-0")}
         style={{
           fontSize: `${size || "16px"}`,
-          fontWeight: `${weight || "400"}`
+          fontWeight: `${weight || "400"}`,
+          lineHeight: `${lineHeight || "1.5"}`
         }}
       >
-        {text}
+        {content}
       </h1>
     </div>
   );

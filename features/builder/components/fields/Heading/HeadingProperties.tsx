@@ -21,9 +21,10 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 const propertiesSchema = z.object({
-  text: z.string().max(200),
-  size: z.string().max(200),
-  weight: z.string()
+  content: z.string().max(200),
+  size: z.string(),
+  weight: z.string(),
+  lineHeight: z.string()
 });
 
 type PropertiesSchema = z.infer<typeof propertiesSchema>;
@@ -42,14 +43,16 @@ export const HeadingProperties = () => {
     resolver: zodResolver(propertiesSchema),
     mode: "onChange",
     defaultValues: {
-      text: element.extraAttributes.text,
+      content: element.extraAttributes.content,
       size: element.extraAttributes.size,
-      weight: element.extraAttributes.weight
+      weight: element.extraAttributes.weight,
+      lineHeight: element.extraAttributes.lineHeight
     },
     values: {
-      text: element.extraAttributes.text,
+      content: element.extraAttributes.content,
       size: element.extraAttributes.size,
-      weight: element.extraAttributes.weight
+      weight: element.extraAttributes.weight,
+      lineHeight: element.extraAttributes.lineHeight
     }
   });
 
@@ -71,12 +74,12 @@ export const HeadingProperties = () => {
       >
         <FormField
           control={form.control}
-          name="text"
+          name="content"
           render={({ field }) => (
             <FormItem className="flex flex-col">
               <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-                <AttributeLabelTooltip message="The text of the heading.">
-                  <AttributeLabel>Text</AttributeLabel>
+                <AttributeLabelTooltip message="Enter what you want the heading to be.">
+                  <AttributeLabel>Content</AttributeLabel>
                 </AttributeLabelTooltip>
                 <FormControl>
                   <AttributeInput {...field} />
@@ -92,7 +95,7 @@ export const HeadingProperties = () => {
           render={({ field }) => (
             <FormItem className="flex flex-col">
               <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-                <AttributeLabelTooltip message="How big the heading should be.">
+                <AttributeLabelTooltip message="The font-size CSS property sets the size of the font for the heading. Changing the font size also updates the sizes of the font size-relative units, such as em, ex, and so forth.">
                   <AttributeLabel>Size</AttributeLabel>
                 </AttributeLabelTooltip>
                 <FormControl>
@@ -108,7 +111,7 @@ export const HeadingProperties = () => {
           name="weight"
           render={({ field }) => (
             <FormItem className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-              <AttributeLabelTooltip message="The weight of the font.">
+              <AttributeLabelTooltip message="The font-weight CSS property sets the weight (or boldness) of the font.">
                 <AttributeLabel>Font Weight</AttributeLabel>
               </AttributeLabelTooltip>
               <Select onValueChange={field.onChange} value={field.value}>
@@ -127,6 +130,23 @@ export const HeadingProperties = () => {
                   })}
                 </SelectContent>
               </Select>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="lineHeight"
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
+                <AttributeLabelTooltip message="The line-height CSS property sets the height of the heading. It's commonly used to set the distance between lines of text.">
+                  <AttributeLabel>Line Height</AttributeLabel>
+                </AttributeLabelTooltip>
+                <FormControl>
+                  <AttributeInput {...field} />
+                </FormControl>
+              </div>
+              <FormMessage />
             </FormItem>
           )}
         />
