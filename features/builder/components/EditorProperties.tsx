@@ -19,7 +19,7 @@ export const EditorProperties = () => {
 
   const Wrapper = ({ children }: Partial<ChildrenProp>) => {
     return (
-      <aside className="flex h-full w-[280px] max-w-[280px] flex-grow flex-col gap-2 overflow-y-auto border-l-2 border-muted bg-zinc-50 p-4 dark:bg-zinc-900">
+      <aside className="flex h-full w-[280px] max-w-[280px] flex-grow flex-col gap-2 overflow-y-auto border-l border-muted border-zinc-300 bg-zinc-50 p-4 dark:border-zinc-700 dark:bg-zinc-900">
         {children}
       </aside>
     );
