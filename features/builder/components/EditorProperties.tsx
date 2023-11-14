@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "components/ui/button";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
 import { ElementsType, FormElements } from "features/types";

@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Select, SelectContent, SelectValue } from "components/ui/select";
 import {
   Form,
   FormControl,
@@ -7,6 +6,8 @@ import {
   FormItem,
   FormMessage
 } from "components/ui/form";
+import { Select, SelectContent, SelectValue } from "components/ui/select";
+import { Separator } from "components/ui/separator";
 import { AttributeInput } from "features/builder/components/attributes/AttributeInput";
 import { AttributeLabel } from "features/builder/components/attributes/AttributeLabel";
 import { AttributeLabelTooltip } from "features/builder/components/attributes/AttributeLabelTooltip";
@@ -19,7 +20,7 @@ import {
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Separator } from "components/ui/separator";
+import { useShallow } from "zustand/react/shallow";
 
 const propertiesSchema = z.object({
   content: z.string().max(200),
@@ -35,10 +36,13 @@ type PropertiesSchema = z.infer<typeof propertiesSchema>;
  * Form to handle the properties of a heading.
  */
 export const HeadingProperties = () => {
-  const [activeElement, updateElement] = useEditorStore(state => [
-    state.activeElement,
-    state.updateElement
-  ]);
+  const { activeElement, updateElement } = useEditorStore(
+    useShallow(state => ({
+      activeElement: state.activeElement,
+      updateElement: state.updateElement
+    }))
+  );
+
   const element = activeElement as HeadingElement;
 
   const values = {

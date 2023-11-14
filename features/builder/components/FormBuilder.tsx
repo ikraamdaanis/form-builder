@@ -3,7 +3,6 @@
 import { DragEndEvent, DragOverEvent, MeasuringStrategy } from "@dnd-kit/core";
 import { SortableData, arrayMove } from "@dnd-kit/sortable";
 import { EditorCanvas } from "features/builder/components/EditorCanvas";
-import { EditorProperties } from "features/builder/components/EditorProperties";
 import { SortableContainer } from "features/builder/components/SortableContainer";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
 import { ElementsType, FormElements } from "features/types";
@@ -130,10 +129,7 @@ export const FormBuilder = () => {
         }
       }}
     >
-      <div className="relative flex h-[200px] w-full flex-grow items-center justify-center overflow-y-auto bg-accent bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)]">
-        <EditorCanvas />
-        <EditorProperties />
-      </div>
+      <EditorCanvas />
     </SortableContainer>
   );
 };
