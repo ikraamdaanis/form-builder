@@ -34,7 +34,7 @@ export const ElementWrapper = ({ element, isOverlay }: Props) => {
         "group relative cursor-pointer select-none border border-dashed border-transparent outline-none",
         !isDragging && "hover:border-blue-300",
         isActiveElement && !isDragging && "border-blue-300",
-        element.id.includes("space") &&
+        (element.id.includes("space") || isDragging) &&
           "border border-dashed border-blue-300 py-10 opacity-50"
       )}
       ref={setNodeRef}
