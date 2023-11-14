@@ -4,7 +4,7 @@ import {
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
 import { Show } from "components/Show";
-import { EditorSidebar } from "features/builder/components/EditorSidebar";
+import { EditorSidebar } from "features/builder/components/EditorToolbar";
 import { ElementWrapper } from "features/builder/components/ElementWrapper";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
 import { cn } from "utils/cn";
@@ -36,6 +36,7 @@ export const EditorCanvas = () => {
 
   return (
     <div className="flex h-full w-full">
+      <EditorSidebar />
       <div className="w-full p-4">
         <div
           ref={droppable.setNodeRef}
@@ -67,7 +68,6 @@ export const EditorCanvas = () => {
           </Show>
         </div>
       </div>
-      <EditorSidebar />
     </div>
   );
 };
