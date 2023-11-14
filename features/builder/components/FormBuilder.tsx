@@ -2,11 +2,17 @@
 
 import { DragEndEvent, DragOverEvent, MeasuringStrategy } from "@dnd-kit/core";
 import { SortableData, arrayMove } from "@dnd-kit/sortable";
+import { Form } from "database/schema";
 import { EditorCanvas } from "features/builder/components/EditorCanvas";
 import { SortableContainer } from "features/builder/components/SortableContainer";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
 import { ElementsType, FormElements } from "features/types";
+import { useEffect } from "react";
 import { useShallow } from "zustand/react/shallow";
+
+type Props = {
+  form: Form;
+};
 
 /**
  * The `FormBuilder` component is a higher-level container that orchestrates the
@@ -15,7 +21,7 @@ import { useShallow } from "zustand/react/shallow";
  * component for the main form editor interface and `SortableContainer`
  * for managing the sortable behavior of form elements.
  */
-export const FormBuilder = () => {
+export const FormBuilder = ({ form }: Props) => {
   const { elements, setElements, addElement } = useEditorStore(
     useShallow(state => ({
       elements: state.elements,
@@ -23,6 +29,12 @@ export const FormBuilder = () => {
       addElement: state.addElement
     }))
   );
+
+  useEffect(() => {
+    if (form?.content) {
+      setElements(JSON.parse(form.content || ""));
+    }
+  }, [form, setElements]);
 
   function onDragStart() {}
 

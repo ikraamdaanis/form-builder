@@ -34,6 +34,11 @@ export type Form = InferSelectModel<typeof forms> & {
   formSubmissions?: FormSubmission[];
 };
 
+export type FormUpdateSchema = Partial<Form> & {
+  id: string;
+  updatedAt: Date;
+};
+
 export const formsRelations = relations(forms, ({ many }) => ({
   formSubmissions: many(formSubmissions)
 }));

@@ -20,7 +20,7 @@ const BuilderPage = async ({ params }: Props) => {
     <section className="flex h-full w-full flex-col">
       <EditorNavbar form={form} />
       <div className="relative flex h-[200px] w-full flex-grow items-center justify-center overflow-y-auto bg-accent bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)]">
-        <FormBuilder />
+        <FormBuilder form={form} />
         <EditorProperties />
       </div>
     </section>
