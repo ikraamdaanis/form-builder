@@ -1,3 +1,5 @@
+"use client";
+
 import {
   DndContext,
   DndContextProps,
@@ -8,7 +10,6 @@ import {
 } from "@dnd-kit/core";
 import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
 import { DragOverlay } from "features/builder/components/DragOverlay";
-import { useEffect, useState } from "react";
 
 /**
  * Sortable container for the form editor. Allows for form elements to be
@@ -26,13 +27,6 @@ export const SortableContainer = (props: DndContextProps) => {
       coordinateGetter: sortableKeyboardCoordinates
     })
   );
-
-  const [isMounted, setIsMounted] = useState(false);
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!isMounted) return null;
 
   return (
     <DndContext sensors={sensors} {...props}>

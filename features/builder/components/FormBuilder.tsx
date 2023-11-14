@@ -7,7 +7,7 @@ import { EditorCanvas } from "features/builder/components/EditorCanvas";
 import { SortableContainer } from "features/builder/components/SortableContainer";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
 import { ElementsType, FormElements } from "features/types";
-import { useEffect } from "react";
+import { useEffect, useId } from "react";
 import { useShallow } from "zustand/react/shallow";
 
 type Props = {
@@ -129,6 +129,8 @@ export const FormBuilder = ({ form }: Props) => {
     setElements(elements.filter(element => !element.id.includes("spacer")));
   }
 
+  const sortableContainerId = useId();
+
   return (
     <SortableContainer
       onDragStart={onDragStart}
@@ -140,6 +142,7 @@ export const FormBuilder = ({ form }: Props) => {
           strategy: MeasuringStrategy.Always
         }
       }}
+      id={sortableContainerId}
     >
       <EditorCanvas />
     </SortableContainer>
