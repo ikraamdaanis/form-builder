@@ -4,7 +4,7 @@ import {
   useDndMonitor
 } from "@dnd-kit/core";
 import { ElementWrapper } from "features/builder/components/ElementWrapper";
-import { SidebarButtonDragOverlay } from "features/builder/components/SidebarButton";
+import { ElementDropperOverlay } from "features/builder/components/ElementDropper";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
 import { ElementsType, FormElements } from "features/types";
 import { useState } from "react";
@@ -36,7 +36,7 @@ export const DragOverlay = () => {
 
   if (isSidebarButton) {
     const type = draggedItem.data.current?.type as ElementsType;
-    node = <SidebarButtonDragOverlay formElement={FormElements[type]} />;
+    node = <ElementDropperOverlay formElement={FormElements[type]} />;
   }
 
   const element = elements.find(element => element.id === draggedItem.id);

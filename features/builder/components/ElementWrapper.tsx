@@ -31,11 +31,11 @@ export const ElementWrapper = ({ element, isOverlay }: Props) => {
   return (
     <Item
       className={cn(
-        "group relative cursor-pointer select-none border border-transparent outline-none",
+        "group relative cursor-pointer select-none border border-dashed border-transparent outline-none",
         !isDragging && "hover:border-blue-300",
         isActiveElement && !isDragging && "border-blue-300",
         element.id.includes("space") &&
-          "border border-dashed border-blue-300 opacity-50"
+          "border border-dashed border-blue-300 py-10 opacity-50"
       )}
       ref={setNodeRef}
       style={style}
