@@ -35,7 +35,7 @@ export const SaveFormButton = ({ formId }: Props) => {
 
   return (
     <Button
-      variant={"outline"}
+      variant="outline"
       className="gap-2"
       disabled={loading}
       onClick={() => startTransition(handleFormButton)}

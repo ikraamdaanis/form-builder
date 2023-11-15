@@ -25,7 +25,7 @@ export const PublishFormButton = ({ formId }: Props) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button className="gap-2 bg-gradient-to-r from-indigo-400 to-cyan-400 text-white">
+        <Button className="gap-2 bg-blue-500 text-white">
           <BookPlus className="h-4 w-4" />
           Publish
         </Button>
