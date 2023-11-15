@@ -1,9 +1,12 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
+import { Button } from "components/ui/button";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
 import { FormElementInstance, FormElements } from "features/types";
+import { Trash } from "lucide-react";
 import { forwardRef } from "react";
 import { cn } from "utils/cn";
+import { useShallow } from "zustand/react/shallow";
 
 type Props = {
   element: FormElementInstance;
@@ -46,6 +49,9 @@ export const ElementWrapper = ({ element, isOverlay }: Props) => {
         setActiveElement(element);
       }}
     >
+      <div className="absolute right-0 top-0 hidden group-hover:flex">
+        <RemoveElement elementId={element.id} />
+      </div>
       <EditorElement element={element} isOverlay={isOverlay} />
     </Item>
   );
@@ -60,3 +66,24 @@ export const Item = forwardRef<HTMLDivElement, JSX.IntrinsicElements["div"]>(
     );
   }
 );
+
+/** Button for remove an element in the canvas. */
+const RemoveElement = ({ elementId }: { elementId: string }) => {
+  const { removeElement } = useEditorStore(
+    useShallow(state => ({
+      removeElement: state.removeElement
+    }))
+  );
+
+  return (
+    <Button
+      className="h-5 w-5 rounded-sm bg-red-600 p-0 hover:bg-red-500"
+      onClick={event => {
+        event.stopPropagation();
+        removeElement(elementId);
+      }}
+    >
+      <Trash className="h-3 w-3 text-white" />
+    </Button>
+  );
+};

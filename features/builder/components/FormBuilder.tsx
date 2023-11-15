@@ -14,6 +14,8 @@ type Props = {
   form: Form;
 };
 
+const SPACER_ID = "spacer";
+
 /**
  * The `FormBuilder` component is a higher-level container that orchestrates the
  * form-building process, integrating with the @dnd-kit library to handle
@@ -22,13 +24,15 @@ type Props = {
  * for managing the sortable behavior of form elements.
  */
 export const FormBuilder = ({ form }: Props) => {
-  const { elements, setElements, addElement } = useEditorStore(
+  const { elements, setElements, addElement, removeElement } = useEditorStore(
     useShallow(state => ({
       elements: state.elements,
       setElements: state.setElements,
-      addElement: state.addElement
+      addElement: state.addElement,
+      removeElement: state.removeElement
     }))
   );
+
   useEffect(() => {
     if (form?.content) {
       setElements(JSON.parse(form.content || ""));
@@ -53,7 +57,7 @@ export const FormBuilder = ({ form }: Props) => {
 
     if (isEditorButton) {
       const type = active.data?.current?.type as ElementsType;
-      const newElement = FormElements[type].construct("spacer");
+      const newElement = FormElements[type].construct(SPACER_ID);
 
       // If an element is being dropped in and is hovering another element, insert
       // it at the same index.
@@ -61,7 +65,7 @@ export const FormBuilder = ({ form }: Props) => {
         const nextIndex =
           overSortable.index > -1 ? overSortable.index : elements.length;
 
-        setElements(elements.filter(element => !element.id.includes("spacer")));
+        removeElement(SPACER_ID);
         return addElement(nextIndex, newElement);
       }
 
@@ -70,7 +74,7 @@ export const FormBuilder = ({ form }: Props) => {
       if (overCanvas) {
         const nextIndex = elements.length;
 
-        setElements(elements.filter(element => !element.id.includes("spacer")));
+        removeElement(SPACER_ID);
         return addElement(nextIndex, newElement);
       }
     }
@@ -89,7 +93,7 @@ export const FormBuilder = ({ form }: Props) => {
   }
 
   function onDragEnd(event: DragEndEvent) {
-    setElements(elements.filter(element => !element.id.includes("spacer")));
+    removeElement(SPACER_ID);
 
     const { active, over } = event;
 
@@ -104,7 +108,7 @@ export const FormBuilder = ({ form }: Props) => {
       const newElement = FormElements[type].construct(crypto.randomUUID());
 
       const spaceElementIndex = elements.findIndex(
-        element => element.id === "spacer"
+        element => element.id === SPACER_ID
       );
 
       if (spaceElementIndex > -1) {
@@ -125,7 +129,7 @@ export const FormBuilder = ({ form }: Props) => {
   }
 
   function onDragCancel() {
-    setElements(elements.filter(element => !element.id.includes("spacer")));
+    setElements(elements.filter(element => !element.id.includes(SPACER_ID)));
   }
 
   return (
