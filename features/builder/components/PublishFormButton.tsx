@@ -25,7 +25,7 @@ export const PublishFormButton = ({ formId }: Props) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button className="gap-2 bg-blue-500 text-white">
+        <Button className="gap-2 border border-zinc-300 bg-blue-500 text-white dark:border-zinc-700">
           <BookPlus className="h-4 w-4" />
           Publish
         </Button>
@@ -49,6 +49,7 @@ export const PublishFormButton = ({ formId }: Props) => {
             disabled={loading}
             onClick={e => {
               e.preventDefault();
+              console.log(formId);
             }}
           >
             Proceed {loading && <Loader className="animate-spin" />}

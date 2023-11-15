@@ -6,7 +6,10 @@ export const PreviewDialogButton = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant={"outline"} className="gap-2">
+        <Button
+          variant="outline"
+          className="h-10 gap-2 dark:border-0 dark:bg-zinc-700"
+        >
           <ScanEye className="h-4 w-4" />
           Preview
         </Button>
