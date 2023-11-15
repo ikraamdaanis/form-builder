@@ -3,7 +3,7 @@ import { CSS } from "@dnd-kit/utilities";
 import { Button } from "components/ui/button";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
 import { FormElementInstance, FormElements } from "features/types";
-import { Trash } from "lucide-react";
+import { Settings, Trash } from "lucide-react";
 import { forwardRef } from "react";
 import { cn } from "utils/cn";
 import { useShallow } from "zustand/react/shallow";
@@ -49,8 +49,9 @@ export const ElementWrapper = ({ element, isOverlay }: Props) => {
         setActiveElement(element);
       }}
     >
-      <div className="absolute right-0 top-0 hidden group-hover:flex">
-        <RemoveElement elementId={element.id} />
+      <div className="absolute right-0 top-0 hidden gap-1 group-hover:flex">
+        <ActiveElementButton element={element} />
+        <RemoveElementButton elementId={element.id} />
       </div>
       <EditorElement element={element} isOverlay={isOverlay} />
     </Item>
@@ -67,8 +68,29 @@ export const Item = forwardRef<HTMLDivElement, JSX.IntrinsicElements["div"]>(
   }
 );
 
+/** Button to open the properties panel for the selected element. */
+const ActiveElementButton = ({ element }: { element: FormElementInstance }) => {
+  const { setActiveElement } = useEditorStore(
+    useShallow(state => ({
+      setActiveElement: state.setActiveElement
+    }))
+  );
+
+  return (
+    <Button
+      className="h-5 w-5 rounded-sm bg-zinc-600 p-0 hover:bg-zinc-500"
+      onClick={event => {
+        event.stopPropagation();
+        setActiveElement(element);
+      }}
+    >
+      <Settings className="h-3 w-3 text-white" />
+    </Button>
+  );
+};
+
 /** Button for remove an element in the canvas. */
-const RemoveElement = ({ elementId }: { elementId: string }) => {
+const RemoveElementButton = ({ elementId }: { elementId: string }) => {
   const { removeElement } = useEditorStore(
     useShallow(state => ({
       removeElement: state.removeElement
