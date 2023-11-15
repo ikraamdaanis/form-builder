@@ -29,7 +29,6 @@ export const FormBuilder = ({ form }: Props) => {
       addElement: state.addElement
     }))
   );
-
   useEffect(() => {
     if (form?.content) {
       setElements(JSON.parse(form.content || ""));
@@ -129,8 +128,6 @@ export const FormBuilder = ({ form }: Props) => {
     setElements(elements.filter(element => !element.id.includes("spacer")));
   }
 
-  const sortableContainerId = useId();
-
   return (
     <SortableContainer
       onDragStart={onDragStart}
@@ -142,9 +139,9 @@ export const FormBuilder = ({ form }: Props) => {
           strategy: MeasuringStrategy.Always
         }
       }}
-      id={sortableContainerId}
+      id={useId()}
     >
-      <EditorCanvas />
+      <EditorCanvas form={form} />
     </SortableContainer>
   );
 };

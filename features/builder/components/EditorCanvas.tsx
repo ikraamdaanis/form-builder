@@ -4,11 +4,17 @@ import {
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
 import { Show } from "components/Show";
+import { Form } from "database/schema";
 import { EditorSidebar } from "features/builder/components/EditorToolbar";
 import { ElementWrapper } from "features/builder/components/ElementWrapper";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
+import { FormElementInstance } from "features/types";
 import { cn } from "utils/cn";
 import { useShallow } from "zustand/react/shallow";
+
+type Props = {
+  form: Form;
+};
 
 /**
  * The Editor Canvas serves as the main editor for forms, providing a canvas
@@ -16,13 +22,17 @@ import { useShallow } from "zustand/react/shallow";
  * functionality. It integrates with the @dnd-kit library for handling
  * drag-and-drop operations.
  */
-export const EditorCanvas = () => {
+export const EditorCanvas = ({ form }: Props) => {
+  const formElements = JSON.parse(form.content || "") as FormElementInstance[];
+
   const { elements, setActiveElement } = useEditorStore(
     useShallow(state => ({
       elements: state.elements,
       setActiveElement: state.setActiveElement
     }))
   );
+
+  const currentElements = !elements.length ? formElements : elements;
 
   const droppable = useDroppable({
     id: "editor-drop-area",
@@ -49,18 +59,18 @@ export const EditorCanvas = () => {
             setActiveElement(null);
           }}
         >
-          <Show when={!droppable.isOver && elements.length === 0}>
+          <Show when={!droppable.isOver && currentElements.length === 0}>
             <p className="flex flex-grow items-center text-3xl font-bold text-muted-foreground">
               Drop here
             </p>
           </Show>
-          <Show when={elements.length > 0}>
+          <Show when={currentElements.length > 0}>
             <SortableContext
               items={elements}
               strategy={verticalListSortingStrategy}
             >
               <div className="flex h-full w-full flex-col gap-2 space-y-2 p-4">
-                {elements.map(element => {
+                {currentElements.map(element => {
                   return <ElementWrapper key={element.id} element={element} />;
                 })}
               </div>
