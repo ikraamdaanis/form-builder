@@ -25,7 +25,12 @@ export function StatsCard({
   className
 }: Props) {
   return (
-    <Card className={cn("border-zinc-900 bg-zinc-800", className)}>
+    <Card
+      className={cn(
+        "border border-zinc-300 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800",
+        className
+      )}
+    >
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-md font-semibold text-muted-foreground">
           {title}

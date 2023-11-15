@@ -24,7 +24,7 @@ type Props = {
 export const FormCard = ({ form }: Props) => {
   return (
     <div className="flex h-full">
-      <Card className="flex flex-1 flex-col bg-zinc-800">
+      <Card className="flex flex-1 flex-col border border-zinc-300 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800">
         <CardHeader>
           <CardTitle className="flex items-center justify-between gap-2">
             <span className="truncate font-bold">{form.name}</span>
@@ -61,7 +61,7 @@ export const FormCard = ({ form }: Props) => {
             <Button
               asChild
               variant="secondary"
-              className="text-md mt-2 w-full gap-4 bg-zinc-900 hover:bg-zinc-900 hover:brightness-110"
+              className="text-md mt-2 w-full gap-4 border border-zinc-300 bg-zinc-50 hover:bg-zinc-50 hover:brightness-110 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-900"
             >
               <Link href={`/builder/${form.id}`}>
                 Edit form <Edit className="h-4 w-4" />
