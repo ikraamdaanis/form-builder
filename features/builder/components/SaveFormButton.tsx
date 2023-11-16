@@ -36,7 +36,7 @@ export const SaveFormButton = ({ formId }: Props) => {
   return (
     <Button
       variant="outline"
-      className="h-10 gap-2 dark:border-0 dark:bg-zinc-700"
+      className="h-10 gap-2 transition hover:brightness-90 dark:border-0 dark:bg-zinc-700"
       disabled={loading}
       onClick={() => startTransition(handleFormButton)}
     >

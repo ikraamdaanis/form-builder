@@ -25,7 +25,7 @@ export const PublishFormButton = ({ formId }: Props) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button className="gap-2 border border-zinc-300 bg-blue-500 text-white dark:border-zinc-700">
+        <Button className="gap-2 border border-zinc-300 bg-blue-500 text-white hover:bg-blue-600 dark:border-zinc-700">
           <BookPlus className="h-4 w-4" />
           Publish
         </Button>
