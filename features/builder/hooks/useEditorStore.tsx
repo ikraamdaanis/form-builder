@@ -1,5 +1,6 @@
 "use client";
 
+import { FormSettings } from "database/schema";
 import { FormElementInstance } from "features/types";
 import { create } from "zustand";
 
@@ -11,10 +12,16 @@ type EditorStore = {
   removeElement: (elementId: string) => void;
   activeElement: FormElementInstance | null;
   setActiveElement: (element: FormElementInstance | null) => void;
+  settings: FormSettings;
+  updateSettings: (updateValue: UpdateSettingsValue) => void;
 };
 
+type UpdateSettingsValue =
+  | Partial<FormSettings>
+  | ((prevFormSettings: FormSettings) => FormSettings);
+
 /** Store for the editor to handle state. */
-export const useEditorStore = create<EditorStore>(set => ({
+export const useEditorStore = create<EditorStore>((set, state) => ({
   elements: [],
   setElements: (elements: FormElementInstance[]) => {
     set({ elements });
@@ -50,5 +57,20 @@ export const useEditorStore = create<EditorStore>(set => ({
   activeElement: null,
   setActiveElement: (element: FormElementInstance | null) => {
     set({ activeElement: element });
+  },
+  settings: {
+    maxWidth: "1024px"
+  },
+  updateSettings: (updateValue: UpdateSettingsValue) => {
+    let formSettings: FormSettings = state().settings;
+
+    const newState =
+      typeof updateValue === "function"
+        ? (updateValue as (state: FormSettings) => FormSettings)(formSettings)
+        : updateValue;
+
+    formSettings = { ...state().settings, ...newState };
+
+    set({ settings: formSettings });
   }
 }));

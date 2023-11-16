@@ -9,6 +9,7 @@ import {
   uuid,
   varchar
 } from "drizzle-orm/pg-core";
+import { FormElementInstance } from "features/types";
 
 export const forms = pgTable(
   "forms",
@@ -32,6 +33,15 @@ export const forms = pgTable(
 
 export type Form = InferSelectModel<typeof forms> & {
   formSubmissions?: FormSubmission[];
+};
+
+export type FormSettings = {
+  maxWidth: string;
+};
+
+export type Content = {
+  settings: FormSettings;
+  elements: FormElementInstance[];
 };
 
 export type FormUpdateSchema = Partial<Form> & {
