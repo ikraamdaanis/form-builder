@@ -25,13 +25,29 @@ type Props = {
 export const EditorCanvas = ({ form }: Props) => {
   const formElements = JSON.parse(form.content || "") as FormElementInstance[];
 
-  const { elements, setActiveElement } = useEditorStore(
+  return (
+    <div className="flex h-full w-full">
+      <EditorSidebar />
+      <CanvasElements formElements={formElements} />
+    </div>
+  );
+};
+
+type CanvasElementsProps = {
+  formElements: FormElementInstance[];
+};
+
+/**
+ * Displays the elements in the form builder canvas.
+ */
+const CanvasElements = ({ formElements }: CanvasElementsProps) => {
+  const { elements, setActiveElement, settings } = useEditorStore(
     useShallow(state => ({
       elements: state.elements,
-      setActiveElement: state.setActiveElement
+      setActiveElement: state.setActiveElement,
+      settings: state.settings
     }))
   );
-
   const currentElements = !elements.length ? formElements : elements;
 
   const droppable = useDroppable({
@@ -45,38 +61,38 @@ export const EditorCanvas = ({ form }: Props) => {
     droppable.active?.data?.current?.isEditorButton && droppable.over;
 
   return (
-    <div className="flex h-full w-full">
-      <EditorSidebar />
-      <div className="w-full p-4">
-        <div
-          ref={droppable.setNodeRef}
-          className={cn(
-            "m-auto flex h-full max-w-[920px] flex-1 flex-grow flex-col items-center justify-start overflow-y-auto rounded-xl bg-zinc-50 dark:bg-zinc-900",
-            isOverEditor && "ring-2 ring-blue-400"
-          )}
-          onClick={e => {
-            e.stopPropagation();
-            setActiveElement(null);
-          }}
-        >
-          <Show when={!droppable.isOver && currentElements.length === 0}>
-            <p className="flex flex-grow items-center text-3xl font-bold text-muted-foreground">
-              Drop here
-            </p>
-          </Show>
-          <Show when={currentElements.length > 0}>
-            <SortableContext
-              items={elements}
-              strategy={verticalListSortingStrategy}
+    <div className="w-full p-4">
+      <div
+        ref={droppable.setNodeRef}
+        className={cn(
+          "m-auto flex h-full max-w-[920px] flex-1 flex-grow flex-col items-center justify-start overflow-y-auto bg-zinc-50 dark:bg-zinc-900",
+          isOverEditor && "ring-2 ring-blue-400"
+        )}
+        onClick={e => {
+          e.stopPropagation();
+          setActiveElement(null);
+        }}
+      >
+        <Show when={!droppable.isOver && currentElements.length === 0}>
+          <p className="flex flex-grow items-center text-3xl font-bold text-muted-foreground">
+            Drop here
+          </p>
+        </Show>
+        <Show when={currentElements.length > 0}>
+          <SortableContext
+            items={elements}
+            strategy={verticalListSortingStrategy}
+          >
+            <div
+              className="flex h-full w-full flex-col gap-2 space-y-2 p-4"
+              style={{ maxWidth: settings.maxWidth || "1024px" }}
             >
-              <div className="flex h-full w-full flex-col gap-2 space-y-2 p-4">
-                {currentElements.map(element => {
-                  return <ElementWrapper key={element.id} element={element} />;
-                })}
-              </div>
-            </SortableContext>
-          </Show>
-        </div>
+              {currentElements.map(element => {
+                return <ElementWrapper key={element.id} element={element} />;
+              })}
+            </div>
+          </SortableContext>
+        </Show>
       </div>
     </div>
   );

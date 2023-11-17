@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "components/ui/button";
+import { FormProperties } from "features/builder/components/FormProperties";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
 import { ElementsType, FormElements } from "features/types";
 import { MoveLeft } from "lucide-react";
@@ -27,7 +28,12 @@ export const EditorProperties = () => {
     );
   };
 
-  if (!activeElement) return <Wrapper />;
+  if (!activeElement)
+    return (
+      <Wrapper>
+        <FormProperties />
+      </Wrapper>
+    );
 
   const elementType = activeElement?.type as ElementsType;
 
