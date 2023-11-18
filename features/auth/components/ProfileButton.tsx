@@ -9,7 +9,7 @@ export const ProfileButton = (props: RefAttributes<HTMLButtonElement>) => {
   return (
     <Button
       className={cn(
-        "h-10 w-10 overflow-hidden rounded-lg border border-zinc-300 bg-zinc-400 p-0 transition hover:brightness-90 dark:border-zinc-700 dark:bg-zinc-700",
+        "h-8 w-8 overflow-hidden rounded-lg border border-zinc-300 bg-zinc-400 p-0 transition hover:brightness-90 dark:border-zinc-700 dark:bg-zinc-700",
         !isSignedIn && "animate-pulse",
         isLoaded && !isSignedIn && "hidden"
       )}

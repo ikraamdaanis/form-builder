@@ -2,7 +2,7 @@ import { Button } from "components/ui/button";
 import { FormUpdateSchema } from "database/schema";
 import { updateForm } from "features/builder/actions/updateForm";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
-import { Loader, SaveIcon } from "lucide-react";
+import { SaveIcon } from "lucide-react";
 import { useTransition } from "react";
 import { useShallow } from "zustand/react/shallow";
 
@@ -36,13 +36,12 @@ export const SaveFormButton = ({ formId }: Props) => {
   return (
     <Button
       variant="outline"
-      className="h-10 gap-2 transition hover:brightness-90 dark:border-0 dark:bg-zinc-700"
+      className="h-8 gap-2 px-2 text-xs font-semibold transition hover:brightness-90 dark:border-0 dark:bg-zinc-700"
       disabled={loading}
       onClick={() => startTransition(handleFormButton)}
     >
       <SaveIcon className="h-4 w-4" />
       Save
-      {loading && <Loader className="animate-spin" />}
     </Button>
   );
 };
