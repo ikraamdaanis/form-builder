@@ -7,7 +7,10 @@ import { Show } from "components/Show";
 import { Form } from "database/schema";
 import { EditorSidebar } from "features/builder/components/EditorToolbar";
 import { ElementWrapper } from "features/builder/components/ElementWrapper";
-import { useEditorStore } from "features/builder/hooks/useEditorStore";
+import {
+  formSettings,
+  useEditorStore
+} from "features/builder/hooks/useEditorStore";
 import { FormElementInstance } from "features/types";
 import { cn } from "utils/cn";
 import { useShallow } from "zustand/react/shallow";
@@ -84,8 +87,11 @@ const CanvasElements = ({ formElements }: CanvasElementsProps) => {
             strategy={verticalListSortingStrategy}
           >
             <div
-              className="flex h-full w-full flex-col gap-2 space-y-2 p-4"
-              style={{ maxWidth: settings.maxWidth || "1024px" }}
+              className="flex h-full w-full flex-col p-4"
+              style={{
+                maxWidth: settings.maxWidth || formSettings.maxWidth,
+                gap: settings.gap || formSettings.gap
+              }}
             >
               {currentElements.map(element => {
                 return <ElementWrapper key={element.id} element={element} />;

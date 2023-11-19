@@ -37,6 +37,7 @@ export type Form = InferSelectModel<typeof forms> & {
 
 export type FormSettings = {
   maxWidth: string;
+  gap: string;
 };
 
 export type Content = {

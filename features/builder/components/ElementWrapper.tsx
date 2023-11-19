@@ -35,10 +35,10 @@ export const ElementWrapper = ({ element, isOverlay }: Props) => {
     <Item
       className={cn(
         "group relative cursor-pointer select-none border border-dashed border-transparent outline-none",
-        !isDragging && "hover:border-blue-300",
-        isActiveElement && !isDragging && "border-blue-300",
+        !isDragging && "hover:border-blue-400",
+        isActiveElement && !isDragging && "border-blue-400",
         (element.id.includes("space") || isDragging) &&
-          "border border-dashed border-blue-300 py-10 opacity-50"
+          "border border-dashed border-blue-400 py-10 opacity-50"
       )}
       ref={setNodeRef}
       style={style}
@@ -49,7 +49,12 @@ export const ElementWrapper = ({ element, isOverlay }: Props) => {
         setActiveElement(element);
       }}
     >
-      <div className="absolute right-0 top-0 hidden gap-1 group-hover:flex">
+      <div
+        className={cn(
+          "absolute right-0 top-0 hidden gap-1",
+          !isDragging && !isOverlay && "group-hover:flex"
+        )}
+      >
         <ActiveElementButton element={element} />
         <RemoveElementButton elementId={element.id} />
       </div>

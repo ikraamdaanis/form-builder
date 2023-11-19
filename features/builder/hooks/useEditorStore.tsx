@@ -20,6 +20,12 @@ type UpdateSettingsValue =
   | Partial<FormSettings>
   | ((prevFormSettings: FormSettings) => FormSettings);
 
+/** Default values for the form properties. */
+export const formSettings: FormSettings = {
+  maxWidth: "1024px",
+  gap: "1rem"
+};
+
 /** Store for the editor to handle state. */
 export const useEditorStore = create<EditorStore>((set, state) => ({
   elements: [],
@@ -58,9 +64,7 @@ export const useEditorStore = create<EditorStore>((set, state) => ({
   setActiveElement: (element: FormElementInstance | null) => {
     set({ activeElement: element });
   },
-  settings: {
-    maxWidth: "1024px"
-  },
+  settings: formSettings,
   updateSettings: (updateValue: UpdateSettingsValue) => {
     let formSettings: FormSettings = state().settings;
 

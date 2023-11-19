@@ -9,13 +9,17 @@ import {
 import { AttributeInput } from "features/builder/components/attributes/AttributeInput";
 import { AttributeLabel } from "features/builder/components/attributes/AttributeLabel";
 import { AttributeLabelTooltip } from "features/builder/components/attributes/AttributeLabelTooltip";
-import { useEditorStore } from "features/builder/hooks/useEditorStore";
+import {
+  formSettings,
+  useEditorStore
+} from "features/builder/hooks/useEditorStore";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useShallow } from "zustand/react/shallow";
 
 const propertiesSchema = z.object({
-  maxWidth: z.string().max(200)
+  maxWidth: z.string().max(200),
+  gap: z.string().max(200)
 });
 
 type PropertiesSchema = z.infer<typeof propertiesSchema>;
@@ -31,15 +35,16 @@ export const FormProperties = () => {
     }))
   );
 
+  const values = {
+    maxWidth: settings.maxWidth,
+    gap: settings.gap
+  };
+
   const form = useForm<PropertiesSchema>({
     resolver: zodResolver(propertiesSchema),
     mode: "onChange",
-    defaultValues: {
-      maxWidth: settings.maxWidth
-    },
-    values: {
-      maxWidth: settings.maxWidth
-    }
+    defaultValues: values,
+    values
   });
 
   function applyChanges(values: PropertiesSchema) {
@@ -65,7 +70,38 @@ export const FormProperties = () => {
                   <AttributeLabel>Max Width</AttributeLabel>
                 </AttributeLabelTooltip>
                 <FormControl>
-                  <AttributeInput {...field} />
+                  <AttributeInput
+                    {...field}
+                    onBlur={({ target: { value } }) => {
+                      if (!value.length) {
+                        field.onChange(formSettings.maxWidth);
+                      }
+                    }}
+                  />
+                </FormControl>
+              </div>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="gap"
+          render={({ field }) => (
+            <FormItem className="flex flex-col">
+              <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
+                <AttributeLabelTooltip message="The gap CSS shorthand property sets the gaps between the elements.">
+                  <AttributeLabel>Gap</AttributeLabel>
+                </AttributeLabelTooltip>
+                <FormControl>
+                  <AttributeInput
+                    {...field}
+                    onBlur={({ target: { value } }) => {
+                      if (!value.length) {
+                        field.onChange(formSettings.gap);
+                      }
+                    }}
+                  />
                 </FormControl>
               </div>
               <FormMessage />
