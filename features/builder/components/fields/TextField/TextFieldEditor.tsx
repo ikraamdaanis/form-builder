@@ -15,19 +15,19 @@ export const TextFieldEditor = ({ element }: Props) => {
     elementInstance.extraAttributes;
 
   return (
-    <div className="flex w-full flex-col gap-2 bg-zinc-50 outline-0 ring-0 focus-visible:outline-none dark:bg-zinc-900">
+    <div className="flex w-full flex-col gap-2 bg-zinc-50 outline-0 ring-0 focus-visible:outline-none">
       <div>
-        <Label>
+        <Label className="text-zinc-950">
           {label}
           {required && "*"}
         </Label>
         <Input
           readOnly
           placeholder={placeholder}
-          className="pointer-events-none cursor-default"
+          className="pointer-events-none cursor-default border-zinc-300 bg-zinc-50 placeholder:text-zinc-400"
         />
         {helperText && (
-          <p className="text-[0.8rem] text-muted-foreground">{helperText}</p>
+          <p className="text-[0.8rem] text-zinc-600">{helperText}</p>
         )}
       </div>
     </div>

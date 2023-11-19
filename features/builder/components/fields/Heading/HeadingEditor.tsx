@@ -19,7 +19,7 @@ export const HeadingEditor = ({ element }: Props) => {
   } = elementInstance.extraAttributes;
 
   return (
-    <div className="flex w-full flex-col gap-2 bg-zinc-50 outline-0 ring-0 focus-visible:outline-none dark:bg-zinc-900">
+    <div className="flex w-full flex-col gap-2 bg-zinc-50 text-zinc-950 outline-0 ring-0 focus-visible:outline-none">
       <h1
         style={{
           fontSize: `${size || "16px"}`,

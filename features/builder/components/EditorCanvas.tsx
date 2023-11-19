@@ -65,7 +65,7 @@ const CanvasElements = ({ formElements }: CanvasElementsProps) => {
       <div
         ref={droppable.setNodeRef}
         className={cn(
-          "m-auto flex h-full max-w-[920px] flex-1 flex-grow flex-col items-center justify-start overflow-y-auto bg-zinc-50 dark:bg-zinc-900",
+          "m-auto flex h-full max-w-[920px] flex-1 flex-grow flex-col items-center justify-start overflow-y-auto bg-zinc-50",
           isOverEditor && "ring-2 ring-blue-400"
         )}
         onClick={e => {
