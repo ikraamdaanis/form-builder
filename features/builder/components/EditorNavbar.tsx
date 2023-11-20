@@ -4,7 +4,7 @@ import { Show } from "components/Show";
 import { ThemeToggler } from "components/ThemeToggler";
 import { Form } from "database/schema";
 import { ProfileButton } from "features/auth/components/ProfileButton";
-import { PreviewDialogButton } from "features/builder/components/PreviewDialogButton";
+import { PreviewButton } from "features/builder/components/PreviewButton";
 import { PublishFormButton } from "features/builder/components/PublishFormButton";
 import { SaveFormButton } from "features/builder/components/SaveFormButton";
 import Link from "next/link";
@@ -36,7 +36,7 @@ export const EditorNavbar = ({ form }: Props) => {
           <ThemeToggler />
           <ProfileButton />
         </div>
-        <PreviewDialogButton />
+        <PreviewButton />
         <Show when={!form.published}>
           <SaveFormButton formId={form.id} />
           <PublishFormButton formId={form.id} />
