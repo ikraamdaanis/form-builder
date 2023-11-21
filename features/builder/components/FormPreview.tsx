@@ -28,21 +28,19 @@ export const FormPreview = ({ form }: Props) => {
 
   return (
     <section className="flex h-full w-full flex-col">
-      <div className="flex flex-grow flex-col items-center justify-center overflow-y-auto bg-accent bg-[url(/paper.svg)] p-4 dark:bg-[url(/paper-dark.svg)]">
-        <div className="flex h-full w-full max-w-[620px] flex-grow flex-col overflow-y-auto bg-zinc-50">
-          <div
-            className="flex h-full w-full flex-col p-4"
-            style={{
-              maxWidth: settings.maxWidth,
-              gap: settings.gap
-            }}
-          >
-            {displayedElements.map(element => {
-              const EditorElement = FormElements[element.type].formComponent;
+      <div className="flex h-full w-full flex-grow flex-col items-center justify-start overflow-y-auto bg-zinc-50">
+        <div
+          className="flex h-full w-full flex-col p-4"
+          style={{
+            maxWidth: settings.maxWidth,
+            gap: settings.gap
+          }}
+        >
+          {displayedElements.map(element => {
+            const EditorElement = FormElements[element.type].formComponent;
 
-              return <EditorElement key={element.id} element={element} />;
-            })}
-          </div>
+            return <EditorElement key={element.id} element={element} />;
+          })}
         </div>
       </div>
     </section>

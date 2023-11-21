@@ -36,8 +36,8 @@ export const FormProperties = () => {
   );
 
   const values = {
-    maxWidth: settings.maxWidth,
-    gap: settings.gap
+    maxWidth: settings.maxWidth || formSettings.maxWidth,
+    gap: settings.gap || formSettings.gap
   };
 
   const form = useForm<PropertiesSchema>({
@@ -75,6 +75,10 @@ export const FormProperties = () => {
                     onBlur={({ target: { value } }) => {
                       if (!value.length) {
                         field.onChange(formSettings.maxWidth);
+                        updateSettings(prevSettings => ({
+                          ...prevSettings,
+                          maxWidth: formSettings.maxWidth
+                        }));
                       }
                     }}
                   />
@@ -99,6 +103,10 @@ export const FormProperties = () => {
                     onBlur={({ target: { value } }) => {
                       if (!value.length) {
                         field.onChange(formSettings.gap);
+                        updateSettings(prevSettings => ({
+                          ...prevSettings,
+                          gap: formSettings.gap
+                        }));
                       }
                     }}
                   />

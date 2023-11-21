@@ -34,10 +34,10 @@ export const FormBuilder = ({ form }: Props) => {
   );
 
   useEffect(() => {
-    if (form?.content) {
+    if (form?.content && !elements.length) {
       setElements(JSON.parse(form.content || ""));
     }
-  }, [form, setElements]);
+  }, [elements.length, form, setElements]);
 
   function onDragStart() {}
 

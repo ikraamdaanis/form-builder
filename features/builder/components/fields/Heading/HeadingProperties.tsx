@@ -168,7 +168,7 @@ export const HeadingProperties = () => {
             </FormItem>
           )}
         />
-        <Separator className="bg-zinc-800" />
+        <Separator className="bg-zinc-300 dark:bg-zinc-800" />
         <p className="text-sm font-semibold">Layout</p>
         <FormField
           control={form.control}
