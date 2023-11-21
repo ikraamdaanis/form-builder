@@ -54,7 +54,7 @@ function HeadingEditor({ element }: Props) {
   } = elementInstance.extraAttributes;
 
   return (
-    <div className="flex w-full flex-col gap-2 bg-zinc-50 text-zinc-950 outline-0 ring-0 focus-visible:outline-none">
+    <div className="flex w-full flex-col gap-2 bg-white text-zinc-950 outline-0 ring-0 focus-visible:outline-none">
       <h1
         style={{
           fontSize: `${size || "16px"}`,
@@ -82,7 +82,7 @@ function HeadingPreview({ element }: Props) {
   } = elementInstance.extraAttributes;
 
   return (
-    <div className="flex w-full flex-col gap-2 bg-zinc-50 text-zinc-950 outline-0 ring-0 selection:bg-blue-300 focus-visible:outline-none">
+    <div className="flex w-full flex-col gap-2 bg-white text-zinc-950 outline-0 ring-0 selection:bg-blue-300 focus-visible:outline-none">
       <h1
         style={{
           fontSize: `${size || "16px"}`,

@@ -11,7 +11,7 @@ const type: ElementsType = "TextField";
 
 export const textFieldAttributes = {
   label: "Text field",
-  helperText: "Helper Text",
+  helperText: "",
   required: false,
   placeholder: "Value here...."
 };
@@ -46,7 +46,7 @@ function TextFieldPreview({ element }: Omit<Props, "isOverlay">) {
     elementInstance.extraAttributes;
 
   return (
-    <div className="flex w-full flex-col gap-2 bg-zinc-50 outline-0 ring-0 selection:bg-blue-300 selection:text-zinc-950 focus-visible:outline-none">
+    <div className="flex w-full flex-col gap-2 bg-white outline-0 ring-0 selection:bg-blue-300 selection:text-zinc-950 focus-visible:outline-none">
       <div>
         <Label className="text-zinc-950">
           {label}

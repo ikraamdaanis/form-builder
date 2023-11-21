@@ -15,7 +15,7 @@ export const TextFieldEditor = ({ element }: Props) => {
     elementInstance.extraAttributes;
 
   return (
-    <div className="flex w-full flex-col gap-2 bg-zinc-50 outline-0 ring-0 focus-visible:outline-none">
+    <div className="flex w-full flex-col gap-2 bg-white outline-0 ring-0 focus-visible:outline-none">
       <div>
         <Label className="text-zinc-950">
           {label}

@@ -70,6 +70,7 @@ export const FormProperties = ({ form }: Props) => {
 
   return (
     <FormProvider {...propertiesForm}>
+      <h2 className="mb-2 text-sm font-semibold">Form Properties</h2>
       <form
         onChange={propertiesForm.handleSubmit(applyChanges)}
         onSubmit={e => {
