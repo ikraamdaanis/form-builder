@@ -4,14 +4,10 @@ import {
   verticalListSortingStrategy
 } from "@dnd-kit/sortable";
 import { Show } from "components/Show";
-import { Form } from "database/schema";
+import { Content, Form } from "database/schema";
 import { EditorSidebar } from "features/builder/components/EditorToolbar";
 import { ElementWrapper } from "features/builder/components/ElementWrapper";
-import {
-  formSettings,
-  useEditorStore
-} from "features/builder/hooks/useEditorStore";
-import { FormElementInstance } from "features/types";
+import { useEditorStore } from "features/builder/hooks/useEditorStore";
 import { cn } from "utils/cn";
 import { useShallow } from "zustand/react/shallow";
 
@@ -26,32 +22,35 @@ type Props = {
  * drag-and-drop operations.
  */
 export const EditorCanvas = ({ form }: Props) => {
-  const formElements = JSON.parse(form.content || "") as FormElementInstance[];
+  const formContent = JSON.parse(form.content || "") as Content;
 
   return (
     <div className="flex h-full w-full">
       <EditorSidebar />
-      <CanvasElements formElements={formElements} />
+      <CanvasElements formContent={formContent} />
     </div>
   );
 };
 
 type CanvasElementsProps = {
-  formElements: FormElementInstance[];
+  formContent: Content;
 };
 
 /**
  * Displays the elements in the form builder canvas.
  */
-const CanvasElements = ({ formElements }: CanvasElementsProps) => {
-  const { elements, setActiveElement, settings } = useEditorStore(
+const CanvasElements = ({ formContent }: CanvasElementsProps) => {
+  const { elements, setActiveElement, settings, hasLoaded } = useEditorStore(
     useShallow(state => ({
       elements: state.elements,
       setActiveElement: state.setActiveElement,
-      settings: state.settings
+      settings: state.settings,
+      hasLoaded: state.hasLoaded
     }))
   );
-  const currentElements = !elements.length ? formElements : elements;
+
+  const currentElements = !elements.length ? formContent.elements : elements;
+  const currentSettings = !hasLoaded ? formContent.settings : settings;
 
   const droppable = useDroppable({
     id: "editor-drop-area",
@@ -87,10 +86,10 @@ const CanvasElements = ({ formElements }: CanvasElementsProps) => {
             strategy={verticalListSortingStrategy}
           >
             <div
-              className="flex h-full w-full flex-col p-4"
+              className="flex h-full w-full flex-col bg-white p-4"
               style={{
-                maxWidth: settings.maxWidth || formSettings.maxWidth,
-                gap: settings.gap || formSettings.gap
+                maxWidth: currentSettings.maxWidth,
+                gap: currentSettings.gap
               }}
             >
               {currentElements.map(element => {

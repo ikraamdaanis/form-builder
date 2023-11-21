@@ -1,5 +1,5 @@
 import { Button } from "components/ui/button";
-import { FormUpdateSchema } from "database/schema";
+import { Content, FormUpdateSchema } from "database/schema";
 import { updateForm } from "features/builder/actions/updateForm";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
 import { SaveIcon } from "lucide-react";
@@ -15,15 +15,22 @@ type Props = {
  */
 export const SaveFormButton = ({ formId }: Props) => {
   const [loading, startTransition] = useTransition();
-  const { elements } = useEditorStore(
-    useShallow(state => ({ elements: state.elements }))
+  const { elements, settings } = useEditorStore(
+    useShallow(state => ({
+      elements: state.elements,
+      settings: state.settings
+    }))
   );
 
   async function handleFormButton() {
+    const content: Content = {
+      elements,
+      settings
+    };
     try {
       const data: FormUpdateSchema = {
         id: formId,
-        content: JSON.stringify(elements),
+        content: JSON.stringify(content),
         updatedAt: new Date()
       };
 

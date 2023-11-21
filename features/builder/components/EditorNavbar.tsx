@@ -8,9 +8,9 @@ import { ProfileButton } from "features/auth/components/ProfileButton";
 import { PreviewButton } from "features/builder/components/PreviewButton";
 import { PublishFormButton } from "features/builder/components/PublishFormButton";
 import { SaveFormButton } from "features/builder/components/SaveFormButton";
+import { useBuilderLinks } from "features/builder/hooks/useBuilderLinks";
 import { MoveLeft } from "lucide-react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 type Props = {
   form: Form;
@@ -22,15 +22,13 @@ type Props = {
  * name, preview button, and form-saving options.
  */
 export const EditorNavbar = ({ form }: Props) => {
-  const pathname = usePathname();
-
-  const isPreviewPage = pathname.includes("preview");
+  const { isPreview } = useBuilderLinks();
 
   return (
     <nav className="flex items-center justify-between gap-3 border-b border-b-zinc-300 bg-primary bg-white px-4 py-2 dark:border-b-zinc-700 dark:bg-zinc-900">
       <div className="flex items-center gap-2">
         <Show
-          when={!isPreviewPage}
+          when={!isPreview}
           fallback={
             <>
               <Link href={`/builder/${form.id}`}>

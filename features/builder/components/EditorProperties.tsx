@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "components/ui/button";
+import { Form } from "database/schema";
 import { FormProperties } from "features/builder/components/FormProperties";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
 import { ElementsType, FormElements } from "features/types";
@@ -8,11 +9,15 @@ import { MoveLeft } from "lucide-react";
 import { ChildrenProp } from "types";
 import { useShallow } from "zustand/react/shallow";
 
+type Props = {
+  form: Form;
+};
+
 /**
  * Sidebar for the properties fields for elements in the form builder enabling
  * the user to change the attributes of an element.
  */
-export const EditorProperties = () => {
+export const EditorProperties = ({ form }: Props) => {
   const { activeElement, setActiveElement } = useEditorStore(
     useShallow(state => ({
       activeElement: state.activeElement,
@@ -31,7 +36,7 @@ export const EditorProperties = () => {
   if (!activeElement)
     return (
       <Wrapper>
-        <FormProperties />
+        <FormProperties form={form} />
       </Wrapper>
     );
 

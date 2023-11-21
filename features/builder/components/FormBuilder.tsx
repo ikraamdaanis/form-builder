@@ -2,10 +2,13 @@
 
 import { DragEndEvent, DragOverEvent, MeasuringStrategy } from "@dnd-kit/core";
 import { SortableData, arrayMove } from "@dnd-kit/sortable";
-import { Form } from "database/schema";
+import { Content, Form } from "database/schema";
 import { EditorCanvas } from "features/builder/components/EditorCanvas";
 import { SortableContainer } from "features/builder/components/SortableContainer";
-import { useEditorStore } from "features/builder/hooks/useEditorStore";
+import {
+  formSettings,
+  useEditorStore
+} from "features/builder/hooks/useEditorStore";
 import { ElementsType, FormElements } from "features/types";
 import { useEffect, useId } from "react";
 import { useShallow } from "zustand/react/shallow";
@@ -24,20 +27,28 @@ const SPACER_ID = "spacer";
  * for managing the sortable behavior of form elements.
  */
 export const FormBuilder = ({ form }: Props) => {
-  const { elements, setElements, addElement, removeElement } = useEditorStore(
-    useShallow(state => ({
-      elements: state.elements,
-      setElements: state.setElements,
-      addElement: state.addElement,
-      removeElement: state.removeElement
-    }))
-  );
+  const { elements, setElements, addElement, removeElement, updateSettings } =
+    useEditorStore(
+      useShallow(state => ({
+        elements: state.elements,
+        setElements: state.setElements,
+        addElement: state.addElement,
+        removeElement: state.removeElement,
+        updateSettings: state.updateSettings
+      }))
+    );
 
   useEffect(() => {
     if (form?.content && !elements.length) {
-      setElements(JSON.parse(form.content || ""));
+      const content: Content = JSON.parse(form.content || "") || {
+        elements: [],
+        settings: formSettings
+      };
+
+      setElements(content.elements);
+      updateSettings(content.settings);
     }
-  }, [elements.length, form, setElements]);
+  }, [elements.length, form, setElements, updateSettings]);
 
   function onDragStart() {}
 

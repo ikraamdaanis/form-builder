@@ -14,6 +14,7 @@ type EditorStore = {
   setActiveElement: (element: FormElementInstance | null) => void;
   settings: FormSettings;
   updateSettings: (updateValue: UpdateSettingsValue) => void;
+  hasLoaded: boolean;
 };
 
 type UpdateSettingsValue =
@@ -21,7 +22,7 @@ type UpdateSettingsValue =
   | ((prevFormSettings: FormSettings) => FormSettings);
 
 /** Default values for the form properties. */
-export const formSettings: FormSettings = {
+export const formSettings: EditorStore["settings"] = {
   maxWidth: "1024px",
   gap: "1rem"
 };
@@ -75,6 +76,7 @@ export const useEditorStore = create<EditorStore>((set, state) => ({
 
     formSettings = { ...state().settings, ...newState };
 
-    set({ settings: formSettings });
-  }
+    set({ settings: formSettings, hasLoaded: true });
+  },
+  hasLoaded: false
 }));

@@ -1,11 +1,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  Form,
+  Form as FormProvider,
   FormControl,
   FormField,
   FormItem,
   FormMessage
 } from "components/ui/form";
+import { Content, Form } from "database/schema";
 import { AttributeInput } from "features/builder/components/attributes/AttributeInput";
 import { AttributeLabel } from "features/builder/components/attributes/AttributeLabel";
 import { AttributeLabelTooltip } from "features/builder/components/attributes/AttributeLabelTooltip";
@@ -24,23 +25,32 @@ const propertiesSchema = z.object({
 
 type PropertiesSchema = z.infer<typeof propertiesSchema>;
 
+type Props = {
+  form: Form;
+};
+
 /**
  * Form to handle the properties of a form.
  */
-export const FormProperties = () => {
-  const { settings, updateSettings } = useEditorStore(
+export const FormProperties = ({ form }: Props) => {
+  const formContent = JSON.parse(form.content || "") as Content;
+
+  const { settings, updateSettings, hasLoaded } = useEditorStore(
     useShallow(state => ({
       settings: state.settings,
-      updateSettings: state.updateSettings
+      updateSettings: state.updateSettings,
+      hasLoaded: state.hasLoaded
     }))
   );
 
+  const currentSettings = !hasLoaded ? formContent.settings : settings;
+
   const values = {
-    maxWidth: settings.maxWidth || formSettings.maxWidth,
-    gap: settings.gap || formSettings.gap
+    maxWidth: currentSettings.maxWidth,
+    gap: currentSettings.gap
   };
 
-  const form = useForm<PropertiesSchema>({
+  const propertiesForm = useForm<PropertiesSchema>({
     resolver: zodResolver(propertiesSchema),
     mode: "onChange",
     defaultValues: values,
@@ -51,17 +61,24 @@ export const FormProperties = () => {
     updateSettings(prevSettings => ({ ...prevSettings, ...values }));
   }
 
+  function updateField(fieldName: keyof typeof values, value: string) {
+    updateSettings(prevSettings => ({
+      ...prevSettings,
+      [fieldName]: value
+    }));
+  }
+
   return (
-    <Form {...form}>
+    <FormProvider {...propertiesForm}>
       <form
-        onChange={form.handleSubmit(applyChanges)}
+        onChange={propertiesForm.handleSubmit(applyChanges)}
         onSubmit={e => {
           e.preventDefault();
         }}
         className="flex flex-col gap-4"
       >
         <FormField
-          control={form.control}
+          control={propertiesForm.control}
           name="maxWidth"
           render={({ field }) => (
             <FormItem className="flex flex-col">
@@ -75,10 +92,7 @@ export const FormProperties = () => {
                     onBlur={({ target: { value } }) => {
                       if (!value.length) {
                         field.onChange(formSettings.maxWidth);
-                        updateSettings(prevSettings => ({
-                          ...prevSettings,
-                          maxWidth: formSettings.maxWidth
-                        }));
+                        updateField("maxWidth", formSettings.maxWidth);
                       }
                     }}
                   />
@@ -89,7 +103,7 @@ export const FormProperties = () => {
           )}
         />
         <FormField
-          control={form.control}
+          control={propertiesForm.control}
           name="gap"
           render={({ field }) => (
             <FormItem className="flex flex-col">
@@ -103,10 +117,7 @@ export const FormProperties = () => {
                     onBlur={({ target: { value } }) => {
                       if (!value.length) {
                         field.onChange(formSettings.gap);
-                        updateSettings(prevSettings => ({
-                          ...prevSettings,
-                          gap: formSettings.gap
-                        }));
+                        updateField("gap", formSettings.gap);
                       }
                     }}
                   />
@@ -117,6 +128,6 @@ export const FormProperties = () => {
           )}
         />
       </form>
-    </Form>
+    </FormProvider>
   );
 };
