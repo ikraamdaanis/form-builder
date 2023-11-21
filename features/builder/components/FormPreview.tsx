@@ -1,8 +1,8 @@
 "use client";
 
-import { Form } from "database/schema";
+import { Content, Form } from "database/schema";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
-import { FormElementInstance, FormElements } from "features/types";
+import { FormElements } from "features/types";
 import { useShallow } from "zustand/react/shallow";
 
 type Props = {
@@ -15,28 +15,30 @@ type Props = {
  * users.
  */
 export const FormPreview = ({ form }: Props) => {
-  const { elements, settings } = useEditorStore(
+  const { elements, settings, hasLoaded } = useEditorStore(
     useShallow(state => ({
       elements: state.elements,
-      settings: state.settings
+      settings: state.settings,
+      hasLoaded: state.hasLoaded
     }))
   );
 
-  const displayedElements = elements.length
-    ? elements
-    : (JSON.parse(form.content || "") as FormElementInstance[]);
+  const formContent = JSON.parse(form.content || "") as Content;
+
+  const currentElements = elements.length ? elements : formContent.elements;
+  const currentSettings = hasLoaded ? settings : formContent.settings;
 
   return (
     <section className="flex h-full w-full flex-col">
-      <div className="flex h-full w-full flex-grow flex-col items-center justify-start overflow-y-auto bg-zinc-50">
+      <div className="flex h-full w-full flex-grow flex-col items-center justify-start overflow-y-auto bg-white">
         <div
           className="flex h-full w-full flex-col p-4"
           style={{
-            maxWidth: settings.maxWidth,
-            gap: settings.gap
+            maxWidth: currentSettings.maxWidth,
+            gap: currentSettings.gap
           }}
         >
-          {displayedElements.map(element => {
+          {currentElements.map(element => {
             const EditorElement = FormElements[element.type].formComponent;
 
             return <EditorElement key={element.id} element={element} />;
