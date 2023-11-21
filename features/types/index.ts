@@ -27,7 +27,7 @@ export type FormElement = {
     element: FormElementInstance;
     isOverlay?: boolean;
   }) => JSX.Element;
-  formComponent: () => JSX.Element;
+  formComponent: (props: { element: FormElementInstance }) => JSX.Element;
   propertiesComponent: () => JSX.Element;
 };
 

@@ -43,8 +43,7 @@ export const PreviewButton = () => {
               }}
             >
               {elements.map(element => {
-                const EditorElement =
-                  FormElements[element.type].editorComponent;
+                const EditorElement = FormElements[element.type].formComponent;
 
                 return <EditorElement key={element.id} element={element} />;
               })}
