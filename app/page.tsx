@@ -1,31 +1,15 @@
-import { SignOutButton, currentUser } from "@clerk/nextjs";
 import { Header } from "components/Header";
-import { Button } from "components/ui/button";
-import Link from "next/link";
 
 /**
  * The homepage for the application. Displays the product features and links to
  * sign up and login pages.
  */
 const HomePage = async () => {
-  const user = await currentUser();
   return (
-    <div className="">
+    <div className="h-full">
       <Header />
-      <section className="pt-16">
+      <section className="h-full bg-zinc-50 pt-16 dark:bg-zinc-900">
         <h1>Home</h1>
-        {user ? (
-          <SignOutButton />
-        ) : (
-          <>
-            <Link href="/sign-up">
-              <Button>Sign Up</Button>
-            </Link>
-            <Link href="/login">
-              <Button>Login</Button>
-            </Link>
-          </>
-        )}
       </section>
     </div>
   );
