@@ -3,7 +3,7 @@ import { getFormById } from "features/builder/actions/getFormById";
 import { EditorNavbar } from "features/builder/components/EditorNavbar";
 import { EditorProperties } from "features/builder/components/EditorProperties";
 import { FormBuilder } from "features/builder/components/FormBuilder";
-import { FormPreview } from "features/builder/components/FormPreview";
+import { FormPreview } from "features/forms/components/FormPreview";
 
 type Props = {
   params: {

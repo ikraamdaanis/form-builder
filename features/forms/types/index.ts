@@ -1,3 +1,4 @@
+import { Form } from "database/schema";
 import { z } from "zod";
 
 export const createFormSchema = z.object({
@@ -6,3 +7,5 @@ export const createFormSchema = z.object({
 });
 
 export type CreateFormSchema = z.infer<typeof createFormSchema>;
+
+export type PublicForm = Omit<Form, "submissions" | "visits" | "userId">;

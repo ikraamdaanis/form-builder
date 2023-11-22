@@ -1,3 +1,4 @@
+import { RedirectToSignIn, currentUser } from "@clerk/nextjs";
 import { Separator } from "components/ui/separator";
 import { CreateFormButton } from "features/forms/components/CreateFormButton";
 import { FormCardLoader } from "features/forms/components/FormCard";
@@ -7,6 +8,12 @@ import { StatsCardsWrapper } from "features/stats/components/StatsCardsWrapper";
 import { Suspense } from "react";
 
 const HomePage = async () => {
+  const user = await currentUser();
+
+  if (!user) {
+    return <RedirectToSignIn />;
+  }
+
   return (
     <div className="flex min-h-full w-full flex-col bg-white pt-16 dark:bg-zinc-900">
       <Suspense fallback={<StatsCards loading={true} />}>

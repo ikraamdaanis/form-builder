@@ -6,6 +6,7 @@ import { cn } from "utils/cn";
 
 export const ProfileButton = (props: RefAttributes<HTMLButtonElement>) => {
   const { isLoaded, isSignedIn } = useUser();
+
   return (
     <Button
       className={cn(

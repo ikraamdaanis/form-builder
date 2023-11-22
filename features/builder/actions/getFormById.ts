@@ -17,3 +17,15 @@ export async function getFormById(formId: string) {
     where: and(eq(forms.userId, user.id), eq(forms.id, formId))
   });
 }
+
+/** Fetches a form via an id for the public */
+export async function getPublicFormById(formId: string) {
+  return db.query.forms.findFirst({
+    where: eq(forms.id, formId),
+    columns: {
+      submissions: false,
+      visits: false,
+      userId: false
+    }
+  });
+}
