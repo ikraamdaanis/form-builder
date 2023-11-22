@@ -4,6 +4,7 @@ import { EditorNavbar } from "features/builder/components/EditorNavbar";
 import { EditorProperties } from "features/builder/components/EditorProperties";
 import { FormBuilder } from "features/builder/components/FormBuilder";
 import { FormPreview } from "features/forms/components/FormPreview";
+import { Metadata } from "next";
 
 type Props = {
   params: {
@@ -13,6 +14,14 @@ type Props = {
     preview: string;
   };
 };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const form = await getFormById(params.id);
+
+  return {
+    title: `${form?.name} | Editor`
+  };
+}
 
 const BuilderPage = async ({ params, searchParams }: Props) => {
   const form = await getFormById(params.id);

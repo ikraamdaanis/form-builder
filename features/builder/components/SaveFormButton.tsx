@@ -27,6 +27,7 @@ export const SaveFormButton = ({ formId }: Props) => {
       elements,
       settings
     };
+
     try {
       const data: FormUpdateSchema = {
         id: formId,

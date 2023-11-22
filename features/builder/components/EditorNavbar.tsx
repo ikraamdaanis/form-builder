@@ -1,10 +1,12 @@
 "use client";
 
+import { DashboardButton } from "components/DashboardButton";
 import { Show } from "components/Show";
 import { ThemeToggler } from "components/ThemeToggler";
 import { Button } from "components/ui/button";
 import { Form } from "database/schema";
 import { ProfileButton } from "features/auth/components/ProfileButton";
+import { FormName } from "features/builder/components/FormName";
 import { PreviewButton } from "features/builder/components/PreviewButton";
 import { PublishFormButton } from "features/builder/components/PublishFormButton";
 import { SaveFormButton } from "features/builder/components/SaveFormButton";
@@ -42,15 +44,8 @@ export const EditorNavbar = ({ form }: Props) => {
             </>
           }
         >
-          <Link href="/">
-            <h1 className="text-lg font-semibold text-black dark:text-white">
-              Form Builder
-            </h1>
-          </Link>
-          <h2 className="truncate font-medium">
-            <span className="mr-2 text-muted-foreground">Form:</span>
-            {form.name}
-          </h2>
+          <DashboardButton />
+          <FormName form={form} />
         </Show>
       </div>
       <div className="flex items-center gap-2">

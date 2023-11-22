@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from "@clerk/nextjs";
+import { DashboardButton } from "components/DashboardButton";
 import { Show } from "components/Show";
 import { ThemeToggler } from "components/ThemeToggler";
 import { Button } from "components/ui/button";
@@ -32,11 +33,7 @@ export const Header = () => {
             when={isDashboard}
             fallback={
               <Show when={!!isSignedIn}>
-                <Link href="/dashboard">
-                  <Button className="bg-brandColour hover:bg-brandColour h-8 text-xs font-semibold text-white transition hover:brightness-110">
-                    Dashboard
-                  </Button>
-                </Link>
+                <DashboardButton />
               </Show>
             }
           >
