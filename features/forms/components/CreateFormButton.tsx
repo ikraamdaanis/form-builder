@@ -12,6 +12,10 @@ import {
 import { CreateFormForm } from "features/forms/components/CreateFormForm";
 import { useState } from "react";
 
+/**
+ * Modal for creating a form. Displays the form for creating a form which then
+ * leads the admin to the form editor once the form is created.
+ */
 export const CreateFormButton = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -22,7 +26,7 @@ export const CreateFormButton = () => {
           <p className="">Create new form</p>
         </Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className="bg-zinc-300 dark:bg-zinc-900">
         <DialogHeader>
           <DialogTitle>Create form</DialogTitle>
           <DialogDescription>

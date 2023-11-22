@@ -1,5 +1,5 @@
 import { getPublicFormById } from "features/builder/actions/getFormById";
-import { FormPublic } from "features/forms/components/FormPublic";
+import { PublishedForm } from "features/forms/components/PublishedForm";
 import { Metadata } from "next";
 
 type Props = {
@@ -16,6 +16,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+// We want this page to refresh it's data on every request.
+export const dynamic = "force-dynamic";
+
+/**
+ * Page for the published form. Fetches the public version of the form model
+ * and displays it for the users to fill in and submit.
+ */
 const FormPage = async ({ params }: Props) => {
   const form = await getPublicFormById(params.formId);
 
@@ -23,11 +30,7 @@ const FormPage = async ({ params }: Props) => {
     throw new Error("Form not found");
   }
 
-  return (
-    <div className="flex h-full w-full flex-grow flex-col items-center justify-start overflow-y-auto bg-white">
-      <FormPublic form={form} />
-    </div>
-  );
+  return <PublishedForm form={form} />;
 };
 
 export default FormPage;

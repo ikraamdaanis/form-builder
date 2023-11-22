@@ -10,9 +10,9 @@ import {
   FormLabel,
   FormMessage
 } from "components/ui/form";
-import { Input } from "components/ui/input";
 import { Textarea } from "components/ui/textarea";
 import { toast } from "components/ui/use-toast";
+import { AttributeInput } from "features/builder/components/attributes/AttributeInput";
 import { createForm } from "features/forms/actions/createForm";
 import { CreateFormSchema, createFormSchema } from "features/forms/types";
 import { Loader } from "lucide-react";
@@ -23,6 +23,10 @@ type Props = {
   closeModal: () => void;
 };
 
+/**
+ * Form to create a form which then redirects to the form editor so the admin
+ * can start visually editing the form.
+ */
 export const CreateFormForm = ({ closeModal }: Props) => {
   const router = useRouter();
 
@@ -37,6 +41,7 @@ export const CreateFormForm = ({ closeModal }: Props) => {
   async function onSubmit(values: CreateFormSchema) {
     try {
       const formId = await createForm(values);
+
       toast({
         title: "Success",
         description: "Form created successfully"
@@ -72,7 +77,7 @@ export const CreateFormForm = ({ closeModal }: Props) => {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <AttributeInput {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -85,7 +90,7 @@ export const CreateFormForm = ({ closeModal }: Props) => {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Textarea rows={5} {...field} />
+                <Textarea rows={5} className="max-h-[200px]" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
