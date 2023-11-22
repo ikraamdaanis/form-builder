@@ -26,7 +26,7 @@ export const CreateFormButton = () => {
           <p className="">Create new form</p>
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-zinc-300 dark:bg-zinc-900">
+      <DialogContent className="bg-zinc-50 dark:bg-zinc-900">
         <DialogHeader>
           <DialogTitle>Create form</DialogTitle>
           <DialogDescription>

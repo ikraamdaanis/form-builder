@@ -7,9 +7,9 @@ import {
   FormMessage
 } from "components/ui/form";
 import { Content, Form } from "database/schema";
-import { AttributeInput } from "features/builder/components/attributes/AttributeInput";
-import { AttributeLabel } from "features/builder/components/attributes/AttributeLabel";
-import { AttributeLabelTooltip } from "features/builder/components/attributes/AttributeLabelTooltip";
+import { Input } from "components/styled-ui/Input";
+import { FormLabel } from "components/styled-ui/FormLabel";
+import { Tooltip } from "components/Tooltip";
 import {
   formSettings,
   useEditorStore
@@ -84,11 +84,11 @@ export const FormProperties = ({ form }: Props) => {
           render={({ field }) => (
             <FormItem className="flex flex-col">
               <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-                <AttributeLabelTooltip message="The max-width CSS property sets the maximum width of the form.">
-                  <AttributeLabel>Max Width</AttributeLabel>
-                </AttributeLabelTooltip>
+                <Tooltip message="The max-width CSS property sets the maximum width of the form.">
+                  <FormLabel>Max Width</FormLabel>
+                </Tooltip>
                 <FormControl>
-                  <AttributeInput
+                  <Input
                     {...field}
                     onBlur={({ target: { value } }) => {
                       if (!value.length) {
@@ -109,11 +109,11 @@ export const FormProperties = ({ form }: Props) => {
           render={({ field }) => (
             <FormItem className="flex flex-col">
               <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-                <AttributeLabelTooltip message="The gap CSS shorthand property sets the gaps between the elements.">
-                  <AttributeLabel>Gap</AttributeLabel>
-                </AttributeLabelTooltip>
+                <Tooltip message="The gap CSS shorthand property sets the gaps between the elements.">
+                  <FormLabel>Gap</FormLabel>
+                </Tooltip>
                 <FormControl>
-                  <AttributeInput
+                  <Input
                     {...field}
                     onBlur={({ target: { value } }) => {
                       if (!value.length) {

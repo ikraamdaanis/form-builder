@@ -1,6 +1,6 @@
 import { FormDescription } from "components/ui/form";
 import {
-  Tooltip,
+  Tooltip as ShadcnTooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger
@@ -8,24 +8,24 @@ import {
 import { ReactNode } from "react";
 
 type Props = {
-  message: string;
+  message: ReactNode;
   children: ReactNode;
 };
 
 /**
- * Tooltip used for a label in an attribute field in the attributes panel.
+ * Styled tooltip which taken in a trigger component and message.
  */
-export const AttributeLabelTooltip = ({ message, children }: Props) => {
+export const Tooltip = ({ message, children }: Props) => {
   return (
     <TooltipProvider>
-      <Tooltip>
+      <ShadcnTooltip>
         <TooltipTrigger asChild>{children}</TooltipTrigger>
         <TooltipContent className="max-w-[200px] bg-zinc-50 dark:bg-zinc-900">
           <FormDescription className="text-zinc-900 dark:text-zinc-50">
             {message}
           </FormDescription>
         </TooltipContent>
-      </Tooltip>
+      </ShadcnTooltip>
     </TooltipProvider>
   );
 };

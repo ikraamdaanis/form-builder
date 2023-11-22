@@ -1,6 +1,8 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Input } from "components/styled-ui/Input";
+import { Textarea } from "components/styled-ui/TextArea";
 import { Button } from "components/ui/button";
 import {
   Form,
@@ -10,9 +12,7 @@ import {
   FormLabel,
   FormMessage
 } from "components/ui/form";
-import { Textarea } from "components/ui/textarea";
 import { toast } from "components/ui/use-toast";
-import { AttributeInput } from "features/builder/components/attributes/AttributeInput";
 import { createForm } from "features/forms/actions/createForm";
 import { CreateFormSchema, createFormSchema } from "features/forms/types";
 import { Loader } from "lucide-react";
@@ -77,7 +77,7 @@ export const CreateFormForm = ({ closeModal }: Props) => {
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <AttributeInput {...field} />
+                <Input {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -99,7 +99,7 @@ export const CreateFormForm = ({ closeModal }: Props) => {
         <Button
           onClick={form.handleSubmit(onSubmit)}
           disabled={form.formState.isSubmitting}
-          className="mt-4 w-full"
+          className="bg-brandColour hover:bg-brandColour mt-4 w-full transition hover:brightness-110"
         >
           {!form.formState.isSubmitting && <span>Save</span>}
           {form.formState.isSubmitting && <Loader className="animate-spin" />}

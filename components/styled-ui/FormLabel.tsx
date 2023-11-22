@@ -1,17 +1,15 @@
 import * as LabelPrimitive from "@radix-ui/react-label";
+import { FormLabel as ShadcnFormLabel } from "components/ui/form";
 import * as React from "react";
 import { cn } from "utils/cn";
-import { FormLabel } from "components/ui/form";
 
-/**
- * Label for an attribute field in the attributes panel.
- */
-export const AttributeLabel = React.forwardRef<
+/** Styled `shadcn/ui` FormLabel. */
+export const FormLabel = React.forwardRef<
   React.ElementRef<typeof LabelPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof LabelPrimitive.Root>
 >(({ className, ...props }, ref) => {
   return (
-    <FormLabel
+    <ShadcnFormLabel
       ref={ref}
       className={cn(
         "w-20 min-w-[80px] cursor-pointer text-xs font-semibold opacity-80",
@@ -22,4 +20,4 @@ export const AttributeLabel = React.forwardRef<
   );
 });
 
-AttributeLabel.displayName = "AttributeLabel";
+FormLabel.displayName = "FormLabel";

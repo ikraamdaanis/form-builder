@@ -1,4 +1,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Tooltip } from "components/Tooltip";
+import { FormLabel } from "components/styled-ui/FormLabel";
+import { Input } from "components/styled-ui/Input";
+import { SelectItem } from "components/styled-ui/SelectItem";
+import { SelectTrigger } from "components/styled-ui/SelectTrigger";
 import {
   Form,
   FormControl,
@@ -7,11 +12,6 @@ import {
   FormMessage
 } from "components/ui/form";
 import { Select, SelectContent, SelectValue } from "components/ui/select";
-import { AttributeInput } from "features/builder/components/attributes/AttributeInput";
-import { AttributeLabel } from "features/builder/components/attributes/AttributeLabel";
-import { AttributeLabelTooltip } from "features/builder/components/attributes/AttributeLabelTooltip";
-import { AttributeSelectItem } from "features/builder/components/attributes/AttributeSelectItem";
-import { AttributeSelectTrigger } from "features/builder/components/attributes/AttributeSelectTrigger";
 import { TextFieldElement } from "features/builder/components/fields/TextField/TextField";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
 import { useForm } from "react-hook-form";
@@ -75,11 +75,11 @@ export const TextFieldProperties = () => {
           render={({ field }) => (
             <FormItem className="flex flex-col">
               <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-                <AttributeLabelTooltip message="The label of the field. It will be displayed above the field">
-                  <AttributeLabel>Label</AttributeLabel>
-                </AttributeLabelTooltip>
+                <Tooltip message="The label of the field. It will be displayed above the field">
+                  <FormLabel>Label</FormLabel>
+                </Tooltip>
                 <FormControl>
-                  <AttributeInput {...field} />
+                  <Input {...field} />
                 </FormControl>
               </div>
               <FormMessage />
@@ -91,11 +91,11 @@ export const TextFieldProperties = () => {
           name="placeholder"
           render={({ field }) => (
             <FormItem className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-              <AttributeLabelTooltip message="The placeholder is the text in the input that will be displayed if the user hasn't typed anything.">
-                <AttributeLabel>Placeholder</AttributeLabel>
-              </AttributeLabelTooltip>
+              <Tooltip message="The placeholder is the text in the input that will be displayed if the user hasn't typed anything.">
+                <FormLabel>Placeholder</FormLabel>
+              </Tooltip>
               <FormControl>
-                <AttributeInput {...field} />
+                <Input {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -106,11 +106,11 @@ export const TextFieldProperties = () => {
           name="helperText"
           render={({ field }) => (
             <FormItem className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-              <AttributeLabelTooltip message="Any helpful text for the user that will be below the text field.">
-                <AttributeLabel>Helper Text</AttributeLabel>
-              </AttributeLabelTooltip>
+              <Tooltip message="Any helpful text for the user that will be below the text field.">
+                <FormLabel>Helper Text</FormLabel>
+              </Tooltip>
               <FormControl>
-                <AttributeInput {...field} />
+                <Input {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -121,9 +121,9 @@ export const TextFieldProperties = () => {
           name="required"
           render={({ field }) => (
             <FormItem className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-              <AttributeLabelTooltip message="Choose whether this text field should be required or not.">
-                <AttributeLabel>Required</AttributeLabel>
-              </AttributeLabelTooltip>
+              <Tooltip message="Choose whether this text field should be required or not.">
+                <FormLabel>Required</FormLabel>
+              </Tooltip>
               <Select
                 onValueChange={value => {
                   const isTrue = value === "true";
@@ -132,7 +132,7 @@ export const TextFieldProperties = () => {
                 value={String(field.value)}
               >
                 <FormControl>
-                  <AttributeSelectTrigger>
+                  <SelectTrigger>
                     <SelectValue
                       onChange={({ target }) => {
                         const isTrue =
@@ -142,11 +142,11 @@ export const TextFieldProperties = () => {
                         field.onChange(isTrue);
                       }}
                     />
-                  </AttributeSelectTrigger>
+                  </SelectTrigger>
                 </FormControl>
                 <SelectContent className="selector dark:bg-zinc-800">
-                  <AttributeSelectItem value="true">Yes</AttributeSelectItem>
-                  <AttributeSelectItem value="false">No</AttributeSelectItem>
+                  <SelectItem value="true">Yes</SelectItem>
+                  <SelectItem value="false">No</SelectItem>
                 </SelectContent>
               </Select>
             </FormItem>
