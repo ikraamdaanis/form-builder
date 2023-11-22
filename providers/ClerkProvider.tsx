@@ -22,7 +22,7 @@ export const ClerkProvider = ({ children }: Props) => {
         },
         elements: {
           avatarBox: "rounded-none h-full w-full",
-          card: "overflow-hidden tracking normal",
+          card: "overflow-hidden tracking normal shadow-none border border-zinc-200 dark:border-zinc-800",
           navbarButton: "tracking-normal",
           userPreviewAvatarContainer: "h-10 w-10 rounded-sm overflow-hidden",
           userButtonPopoverActionButton: "tracking-normal px-4",

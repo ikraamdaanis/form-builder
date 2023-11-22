@@ -6,10 +6,17 @@ import { ThemeToggler } from "components/ThemeToggler";
 import { Button } from "components/ui/button";
 import { ProfileButton } from "features/auth/components/ProfileButton";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-/** Header for the application */
+/**
+ * Header for the application, displays the logo, theme toggler, and auth
+ * buttons for users to sign in, login or check their profile. Used in the
+ * home page of the website and the admin dashboard.
+ */
 export const Header = () => {
-  const user = useAuth();
+  const { isLoaded, isSignedIn } = useAuth();
+  const pathname = usePathname();
+  const isDashboard = pathname.includes("dashboard");
 
   return (
     <header className="fixed top-0 h-16 w-full border-b border-b-zinc-300 bg-primary bg-white dark:border-b-zinc-700 dark:bg-zinc-900">
@@ -21,8 +28,21 @@ export const Header = () => {
         </Link>
         <div className="flex items-center gap-2">
           <ThemeToggler />
-          <ProfileButton />
-          <Show when={user.isLoaded && !user.isSignedIn}>
+          <Show
+            when={isDashboard}
+            fallback={
+              <Show when={!!isSignedIn}>
+                <Link href="/dashboard">
+                  <Button className="bg-brandColour hover:bg-brandColour h-8 text-xs font-semibold text-white transition hover:brightness-110">
+                    Dashboard
+                  </Button>
+                </Link>
+              </Show>
+            }
+          >
+            <ProfileButton />
+          </Show>
+          <Show when={isLoaded && !isSignedIn}>
             <Link href="/login">
               <Button className="h-8 bg-zinc-700 text-xs font-semibold text-white transition hover:bg-zinc-700 hover:brightness-110">
                 Login
