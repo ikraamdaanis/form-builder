@@ -7,7 +7,9 @@ import { StatsCards } from "features/stats/components/StatsCards";
 import { StatsCardsWrapper } from "features/stats/components/StatsCardsWrapper";
 import { Suspense } from "react";
 
-const HomePage = async () => {
+export const dashboardLink = "/dashboard";
+
+const DashboardPage = async () => {
   const user = await currentUser();
 
   if (!user) {
@@ -37,4 +39,4 @@ const HomePage = async () => {
   );
 };
 
-export default HomePage;
+export default DashboardPage;
