@@ -87,7 +87,7 @@ export const FormName = ({ form }: Props) => {
               <FormControl>
                 <Input
                   {...field}
-                  className="relative top-[1px] h-8 w-[min-content] truncate rounded-none border-0 border-b-[1px] border-b-transparent pl-0 text-base font-medium outline-none focus-visible:border-b-blue-400 focus-visible:ring-0"
+                  className="relative top-[1px] h-8 w-[min-content] truncate rounded-none border-0 border-b-[1px] border-b-transparent bg-transparent pl-0 text-base font-medium outline-none focus-visible:border-b-blue-400 focus-visible:ring-0 dark:border-b-[1px] dark:border-b-transparent dark:bg-transparent dark:focus-visible:border-b-blue-500"
                   onBlur={({ target: { value } }) => {
                     if (!value.length) {
                       field.onChange("United");
