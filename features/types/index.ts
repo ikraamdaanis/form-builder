@@ -1,8 +1,9 @@
 import { HeadingElement } from "features/builder/components/fields/Heading";
+import { SubmitButtonElement } from "features/builder/components/fields/SubmitButton";
 import { TextFieldElement } from "features/builder/components/fields/TextField";
 import { ReactNode } from "react";
 
-export type ElementsType = "TextField" | "Heading";
+export type ElementsType = "TextField" | "Heading" | "SubmitButton";
 // | "TitleField"
 // | "SubTitleField"
 // | "ParagraphField"
@@ -37,7 +38,8 @@ type FormElementsType = {
 
 export const FormElements: FormElementsType = {
   TextField: TextFieldElement,
-  Heading: HeadingElement
+  Heading: HeadingElement,
+  SubmitButton: SubmitButtonElement
 };
 
 export type FormElementInstance<T = Record<string, any>> = {
@@ -45,3 +47,7 @@ export type FormElementInstance<T = Record<string, any>> = {
   type: ElementsType;
   extraAttributes: T;
 };
+
+export const fontWeights = ["300", "400", "500", "600", "700"] as const;
+
+export type FontWeights = typeof fontWeights;
