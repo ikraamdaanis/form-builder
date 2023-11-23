@@ -90,3 +90,9 @@ body,
   height: 16px !important;
   border-width: 1px !important;
 }
+
+.react-colorful__interactive,
+.react-colorful__last-control,
+.react-colorful__saturation {
+  border-radius: 0px !important;
+}
