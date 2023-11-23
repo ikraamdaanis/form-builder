@@ -34,7 +34,7 @@ const BuilderPage = async ({ params, searchParams }: Props) => {
   return (
     <section className="flex h-full w-full flex-col">
       <EditorNavbar form={form} />
-      <div className="relative flex h-[200px] w-full flex-grow items-center justify-center overflow-y-auto bg-accent bg-[url(/paper.svg)] dark:bg-[url(/paper-dark.svg)]">
+      <div className="relative flex h-[200px] w-full flex-grow items-center justify-center overflow-y-auto bg-zinc-200 dark:bg-zinc-800">
         <Show when={!isPreview} fallback={<FormPreview form={form} />}>
           <FormBuilder form={form} />
           <EditorProperties form={form} />
