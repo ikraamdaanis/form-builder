@@ -20,7 +20,7 @@ export const Header = () => {
   const isDashboard = pathname.includes("dashboard");
 
   return (
-    <header className="fixed top-0 h-16 w-full border-b border-b-zinc-300 bg-primary bg-white dark:border-b-zinc-700 dark:bg-zinc-900">
+    <header className="fixed top-0 w-full border-b border-b-zinc-300 bg-primary bg-white py-2 dark:border-b-zinc-700 dark:bg-zinc-900">
       <nav className="mx-auto flex h-full w-full items-center justify-between px-4">
         <Link href="/">
           <h1 className="text-lg font-semibold text-black dark:text-white">

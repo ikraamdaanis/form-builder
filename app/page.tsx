@@ -8,7 +8,7 @@ const HomePage = async () => {
   return (
     <div className="h-full bg-zinc-50 dark:bg-zinc-900">
       <Header />
-      <section className="h-full pt-16">
+      <section className="h-full pt-[50px]">
         <h1>Home</h1>
       </section>
     </div>
