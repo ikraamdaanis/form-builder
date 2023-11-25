@@ -18,9 +18,15 @@ export const PublishedForm = ({ form }: Props) => {
   const currentElements = formContent.elements;
   const currentSettings = formContent.settings;
 
+  async function handleSubmit(e: FormData) {
+    const data = Object.fromEntries(e);
+    console.log(data);
+  }
+
   return (
     <div className="flex h-full w-full flex-grow flex-col items-center justify-start overflow-y-auto bg-white">
-      <div
+      <form
+        action={handleSubmit}
         className="flex h-full w-full flex-col p-4"
         style={{
           maxWidth: currentSettings.maxWidth,
@@ -32,7 +38,7 @@ export const PublishedForm = ({ form }: Props) => {
 
           return <EditorElement key={element.id} element={element} />;
         })}
-      </div>
+      </form>
     </div>
   );
 };

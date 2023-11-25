@@ -69,6 +69,7 @@ function TextFieldForm({ element }: Omit<Props, "isOverlay">) {
         </Label>
         <ShadcnInput
           placeholder={placeholder}
+          name={label}
           className="border-zinc-300 bg-zinc-50 text-zinc-950 outline-0 ring-0 placeholder:text-zinc-400 focus-visible:ring-blue-400 focus-visible:ring-offset-0 dark:focus-visible:ring-blue-400"
         />
         {helperText && (
