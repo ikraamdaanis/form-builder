@@ -14,7 +14,7 @@ import {
   FormElement,
   FormElementInstance,
   fontWeights
-} from "features/types";
+} from "features/builder/types";
 import { Send } from "lucide-react";
 import { HexColorPicker } from "react-colorful";
 import { useShallow } from "zustand/react/shallow";

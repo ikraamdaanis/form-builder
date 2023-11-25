@@ -2,7 +2,7 @@
 
 import { Content, Form } from "database/schema";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
-import { FormElements } from "features/types";
+import { FormElements } from "features/builder/types";
 import { useShallow } from "zustand/react/shallow";
 
 type Props = {

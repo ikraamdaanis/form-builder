@@ -17,7 +17,11 @@ import { Input as ShadcnInput } from "components/ui/input";
 import { Label } from "components/ui/label";
 import { Select, SelectContent, SelectValue } from "components/ui/select";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
-import { ElementsType, FormElement, FormElementInstance } from "features/types";
+import {
+  ElementsType,
+  FormElement,
+  FormElementInstance
+} from "features/builder/types";
 import { Text } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -35,9 +39,10 @@ export type TextFieldElement = FormElementInstance<typeof textFieldAttributes>;
 
 export const TextFieldElement: FormElement = {
   type,
-  construct: (id: string) => ({
+  construct: (id: string, name: string) => ({
     id,
     type,
+    name,
     extraAttributes: textFieldAttributes
   }),
   editorComponent: TextFieldEditor,
@@ -108,6 +113,7 @@ export function TextFieldEditor({ element }: Omit<Props, "isOverlay">) {
 }
 
 const propertiesSchema = z.object({
+  name: z.string(),
   label: z.string().max(200),
   helperText: z.string().max(200),
   required: z.boolean().default(false),
@@ -130,12 +136,14 @@ export function TextFieldProperties() {
     resolver: zodResolver(propertiesSchema),
     mode: "onChange",
     defaultValues: {
+      name: element.name,
       label: element.extraAttributes.label,
       helperText: element.extraAttributes.helperText,
       required: element.extraAttributes.required,
       placeholder: element.extraAttributes.placeholder
     },
     values: {
+      name: element.name,
       label: element.extraAttributes.label,
       helperText: element.extraAttributes.helperText,
       required: element.extraAttributes.required,
@@ -159,6 +167,21 @@ export function TextFieldProperties() {
         }}
         className="flex flex-col gap-4"
       >
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem className="flex items-center gap-2 space-y-0 rounded-sm p-0">
+              <Tooltip message="The label of the field. It will be displayed above the field">
+                <FormLabel>Name</FormLabel>
+              </Tooltip>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
         <FormField
           control={form.control}
           name="label"

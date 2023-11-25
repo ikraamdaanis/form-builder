@@ -9,7 +9,7 @@ import {
   formSettings,
   useEditorStore
 } from "features/builder/hooks/useEditorStore";
-import { ElementsType, FormElements } from "features/types";
+import { ElementsType, FormElements } from "features/builder/types";
 import { useEffect, useId } from "react";
 import { useShallow } from "zustand/react/shallow";
 
@@ -68,7 +68,7 @@ export const FormBuilder = ({ form }: Props) => {
 
     if (isEditorButton) {
       const type = active.data?.current?.type as ElementsType;
-      const newElement = FormElements[type].construct(SPACER_ID);
+      const newElement = FormElements[type].construct(SPACER_ID, SPACER_ID);
 
       // If an element is being dropped in and is hovering another element, insert
       // it at the same index.
@@ -116,7 +116,14 @@ export const FormBuilder = ({ form }: Props) => {
 
     if (isEditorButton) {
       const type = active.data?.current?.type as ElementsType;
-      const newElement = FormElements[type].construct(crypto.randomUUID());
+      const previousTypesLength = elements.filter(
+        element => element.type === type
+      ).length;
+
+      const newElement = FormElements[type].construct(
+        crypto.randomUUID(),
+        `${type}_${previousTypesLength}`
+      );
 
       const spaceElementIndex = elements.findIndex(
         element => element.id === SPACER_ID

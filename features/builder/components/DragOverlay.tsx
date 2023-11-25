@@ -6,7 +6,7 @@ import {
 import { ElementWrapper } from "features/builder/components/ElementWrapper";
 import { ElementDropperOverlay } from "features/builder/components/ElementDropper";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
-import { ElementsType, FormElements } from "features/types";
+import { ElementsType, FormElements } from "features/builder/types";
 import { useState } from "react";
 
 /**

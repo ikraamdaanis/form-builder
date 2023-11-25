@@ -22,7 +22,7 @@ import {
   FormElement,
   FormElementInstance,
   fontWeights
-} from "features/types";
+} from "features/builder/types";
 import { Heading } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";

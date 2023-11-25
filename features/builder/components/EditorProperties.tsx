@@ -4,7 +4,7 @@ import { Button } from "components/ui/button";
 import { Form } from "database/schema";
 import { FormProperties } from "features/builder/components/FormProperties";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
-import { ElementsType, FormElements } from "features/types";
+import { ElementsType, FormElements } from "features/builder/types";
 import { MoveLeft } from "lucide-react";
 import { ChildrenProp } from "types";
 import { useShallow } from "zustand/react/shallow";

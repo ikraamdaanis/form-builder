@@ -9,7 +9,7 @@ import {
   uuid,
   varchar
 } from "drizzle-orm/pg-core";
-import { FormElementInstance } from "features/types";
+import { FormElementInstance } from "features/builder/types";
 
 export const forms = pgTable(
   "forms",

@@ -1,5 +1,5 @@
 import { ElementDropper } from "features/builder/components/ElementDropper";
-import { FormElements } from "features/types";
+import { FormElements } from "features/builder/types";
 
 /**
  * Displays the drag and drop element buttons used to created elements in the

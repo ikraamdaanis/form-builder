@@ -2,7 +2,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { Button } from "components/ui/button";
 import { useEditorStore } from "features/builder/hooks/useEditorStore";
-import { FormElementInstance, FormElements } from "features/types";
+import { FormElementInstance, FormElements } from "features/builder/types";
 import { Settings, Trash } from "lucide-react";
 import { forwardRef } from "react";
 import { cn } from "utils/cn";
