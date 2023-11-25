@@ -21,7 +21,6 @@ type Props = {
 export const EditorProperties = memo(({ form }: Props) => {
   const { activeElement, setActiveElement } = useEditorStore(
     useShallow(state => ({
-      elements: state.elements,
       activeElement: state.activeElement,
       setActiveElement: state.setActiveElement
     }))

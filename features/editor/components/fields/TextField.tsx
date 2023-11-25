@@ -42,7 +42,7 @@ export const TextFieldElement: FormElement = {
   construct: (id: string, name: string) => ({
     id,
     type,
-    name,
+    alias: name,
     extraAttributes: textFieldAttributes
   }),
   editorComponent: TextFieldEditor,
@@ -136,14 +136,14 @@ export function TextFieldProperties() {
     resolver: zodResolver(propertiesSchema),
     mode: "onChange",
     defaultValues: {
-      name: element.name,
+      name: element.alias,
       label: element.extraAttributes.label,
       helperText: element.extraAttributes.helperText,
       required: element.extraAttributes.required,
       placeholder: element.extraAttributes.placeholder
     },
     values: {
-      name: element.name,
+      name: element.alias,
       label: element.extraAttributes.label,
       helperText: element.extraAttributes.helperText,
       required: element.extraAttributes.required,

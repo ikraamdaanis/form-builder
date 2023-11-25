@@ -19,7 +19,7 @@ export type SubmitFunction = (key: string, value: string) => void;
 
 export type FormElement = {
   type: ElementsType;
-  construct: (id: string, name: string) => FormElementInstance;
+  construct: (id: string, alias: string) => FormElementInstance;
   designerButton: {
     icon: ReactNode;
     label: string;
@@ -44,7 +44,7 @@ export const FormElements: FormElementsType = {
 
 export type FormElementInstance<T = Record<string, any>> = {
   id: string;
-  name: string;
+  alias: string;
   type: ElementsType;
   extraAttributes: T;
 };

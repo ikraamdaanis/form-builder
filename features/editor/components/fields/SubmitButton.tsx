@@ -11,6 +11,7 @@ import { Separator } from "components/ui/separator";
 import { useEditorStore } from "features/editor/hooks/useEditorStore";
 import {
   ElementsType,
+  FontWeights,
   FormElement,
   FormElementInstance,
   fontWeights
@@ -30,14 +31,17 @@ export const submitButtonAttributes = {
   margin: "0px 0px 0px 0px"
 };
 
-type PropertiesSchema = typeof submitButtonAttributes;
+type PropertiesSchema = typeof submitButtonAttributes & {
+  weight: FontWeights;
+};
 
 export type SubmitButtonElement = FormElementInstance<PropertiesSchema>;
 
 export const SubmitButtonElement: FormElement = {
   type,
-  construct: (id: string) => ({
+  construct: (id: string, name: string) => ({
     id,
+    alias: name,
     type,
     extraAttributes: submitButtonAttributes
   }),
@@ -104,6 +108,7 @@ export function SubmitButtonProperties() {
   ) as SubmitButtonElement;
 
   const values = {
+    alias: element.alias,
     background: element.extraAttributes.background,
     color: element.extraAttributes.color,
     content: element.extraAttributes.content,
@@ -120,7 +125,8 @@ export function SubmitButtonProperties() {
   }
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="mt-2 flex flex-col gap-4">
+      <h2 className="text-sm font-semibold">{values.alias} Properties</h2>
       <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
         <Tooltip message="Enter what text should be in the button">
           <label
