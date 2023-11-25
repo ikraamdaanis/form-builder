@@ -49,9 +49,7 @@ const CanvasElements = ({ formContent }: CanvasElementsProps) => {
     }))
   );
 
-  const currentElements = !elements.length
-    ? formContent.elements || []
-    : elements;
+  const currentElements = !hasLoaded ? formContent?.elements || [] : elements;
   const currentSettings = !hasLoaded
     ? formContent.settings || settings
     : settings;

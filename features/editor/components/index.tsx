@@ -28,19 +28,26 @@ const SPACER_ID = "spacer";
  * for managing the sortable behavior of form elements.
  */
 export const FormEditor = ({ form }: Props) => {
-  const { elements, setElements, addElement, removeElement, updateSettings } =
-    useEditorStore(
-      useShallow(state => ({
-        elements: state.elements,
-        setElements: state.setElements,
-        addElement: state.addElement,
-        removeElement: state.removeElement,
-        updateSettings: state.updateSettings
-      }))
-    );
+  const {
+    elements,
+    setElements,
+    addElement,
+    removeElement,
+    updateSettings,
+    hasLoaded
+  } = useEditorStore(
+    useShallow(state => ({
+      elements: state.elements,
+      setElements: state.setElements,
+      addElement: state.addElement,
+      removeElement: state.removeElement,
+      updateSettings: state.updateSettings,
+      hasLoaded: state.hasLoaded
+    }))
+  );
 
   useEffect(() => {
-    if (form?.content && !elements?.length) {
+    if (form?.content && !elements?.length && !hasLoaded) {
       const content: Content = JSON.parse(form.content || "") || {
         elements: [],
         settings: formSettings
@@ -49,7 +56,7 @@ export const FormEditor = ({ form }: Props) => {
       content?.elements?.length && setElements(content.elements);
       content?.settings && updateSettings(content.settings);
     }
-  }, [elements?.length, form, setElements, updateSettings]);
+  }, [elements?.length, form, hasLoaded, setElements, updateSettings]);
 
   function onDragStart() {}
 
