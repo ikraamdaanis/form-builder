@@ -58,7 +58,10 @@ export const useEditorStore = create<EditorStore>((set, state) => ({
         element => element.id !== elementId
       );
 
-      return { elements: newElements };
+      const activeElement =
+        state.activeElement?.id === elementId ? null : state.activeElement;
+
+      return { elements: newElements, activeElement };
     });
   },
   activeElement: null,

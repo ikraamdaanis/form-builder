@@ -6,6 +6,7 @@ import { FormProperties } from "features/editor/components/FormProperties";
 import { useEditorStore } from "features/editor/hooks/useEditorStore";
 import { ElementsType, FormElements } from "features/editor/types";
 import { MoveLeft } from "lucide-react";
+import { memo } from "react";
 import { ChildrenProp } from "types";
 import { useShallow } from "zustand/react/shallow";
 
@@ -17,16 +18,14 @@ type Props = {
  * Sidebar for the properties fields for elements in the form editor enabling
  * the user to change the attributes of an element.
  */
-export const EditorProperties = ({ form }: Props) => {
-  const { elements, activeElement, setActiveElement } = useEditorStore(
+export const EditorProperties = memo(({ form }: Props) => {
+  const { activeElement, setActiveElement } = useEditorStore(
     useShallow(state => ({
       elements: state.elements,
       activeElement: state.activeElement,
       setActiveElement: state.setActiveElement
     }))
   );
-
-  const element = elements.find(element => element.id === activeElement?.id);
 
   const Wrapper = ({ children }: Partial<ChildrenProp>) => {
     return (
@@ -36,14 +35,14 @@ export const EditorProperties = ({ form }: Props) => {
     );
   };
 
-  if (!element)
+  if (!activeElement)
     return (
       <Wrapper>
         <FormProperties form={form} />
       </Wrapper>
     );
 
-  const elementType = element?.type as ElementsType;
+  const elementType = activeElement?.type as ElementsType;
 
   const ElementPropertiesForm = FormElements[elementType]?.propertiesComponent;
 
@@ -58,4 +57,4 @@ export const EditorProperties = ({ form }: Props) => {
       <ElementPropertiesForm />
     </Wrapper>
   );
-};
+});
