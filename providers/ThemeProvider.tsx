@@ -10,7 +10,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       defaultTheme="system"
       enableSystem
       disableTransitionOnChange
-      storageKey="form-builder-theme"
+      storageKey="form-editor-theme"
     >
       {children}
     </NextThemesProvider>

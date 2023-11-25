@@ -1,7 +1,7 @@
 "use client";
 
 import { FormSettings } from "database/schema";
-import { FormElementInstance } from "features/builder/types";
+import { FormElementInstance } from "features/editor/types";
 import { create } from "zustand";
 
 type EditorStore = {

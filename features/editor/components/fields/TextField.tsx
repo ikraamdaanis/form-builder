@@ -16,12 +16,12 @@ import {
 import { Input as ShadcnInput } from "components/ui/input";
 import { Label } from "components/ui/label";
 import { Select, SelectContent, SelectValue } from "components/ui/select";
-import { useEditorStore } from "features/builder/hooks/useEditorStore";
+import { useEditorStore } from "features/editor/hooks/useEditorStore";
 import {
   ElementsType,
   FormElement,
   FormElementInstance
-} from "features/builder/types";
+} from "features/editor/types";
 import { Text } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";

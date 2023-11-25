@@ -15,14 +15,14 @@ import {
 } from "components/ui/form";
 import { Select, SelectContent, SelectValue } from "components/ui/select";
 import { Separator } from "components/ui/separator";
-import { useEditorStore } from "features/builder/hooks/useEditorStore";
+import { useEditorStore } from "features/editor/hooks/useEditorStore";
 import {
   ElementsType,
   FontWeights,
   FormElement,
   FormElementInstance,
   fontWeights
-} from "features/builder/types";
+} from "features/editor/types";
 import { Heading } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";

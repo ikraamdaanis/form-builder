@@ -1,3 +1,5 @@
+"use client";
+
 import { Badge } from "components/ui/badge";
 import { Button } from "components/ui/button";
 import {
@@ -10,6 +12,7 @@ import {
 } from "components/ui/card";
 import { Skeleton } from "components/ui/skeleton";
 import { Form } from "database/schema";
+import { useEditorLinks } from "features/editor/hooks/useEditorLinks";
 import { ArrowRight, Edit } from "lucide-react";
 import Link from "next/link";
 
@@ -22,6 +25,8 @@ type Props = {
  * status, description, and actions.
  */
 export const FormCard = ({ form }: Props) => {
+  const { editorLink } = useEditorLinks();
+
   return (
     <div className="flex h-full">
       <Card className="flex flex-1 flex-col border border-zinc-300 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800">
@@ -63,7 +68,7 @@ export const FormCard = ({ form }: Props) => {
               variant="secondary"
               className="text-md mt-2 w-full gap-4 border border-zinc-300 bg-zinc-50 hover:bg-zinc-50 hover:brightness-110 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-900"
             >
-              <Link href={`/builder/${form.id}`}>
+              <Link href={`${editorLink}/${form.id}`}>
                 Edit form <Edit className="h-4 w-4" />
               </Link>
             </Button>

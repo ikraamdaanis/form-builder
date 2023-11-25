@@ -2,9 +2,9 @@
 
 import { Button } from "components/ui/button";
 import { Form } from "database/schema";
-import { FormProperties } from "features/builder/components/FormProperties";
-import { useEditorStore } from "features/builder/hooks/useEditorStore";
-import { ElementsType, FormElements } from "features/builder/types";
+import { FormProperties } from "features/editor/components/FormProperties";
+import { useEditorStore } from "features/editor/hooks/useEditorStore";
+import { ElementsType, FormElements } from "features/editor/types";
 import { MoveLeft } from "lucide-react";
 import { ChildrenProp } from "types";
 import { useShallow } from "zustand/react/shallow";
@@ -14,7 +14,7 @@ type Props = {
 };
 
 /**
- * Sidebar for the properties fields for elements in the form builder enabling
+ * Sidebar for the properties fields for elements in the form editor enabling
  * the user to change the attributes of an element.
  */
 export const EditorProperties = ({ form }: Props) => {

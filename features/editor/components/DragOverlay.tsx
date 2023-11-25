@@ -3,10 +3,10 @@ import {
   DragOverlay as DragOverlayContainer,
   useDndMonitor
 } from "@dnd-kit/core";
-import { ElementWrapper } from "features/builder/components/ElementWrapper";
-import { ElementDropperOverlay } from "features/builder/components/ElementDropper";
-import { useEditorStore } from "features/builder/hooks/useEditorStore";
-import { ElementsType, FormElements } from "features/builder/types";
+import { ElementWrapper } from "features/editor/components/ElementWrapper";
+import { ElementDropperOverlay } from "features/editor/components/ElementDropper";
+import { useEditorStore } from "features/editor/hooks/useEditorStore";
+import { ElementsType, FormElements } from "features/editor/types";
 import { useState } from "react";
 
 /**

@@ -1,6 +1,6 @@
-import { HeadingElement } from "features/builder/components/fields/Heading";
-import { SubmitButtonElement } from "features/builder/components/fields/SubmitButton";
-import { TextFieldElement } from "features/builder/components/fields/TextField";
+import { HeadingElement } from "features/editor/components/fields/Heading";
+import { SubmitButtonElement } from "features/editor/components/fields/SubmitButton";
+import { TextFieldElement } from "features/editor/components/fields/TextField";
 import { ReactNode } from "react";
 
 export type ElementsType = "TextField" | "Heading" | "SubmitButton";

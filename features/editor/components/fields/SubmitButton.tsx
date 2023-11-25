@@ -8,13 +8,13 @@ import { Button } from "components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "components/ui/popover";
 import { Select, SelectContent, SelectValue } from "components/ui/select";
 import { Separator } from "components/ui/separator";
-import { useEditorStore } from "features/builder/hooks/useEditorStore";
+import { useEditorStore } from "features/editor/hooks/useEditorStore";
 import {
   ElementsType,
   FormElement,
   FormElementInstance,
   fontWeights
-} from "features/builder/types";
+} from "features/editor/types";
 import { Send } from "lucide-react";
 import { HexColorPicker } from "react-colorful";
 import { useShallow } from "zustand/react/shallow";

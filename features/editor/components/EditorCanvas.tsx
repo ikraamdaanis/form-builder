@@ -5,9 +5,9 @@ import {
 } from "@dnd-kit/sortable";
 import { Show } from "components/Show";
 import { Content, Form } from "database/schema";
-import { EditorSidebar } from "features/builder/components/EditorToolbar";
-import { ElementWrapper } from "features/builder/components/ElementWrapper";
-import { useEditorStore } from "features/builder/hooks/useEditorStore";
+import { EditorSidebar } from "features/editor/components/EditorToolbar";
+import { ElementWrapper } from "features/editor/components/ElementWrapper";
+import { useEditorStore } from "features/editor/hooks/useEditorStore";
 import { cn } from "utils/cn";
 import { useShallow } from "zustand/react/shallow";
 
@@ -37,7 +37,7 @@ type CanvasElementsProps = {
 };
 
 /**
- * Displays the elements in the form builder canvas.
+ * Displays the elements in the form editor canvas.
  */
 const CanvasElements = ({ formContent }: CanvasElementsProps) => {
   const { elements, setActiveElement, settings, hasLoaded } = useEditorStore(

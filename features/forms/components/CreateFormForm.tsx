@@ -51,7 +51,6 @@ export const CreateFormForm = ({ closeModal }: Props) => {
 
       closeModal();
       router.refresh();
-      // router.push(`/builder/${formId}`);
     } catch (error) {
       const errorMessage = error as Error;
 
@@ -99,7 +98,7 @@ export const CreateFormForm = ({ closeModal }: Props) => {
         <Button
           onClick={form.handleSubmit(onSubmit)}
           disabled={form.formState.isSubmitting}
-          className="bg-brandColour hover:bg-brandColour mt-4 w-full transition hover:brightness-110"
+          className="mt-4 w-full bg-brandColour transition hover:bg-brandColour hover:brightness-110"
         >
           {!form.formState.isSubmitting && <span>Save</span>}
           {form.formState.isSubmitting && <Loader className="animate-spin" />}

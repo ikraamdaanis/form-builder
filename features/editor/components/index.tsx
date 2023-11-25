@@ -3,13 +3,13 @@
 import { DragEndEvent, DragOverEvent, MeasuringStrategy } from "@dnd-kit/core";
 import { SortableData, arrayMove } from "@dnd-kit/sortable";
 import { Content, Form } from "database/schema";
-import { EditorCanvas } from "features/builder/components/EditorCanvas";
-import { SortableContainer } from "features/builder/components/SortableContainer";
+import { EditorCanvas } from "features/editor/components/EditorCanvas";
+import { SortableContainer } from "features/editor/components/SortableContainer";
 import {
   formSettings,
   useEditorStore
-} from "features/builder/hooks/useEditorStore";
-import { ElementsType, FormElements } from "features/builder/types";
+} from "features/editor/hooks/useEditorStore";
+import { ElementsType, FormElements } from "features/editor/types";
 import { useEffect, useId } from "react";
 import { useShallow } from "zustand/react/shallow";
 
@@ -20,13 +20,13 @@ type Props = {
 const SPACER_ID = "spacer";
 
 /**
- * The `FormBuilder` component is a higher-level container that orchestrates the
+ * The `FormEditor` component is a higher-level container that orchestrates the
  * form-building process, integrating with the @dnd-kit library to handle
  * drag-and-drop interactions for form elements. It utilizes the `EditorCanvas`
  * component for the main form editor interface and `SortableContainer`
  * for managing the sortable behavior of form elements.
  */
-export const FormBuilder = ({ form }: Props) => {
+export const FormEditor = ({ form }: Props) => {
   const { elements, setElements, addElement, removeElement, updateSettings } =
     useEditorStore(
       useShallow(state => ({

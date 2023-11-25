@@ -1,13 +1,13 @@
 import { useDraggable } from "@dnd-kit/core";
 import { Button } from "components/ui/button";
-import { FormElement } from "features/builder/types";
+import { FormElement } from "features/editor/types";
 import { cn } from "utils/cn";
 
 type Props = {
   formElement: FormElement;
 };
 
-/** Used to drag and drop an element into the Form Builder canvas. */
+/** Used to drag and drop an element into the form editor canvas. */
 export const ElementDropper = ({ formElement }: Props) => {
   const { icon, label } = formElement.designerButton;
 

@@ -1,7 +1,7 @@
 import { Button } from "components/ui/button";
 import { Content, FormUpdateSchema } from "database/schema";
-import { updateForm } from "features/builder/actions/updateForm";
-import { useEditorStore } from "features/builder/hooks/useEditorStore";
+import { updateForm } from "features/editor/actions/updateForm";
+import { useEditorStore } from "features/editor/hooks/useEditorStore";
 import { SaveIcon } from "lucide-react";
 import { useTransition } from "react";
 import { useShallow } from "zustand/react/shallow";

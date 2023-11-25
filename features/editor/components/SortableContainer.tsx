@@ -9,7 +9,7 @@ import {
   useSensors
 } from "@dnd-kit/core";
 import { sortableKeyboardCoordinates } from "@dnd-kit/sortable";
-import { DragOverlay } from "features/builder/components/DragOverlay";
+import { DragOverlay } from "features/editor/components/DragOverlay";
 
 /**
  * Sortable container for the form editor. Allows for form elements to be

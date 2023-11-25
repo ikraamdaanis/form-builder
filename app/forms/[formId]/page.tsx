@@ -1,4 +1,4 @@
-import { getPublicFormById } from "features/builder/actions/getFormById";
+import { getPublicFormById } from "features/editor/actions/getFormById";
 import { PublishedForm } from "features/forms/components/PublishedForm";
 import { Metadata } from "next";
 

@@ -1,14 +1,14 @@
 "use client";
 
 import { Button } from "components/ui/button";
-import { useBuilderLinks } from "features/builder/hooks/useBuilderLinks";
+import { useEditorLinks } from "features/editor/hooks/useEditorLinks";
 import { ScanEye } from "lucide-react";
 import Link from "next/link";
 import { cn } from "utils/cn";
 
 /** Button to show the preview of a form. */
 export const PreviewButton = () => {
-  const { isPreview, formLink, previewLink } = useBuilderLinks();
+  const { isPreview, formLink, previewLink } = useEditorLinks();
 
   return (
     <Link href={isPreview ? formLink : previewLink}>

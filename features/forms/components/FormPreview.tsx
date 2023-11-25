@@ -1,8 +1,8 @@
 "use client";
 
 import { Content, Form } from "database/schema";
-import { useEditorStore } from "features/builder/hooks/useEditorStore";
-import { FormElements } from "features/builder/types";
+import { useEditorStore } from "features/editor/hooks/useEditorStore";
+import { FormElements } from "features/editor/types";
 import { useShallow } from "zustand/react/shallow";
 
 type Props = {

@@ -5,7 +5,7 @@ import { Input } from "components/styled-ui/Input";
 import { Form, FormControl, FormField, FormItem } from "components/ui/form";
 import { toast } from "components/ui/use-toast";
 import { Form as FormType } from "database/schema";
-import { updateForm } from "features/builder/actions/updateForm";
+import { updateForm } from "features/editor/actions/updateForm";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { z } from "zod";

@@ -1,9 +1,9 @@
-import { ElementDropper } from "features/builder/components/ElementDropper";
-import { FormElements } from "features/builder/types";
+import { ElementDropper } from "features/editor/components/ElementDropper";
+import { FormElements } from "features/editor/types";
 
 /**
  * Displays the drag and drop element buttons used to created elements in the
- * form builder.
+ * form editor canvas.
  */
 export const EditorSidebar = () => {
   return (

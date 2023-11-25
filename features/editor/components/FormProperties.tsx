@@ -13,7 +13,7 @@ import { Tooltip } from "components/Tooltip";
 import {
   formSettings,
   useEditorStore
-} from "features/builder/hooks/useEditorStore";
+} from "features/editor/hooks/useEditorStore";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useShallow } from "zustand/react/shallow";

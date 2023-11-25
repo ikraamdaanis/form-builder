@@ -1,8 +1,8 @@
 import { Show } from "components/Show";
-import { getFormById } from "features/builder/actions/getFormById";
-import { EditorNavbar } from "features/builder/components/EditorNavbar";
-import { EditorProperties } from "features/builder/components/EditorProperties";
-import { FormBuilder } from "features/builder/components/FormBuilder";
+import { getFormById } from "features/editor/actions/getFormById";
+import { FormEditor } from "features/editor/components";
+import { EditorNavbar } from "features/editor/components/EditorNavbar";
+import { EditorProperties } from "features/editor/components/EditorProperties";
 import { FormPreview } from "features/forms/components/FormPreview";
 import { Metadata } from "next";
 
@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-const BuilderPage = async ({ params, searchParams }: Props) => {
+const EditorPage = async ({ params, searchParams }: Props) => {
   const form = await getFormById(params.id);
   const isPreview = searchParams.preview === "true";
 
@@ -36,7 +36,7 @@ const BuilderPage = async ({ params, searchParams }: Props) => {
       <EditorNavbar form={form} />
       <div className="relative flex h-[200px] w-full flex-grow items-center justify-center overflow-y-auto bg-zinc-200 dark:bg-zinc-800">
         <Show when={!isPreview} fallback={<FormPreview form={form} />}>
-          <FormBuilder form={form} />
+          <FormEditor form={form} />
           <EditorProperties form={form} />
         </Show>
       </div>
@@ -44,4 +44,4 @@ const BuilderPage = async ({ params, searchParams }: Props) => {
   );
 };
 
-export default BuilderPage;
+export default EditorPage;

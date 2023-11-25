@@ -8,7 +8,7 @@ type Props = {
   error: Error;
 };
 
-const BuilderPageError = ({ error }: Props) => {
+const EditorPageError = ({ error }: Props) => {
   useEffect(() => {
     console.error(error);
   }, [error]);
@@ -25,4 +25,4 @@ const BuilderPageError = ({ error }: Props) => {
   );
 };
 
-export default BuilderPageError;
+export default EditorPageError;

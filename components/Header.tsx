@@ -24,7 +24,7 @@ export const Header = () => {
       <nav className="mx-auto flex h-full w-full items-center justify-between px-4">
         <Link href="/">
           <h1 className="text-lg font-semibold text-black dark:text-white">
-            Form Builder
+            Form Editor
           </h1>
         </Link>
         <div className="flex items-center gap-2">
@@ -46,7 +46,7 @@ export const Header = () => {
               </Button>
             </Link>
             <Link href="/sign-up">
-              <Button className="bg-brandColour hover:bg-brandColour h-8 text-xs font-semibold text-white transition hover:brightness-110">
+              <Button className="h-8 bg-brandColour text-xs font-semibold text-white transition hover:bg-brandColour hover:brightness-110">
                 Sign Up
               </Button>
             </Link>

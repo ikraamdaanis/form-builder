@@ -2,7 +2,7 @@
 
 import { Content } from "database/schema";
 import { PublicForm } from "features/forms/types";
-import { FormElements } from "features/builder/types";
+import { FormElements } from "features/editor/types";
 
 type Props = {
   form: PublicForm;
