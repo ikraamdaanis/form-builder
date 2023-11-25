@@ -18,12 +18,15 @@ type Props = {
  * the user to change the attributes of an element.
  */
 export const EditorProperties = ({ form }: Props) => {
-  const { activeElement, setActiveElement } = useEditorStore(
+  const { elements, activeElement, setActiveElement } = useEditorStore(
     useShallow(state => ({
+      elements: state.elements,
       activeElement: state.activeElement,
       setActiveElement: state.setActiveElement
     }))
   );
+
+  const element = elements.find(element => element.id === activeElement?.id);
 
   const Wrapper = ({ children }: Partial<ChildrenProp>) => {
     return (
@@ -33,14 +36,14 @@ export const EditorProperties = ({ form }: Props) => {
     );
   };
 
-  if (!activeElement)
+  if (!element)
     return (
       <Wrapper>
         <FormProperties form={form} />
       </Wrapper>
     );
 
-  const elementType = activeElement?.type as ElementsType;
+  const elementType = element?.type as ElementsType;
 
   const ElementPropertiesForm = FormElements[elementType]?.propertiesComponent;
 
