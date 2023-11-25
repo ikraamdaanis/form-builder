@@ -10,6 +10,7 @@ import {
   useEditorStore
 } from "features/editor/hooks/useEditorStore";
 import { ElementsType, FormElements } from "features/editor/types";
+import { generateElementName } from "features/editor/utils/generateElementName";
 import { useEffect, useId } from "react";
 import { useShallow } from "zustand/react/shallow";
 
@@ -39,16 +40,16 @@ export const FormEditor = ({ form }: Props) => {
     );
 
   useEffect(() => {
-    if (form?.content && !elements.length) {
+    if (form?.content && !elements?.length) {
       const content: Content = JSON.parse(form.content || "") || {
         elements: [],
         settings: formSettings
       };
 
-      setElements(content.elements);
-      updateSettings(content.settings);
+      content?.elements?.length && setElements(content.elements);
+      content?.settings && updateSettings(content.settings);
     }
-  }, [elements.length, form, setElements, updateSettings]);
+  }, [elements?.length, form, setElements, updateSettings]);
 
   function onDragStart() {}
 
@@ -83,7 +84,7 @@ export const FormEditor = ({ form }: Props) => {
       // If an element is being dropped in and isn't above an existing element,
       // put it right at the bottom.
       if (overCanvas) {
-        const nextIndex = elements.length;
+        const nextIndex = elements?.length;
 
         removeElement(SPACER_ID);
         return addElement(nextIndex, newElement);
@@ -97,7 +98,7 @@ export const FormEditor = ({ form }: Props) => {
         element => element.id === active.id
       );
 
-      const newArray = arrayMove([...elements], activeIndex, elements.length);
+      const newArray = arrayMove([...elements], activeIndex, elements?.length);
 
       setElements(newArray);
     }
@@ -116,13 +117,10 @@ export const FormEditor = ({ form }: Props) => {
 
     if (isEditorButton) {
       const type = active.data?.current?.type as ElementsType;
-      const previousTypesLength = elements.filter(
-        element => element.type === type
-      ).length;
 
       const newElement = FormElements[type].construct(
         crypto.randomUUID(),
-        `${type}_${previousTypesLength}`
+        generateElementName(elements, type)
       );
 
       const spaceElementIndex = elements.findIndex(

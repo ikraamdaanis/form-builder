@@ -43,7 +43,9 @@ export const FormProperties = ({ form }: Props) => {
     }))
   );
 
-  const currentSettings = !hasLoaded ? formContent.settings : settings;
+  const currentSettings = !hasLoaded
+    ? formContent.settings || settings
+    : settings;
 
   const values = {
     maxWidth: currentSettings.maxWidth,

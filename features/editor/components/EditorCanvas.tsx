@@ -49,8 +49,12 @@ const CanvasElements = ({ formContent }: CanvasElementsProps) => {
     }))
   );
 
-  const currentElements = !elements.length ? formContent.elements : elements;
-  const currentSettings = !hasLoaded ? formContent.settings : settings;
+  const currentElements = !elements.length
+    ? formContent.elements || []
+    : elements;
+  const currentSettings = !hasLoaded
+    ? formContent.settings || settings
+    : settings;
 
   const droppable = useDroppable({
     id: "editor-drop-area",
