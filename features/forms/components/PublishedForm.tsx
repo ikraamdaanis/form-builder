@@ -3,6 +3,7 @@
 import { Content } from "database/schema";
 import { PublicForm } from "features/forms/types";
 import { FormElements } from "features/editor/types";
+import { submitForm } from "features/forms/actions/submitForm";
 
 type Props = {
   form: PublicForm;
@@ -21,6 +22,13 @@ export const PublishedForm = ({ form }: Props) => {
   async function handleSubmit(e: FormData) {
     const data = Object.fromEntries(e);
     console.log(data);
+
+    const response = await submitForm({
+      formId: form.id,
+      content: JSON.stringify(data)
+    });
+
+    console.log("RESPONSE: ", response);
   }
 
   return (
