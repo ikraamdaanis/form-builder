@@ -43,6 +43,7 @@ export type FormSettings = {
 export type Content = {
   settings: FormSettings;
   elements: FormElementInstance[];
+  formFields: string[];
 };
 
 export type FormUpdateSchema = Partial<Form> & {

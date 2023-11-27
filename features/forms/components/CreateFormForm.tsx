@@ -40,14 +40,12 @@ export const CreateFormForm = ({ closeModal }: Props) => {
 
   async function onSubmit(values: CreateFormSchema) {
     try {
-      const formId = await createForm(values);
+      await createForm(values);
 
       toast({
         title: "Success",
         description: "Form created successfully"
       });
-
-      console.log(formId);
 
       closeModal();
       router.refresh();

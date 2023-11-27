@@ -46,17 +46,12 @@ export const FormName = ({ form }: Props) => {
     const name = !values.name.length ? "United" : values.name;
 
     try {
-      const formId = await updateForm({
-        ...values,
-        name
-      });
+      await updateForm({ ...values, name });
 
       toast({
         title: "Success",
         description: `Form name updated to "${name}"`
       });
-
-      console.log(formId);
 
       router.refresh();
     } catch (error) {

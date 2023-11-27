@@ -23,9 +23,24 @@ export const SaveFormButton = ({ formId }: Props) => {
   );
 
   async function handleFormButton() {
+    /**
+     * Gets all of the field names for the element. These field names will
+     * be displayed in the submissions table.
+     */
+    const formFields = elements.reduce((fields: string[], element) => {
+      const field = element.extraAttributes?.fieldName as string;
+
+      if (field && !fields.includes(field)) {
+        fields.push(field);
+      }
+
+      return fields;
+    }, []);
+
     const content: Content = {
       elements,
-      settings
+      settings,
+      formFields
     };
 
     try {
