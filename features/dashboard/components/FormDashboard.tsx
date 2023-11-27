@@ -4,7 +4,6 @@ import { Button } from "components/ui/button";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -21,8 +20,8 @@ type Props = {
 };
 
 /**
- * Dashboard for an individual form. Contains links to the editor and
- * to view form submissions.
+ * Dashboard for an individual form. Contains links to the editor and to view
+ * form submissions and also displays recent submissions.
  */
 export const FormDashboard = ({ form, formSubmissions }: Props) => {
   const { editorLink } = useEditorLinks();
@@ -48,34 +47,36 @@ export const FormDashboard = ({ form, formSubmissions }: Props) => {
           </Link>
         </Button>
       </div>
-      <div>
-        <Table>
-          <TableCaption>A list of your recent invoices.</TableCaption>
-          <TableHeader>
-            <TableRow>
-              <TableHead className="w-10">ID</TableHead>
-              {formFields?.map(field => {
-                return <TableHead key={field}>{field}</TableHead>;
+      <div className="p-4">
+        <h2 className="mb-4 text-xl font-semibold">Recent Submissions</h2>
+        <div className="overflow-hidden rounded-sm border border-zinc-300 dark:border-zinc-700">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead className="w-10">ID</TableHead>
+                {formFields?.map(field => {
+                  return <TableHead key={field}>{field}</TableHead>;
+                })}
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {formSubmissions.map(submission => {
+                const fields = JSON.parse(submission.content || "");
+
+                return (
+                  <TableRow key={submission.id}>
+                    <TableCell>{submission.id.slice(0, 4)}</TableCell>
+                    {formFields?.map(field => {
+                      const fieldData = fields?.[field];
+
+                      return <TableCell key={field}>{fieldData}</TableCell>;
+                    })}
+                  </TableRow>
+                );
               })}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {formSubmissions.map(submission => {
-              const fields = JSON.parse(submission.content || "");
-
-              return (
-                <TableRow key={submission.id}>
-                  <TableCell>{submission.id.slice(0, 4)}</TableCell>
-                  {formFields?.map(field => {
-                    const fieldData = fields?.[field];
-
-                    return <TableCell key={field}>{fieldData}</TableCell>;
-                  })}
-                </TableRow>
-              );
-            })}
-          </TableBody>
-        </Table>
+            </TableBody>
+          </Table>
+        </div>
       </div>
     </div>
   );
