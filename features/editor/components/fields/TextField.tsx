@@ -1,18 +1,9 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Tooltip } from "components/Tooltip";
-import { FormLabel } from "components/styled-ui/FormLabel";
 import { Input } from "components/styled-ui/Input";
 import { SelectItem } from "components/styled-ui/SelectItem";
 import { SelectTrigger } from "components/styled-ui/SelectTrigger";
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage
-} from "components/ui/form";
 import { Input as ShadcnInput } from "components/ui/input";
 import { Label } from "components/ui/label";
 import { Select, SelectContent, SelectValue } from "components/ui/select";
@@ -23,19 +14,21 @@ import {
   FormElementInstance
 } from "features/editor/types";
 import { Text } from "lucide-react";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { useShallow } from "zustand/react/shallow";
 
 const type: ElementsType = "TextField";
 
 export const textFieldAttributes = {
-  label: "Text field",
+  fieldName: `TextField_${crypto.randomUUID().slice(0, 4)}`,
+  label: "Text Field",
   helperText: "",
   required: false,
   placeholder: "Value here...."
 };
 
-export type TextFieldElement = FormElementInstance<typeof textFieldAttributes>;
+type PropertiesSchema = typeof textFieldAttributes;
+
+export type TextFieldElement = FormElementInstance<PropertiesSchema>;
 
 export const TextFieldElement: FormElement = {
   type,
@@ -112,158 +105,191 @@ export function TextFieldEditor({ element }: Omit<Props, "isOverlay">) {
   );
 }
 
-const propertiesSchema = z.object({
-  name: z.string(),
-  label: z.string().max(200),
-  helperText: z.string().max(200),
-  required: z.boolean().default(false),
-  placeholder: z.string().max(50)
-});
-
-type PropertiesSchema = z.infer<typeof propertiesSchema>;
-
 /**
  * Form to handle the properties of a text field.
  */
 export function TextFieldProperties() {
-  const [activeElement, updateElement] = useEditorStore(state => [
-    state.activeElement,
-    state.updateElement
-  ]);
-  const element = activeElement as TextFieldElement;
+  const { activeElement, updateElement, elements } = useEditorStore(
+    useShallow(state => ({
+      activeElement: state.activeElement,
+      updateElement: state.updateElement,
+      elements: state.elements
+    }))
+  );
 
-  const form = useForm<PropertiesSchema>({
-    resolver: zodResolver(propertiesSchema),
-    mode: "onChange",
-    defaultValues: {
-      name: element.alias,
-      label: element.extraAttributes.label,
-      helperText: element.extraAttributes.helperText,
-      required: element.extraAttributes.required,
-      placeholder: element.extraAttributes.placeholder
-    },
-    values: {
-      name: element.alias,
-      label: element.extraAttributes.label,
-      helperText: element.extraAttributes.helperText,
-      required: element.extraAttributes.required,
-      placeholder: element.extraAttributes.placeholder
-    }
-  });
+  const element = elements.find(
+    element => element.id === activeElement?.id
+  ) as TextFieldElement;
 
-  function applyChanges(values: PropertiesSchema) {
+  const values = {
+    alias: element.alias,
+    fieldName: element.extraAttributes.fieldName,
+    label: element.extraAttributes.label,
+    helperText: element.extraAttributes.helperText,
+    required: element.extraAttributes.required,
+    placeholder: element.extraAttributes.placeholder
+  };
+
+  function applyChanges({
+    alias,
+    ...values
+  }: Partial<PropertiesSchema> & { alias?: string }) {
     updateElement(element.id, {
       ...element,
-      extraAttributes: { ...values }
+      alias: alias || element.alias,
+      extraAttributes: { ...element.extraAttributes, ...values }
     });
   }
 
   return (
-    <Form {...form}>
-      <form
-        onChange={form.handleSubmit(applyChanges)}
-        onSubmit={e => {
-          e.preventDefault();
-        }}
-        className="flex flex-col gap-4"
-      >
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-              <Tooltip message="The label of the field. It will be displayed above the field">
-                <FormLabel>Name</FormLabel>
-              </Tooltip>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+    <div className="mt-2 flex flex-col gap-4">
+      <h2 className="text-sm font-semibold">{values.alias} Properties</h2>
+      <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
+        <Tooltip message="Enter a custom alias for this element as it will be displayed within the editor interface.">
+          <label
+            className="w-20 min-w-[80px] cursor-pointer text-xs font-semibold opacity-80"
+            htmlFor="alias"
+          >
+            Alias
+          </label>
+        </Tooltip>
+        <Input
+          value={values.alias}
+          id="alias"
+          name="alias"
+          onChange={({ target: { value } }) => {
+            applyChanges({ alias: value });
+          }}
+          onBlur={({ target: { value } }) => {
+            if (!value.length) {
+              applyChanges({ alias: activeElement?.alias });
+            }
+          }}
         />
-        <FormField
-          control={form.control}
+      </div>
+      <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
+        <Tooltip message="Enter a unique field name to identify this form element. This name will be used as a column header in the submissions table, helping you organize and analyze the collected data.">
+          <label
+            className="w-20 min-w-[80px] cursor-pointer text-xs font-semibold opacity-80"
+            htmlFor="alias"
+          >
+            Field Name
+          </label>
+        </Tooltip>
+        <Input
+          value={values.fieldName}
+          id="fieldName"
+          name="fieldName"
+          onChange={({ target: { value } }) => {
+            applyChanges({ fieldName: value });
+          }}
+          onBlur={({ target: { value } }) => {
+            if (!value.length) {
+              applyChanges({ fieldName: textFieldAttributes?.fieldName });
+            }
+          }}
+        />
+      </div>
+      <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
+        <Tooltip message="Enter a label for this input field. It will be displayed above the field">
+          <label
+            className="w-20 min-w-[80px] cursor-pointer text-xs font-semibold opacity-80"
+            htmlFor="alias"
+          >
+            Label
+          </label>
+        </Tooltip>
+        <Input
+          value={values.label}
+          id="label"
           name="label"
-          render={({ field }) => (
-            <FormItem className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-              <Tooltip message="The label of the field. It will be displayed above the field">
-                <FormLabel>Label</FormLabel>
-              </Tooltip>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          onChange={({ target: { value } }) => {
+            applyChanges({ label: value });
+          }}
+          onBlur={({ target: { value } }) => {
+            if (!value.length) {
+              applyChanges({ label: textFieldAttributes?.label });
+            }
+          }}
         />
-        <FormField
-          control={form.control}
+      </div>
+      <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
+        <Tooltip message="The placeholder is the text in the input that will be displayed if the user hasn't typed anything.">
+          <Label
+            className="w-20 min-w-[80px] cursor-pointer text-xs font-semibold opacity-80"
+            htmlFor="alias"
+          >
+            Placeholder
+          </Label>
+        </Tooltip>
+        <Input
+          value={values.placeholder}
+          id="placeholder"
           name="placeholder"
-          render={({ field }) => (
-            <FormItem className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-              <Tooltip message="The placeholder is the text in the input that will be displayed if the user hasn't typed anything.">
-                <FormLabel>Placeholder</FormLabel>
-              </Tooltip>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          onChange={({ target: { value } }) => {
+            applyChanges({ placeholder: value });
+          }}
+          onBlur={({ target: { value } }) => {
+            if (!value.length) {
+              applyChanges({ placeholder: textFieldAttributes?.placeholder });
+            }
+          }}
         />
-        <FormField
-          control={form.control}
+      </div>
+      <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
+        <Tooltip message="Enter any helpful text for the user that will be below the text field.">
+          <Label
+            className="w-20 min-w-[80px] cursor-pointer text-xs font-semibold opacity-80"
+            htmlFor="alias"
+          >
+            Helper Text
+          </Label>
+        </Tooltip>
+        <Input
+          value={values.helperText}
+          id="helperText"
           name="helperText"
-          render={({ field }) => (
-            <FormItem className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-              <Tooltip message="Any helpful text for the user that will be below the text field.">
-                <FormLabel>Helper Text</FormLabel>
-              </Tooltip>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          onChange={({ target: { value } }) => {
+            applyChanges({ helperText: value });
+          }}
+          onBlur={({ target: { value } }) => {
+            if (!value.length) {
+              applyChanges({ helperText: textFieldAttributes?.helperText });
+            }
+          }}
         />
-        <FormField
-          control={form.control}
-          name="required"
-          render={({ field }) => (
-            <FormItem className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-              <Tooltip message="Choose whether this text field should be required or not.">
-                <FormLabel>Required</FormLabel>
-              </Tooltip>
-              <Select
-                onValueChange={value => {
-                  const isTrue = value === "true";
-                  return field.onChange(isTrue);
-                }}
-                value={String(field.value)}
-              >
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue
-                      onChange={({ target }) => {
-                        const isTrue =
-                          (target as HTMLSelectElement).value === "true";
-                        console.log(isTrue);
+      </div>
+      <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
+        <Tooltip message="Choose whether this text field should be required or not.">
+          <Label
+            className="w-20 min-w-[80px] cursor-pointer text-xs font-semibold opacity-80"
+            htmlFor="alias"
+          >
+            Required
+          </Label>
+        </Tooltip>
+        <Select
+          onValueChange={value => {
+            const isTrue = value === "true";
+            applyChanges({ required: isTrue });
+          }}
+          value={String(values.required)}
+        >
+          <SelectTrigger>
+            <SelectValue
+              onChange={({ target }) => {
+                const isTrue = (target as HTMLSelectElement).value === "true";
 
-                        field.onChange(isTrue);
-                      }}
-                    />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent className="selector dark:bg-zinc-800">
-                  <SelectItem value="true">Yes</SelectItem>
-                  <SelectItem value="false">No</SelectItem>
-                </SelectContent>
-              </Select>
-            </FormItem>
-          )}
-        />
-      </form>
-    </Form>
+                applyChanges({ required: isTrue });
+              }}
+            />
+          </SelectTrigger>
+          <SelectContent className="selector dark:bg-zinc-800">
+            <SelectItem value="true">Yes</SelectItem>
+            <SelectItem value="false">No</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+    </div>
   );
 }
