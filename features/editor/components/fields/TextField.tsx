@@ -1,12 +1,15 @@
 "use client";
 
-import { Tooltip } from "components/Tooltip";
 import { Input } from "components/styled-ui/Input";
 import { SelectItem } from "components/styled-ui/SelectItem";
 import { SelectTrigger } from "components/styled-ui/SelectTrigger";
 import { Input as ShadcnInput } from "components/ui/input";
 import { Label } from "components/ui/label";
 import { Select, SelectContent, SelectValue } from "components/ui/select";
+import {
+  AttributeField,
+  AttributeTooltip
+} from "features/editor/components/AttributeComponents";
 import { useEditorStore } from "features/editor/hooks/useEditorStore";
 import {
   ElementsType,
@@ -144,15 +147,12 @@ export function TextFieldProperties() {
   return (
     <div className="mt-2 flex flex-col gap-4">
       <h2 className="text-sm font-semibold">{values.alias} Properties</h2>
-      <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-        <Tooltip message="Enter a custom alias for this element as it will be displayed within the editor interface.">
-          <label
-            className="w-20 min-w-[80px] cursor-pointer text-xs font-semibold opacity-80"
-            htmlFor="alias"
-          >
-            Alias
-          </label>
-        </Tooltip>
+      <AttributeField>
+        <AttributeTooltip
+          tooltipMessage="Enter a custom alias for this element as it will be displayed within the editor interface."
+          label="Alias"
+          htmlFor="alias"
+        />
         <Input
           value={values.alias}
           id="alias"
@@ -166,16 +166,13 @@ export function TextFieldProperties() {
             }
           }}
         />
-      </div>
-      <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-        <Tooltip message="Enter a unique field name to identify this form element. This name will be used as a column header in the submissions table, helping you organize and analyze the collected data.">
-          <label
-            className="w-20 min-w-[80px] cursor-pointer text-xs font-semibold opacity-80"
-            htmlFor="alias"
-          >
-            Field Name
-          </label>
-        </Tooltip>
+      </AttributeField>
+      <AttributeField>
+        <AttributeTooltip
+          tooltipMessage="Enter a unique field name to identify this form element. This name will be used as a column header in the submissions table, helping you organize and analyze the collected data."
+          label="Field Name"
+          htmlFor="fieldName"
+        />
         <Input
           value={values.fieldName}
           id="fieldName"
@@ -189,16 +186,13 @@ export function TextFieldProperties() {
             }
           }}
         />
-      </div>
-      <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-        <Tooltip message="Enter a label for this input field. It will be displayed above the field">
-          <label
-            className="w-20 min-w-[80px] cursor-pointer text-xs font-semibold opacity-80"
-            htmlFor="alias"
-          >
-            Label
-          </label>
-        </Tooltip>
+      </AttributeField>
+      <AttributeField>
+        <AttributeTooltip
+          tooltipMessage="Enter a label for this input field. It will be displayed above the field"
+          label="Label"
+          htmlFor="label"
+        />
         <Input
           value={values.label}
           id="label"
@@ -212,16 +206,13 @@ export function TextFieldProperties() {
             }
           }}
         />
-      </div>
-      <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-        <Tooltip message="The placeholder is the text in the input that will be displayed if the user hasn't typed anything.">
-          <Label
-            className="w-20 min-w-[80px] cursor-pointer text-xs font-semibold opacity-80"
-            htmlFor="alias"
-          >
-            Placeholder
-          </Label>
-        </Tooltip>
+      </AttributeField>
+      <AttributeField>
+        <AttributeTooltip
+          tooltipMessage="The placeholder is the text in the input that will be displayed if the user hasn't typed anything."
+          label="Placeholder"
+          htmlFor="placeholder"
+        />
         <Input
           value={values.placeholder}
           id="placeholder"
@@ -235,16 +226,13 @@ export function TextFieldProperties() {
             }
           }}
         />
-      </div>
-      <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-        <Tooltip message="Enter any helpful text for the user that will be below the text field.">
-          <Label
-            className="w-20 min-w-[80px] cursor-pointer text-xs font-semibold opacity-80"
-            htmlFor="alias"
-          >
-            Helper Text
-          </Label>
-        </Tooltip>
+      </AttributeField>
+      <AttributeField>
+        <AttributeTooltip
+          tooltipMessage="Enter any helpful text for the user that will be below the text field."
+          label="Helper Text"
+          htmlFor="helperText"
+        />
         <Input
           value={values.helperText}
           id="helperText"
@@ -258,16 +246,14 @@ export function TextFieldProperties() {
             }
           }}
         />
-      </div>
-      <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-        <Tooltip message="Choose whether this text field should be required or not.">
-          <Label
-            className="w-20 min-w-[80px] cursor-pointer text-xs font-semibold opacity-80"
-            htmlFor="alias"
-          >
-            Required
-          </Label>
-        </Tooltip>
+      </AttributeField>
+      <AttributeField>
+        <AttributeTooltip
+          tooltipMessage="Choose whether this text field should be required or not."
+          label="Required"
+          htmlFor="required"
+        />
+
         <Select
           onValueChange={value => {
             const isTrue = value === "true";
@@ -289,7 +275,7 @@ export function TextFieldProperties() {
             <SelectItem value="false">No</SelectItem>
           </SelectContent>
         </Select>
-      </div>
+      </AttributeField>
     </div>
   );
 }
