@@ -1,19 +1,16 @@
 "use client";
 
 import { Badge } from "components/ui/badge";
-import { Button } from "components/ui/button";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle
 } from "components/ui/card";
 import { Skeleton } from "components/ui/skeleton";
 import { Form } from "database/schema";
-import { useEditorLinks } from "features/editor/hooks/useEditorLinks";
-import { ArrowRight, Edit } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 type Props = {
@@ -25,56 +22,36 @@ type Props = {
  * status, description, and actions.
  */
 export const FormCard = ({ form }: Props) => {
-  const { editorLink } = useEditorLinks();
-
   return (
-    <div className="flex h-full">
-      <Card className="flex flex-1 flex-col border border-zinc-300 bg-zinc-50 dark:border-zinc-700 dark:bg-zinc-800">
-        <CardHeader>
-          <CardTitle className="flex items-center justify-between gap-2">
-            <span className="truncate font-bold">{form.name}</span>
-            <Badge
-              variant={!form.published ? "destructive" : "default"}
-              className="cursor-default"
-            >
-              {!form.published ? "Draft" : "Published"}
-            </Badge>
-          </CardTitle>
-          <CardDescription className="flex items-center justify-between text-sm text-muted-foreground">
-            {form.published && (
-              <span className="flex items-center gap-2">
-                <ArrowRight className="text-muted-foreground" />
-                <span>{form.visits.toLocaleString()}</span>
-                <ArrowRight className="text-muted-foreground" />
-                <span>{form.submissions.toLocaleString()}</span>
-              </span>
-            )}
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="h-[20px] truncate text-sm text-muted-foreground">
-          {form.description || "No description"}
-        </CardContent>
-        <CardFooter className="mt-auto justify-self-end">
-          {form.published && (
-            <Button asChild className="text-md mt-2 w-full gap-4">
-              <Link href={`/forms/${form.id}`}>
-                View submissions <ArrowRight className="h-4 w-4" />
-              </Link>
-            </Button>
-          )}
-          {!form.published && (
-            <Button
-              asChild
-              variant="secondary"
-              className="text-md mt-2 w-full gap-4 border border-zinc-300 bg-zinc-50 hover:bg-zinc-50 hover:brightness-110 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-900"
-            >
-              <Link href={`${editorLink}/${form.id}`}>
-                Edit form <Edit className="h-4 w-4" />
-              </Link>
-            </Button>
-          )}
-        </CardFooter>
-      </Card>
+    <div className="flex h-full w-full">
+      <Link href={`/dashboard/${form.id}`} className="w-full">
+        <Card className="flex flex-1 flex-col gap-4 border border-zinc-300 bg-zinc-50 p-4 dark:border-zinc-700 dark:bg-zinc-800">
+          <CardHeader className="p-0">
+            <CardTitle className="flex items-center justify-between gap-2 p-0">
+              <span className="truncate font-bold">{form.name}</span>
+              <Badge
+                variant={!form.published ? "destructive" : "default"}
+                className="cursor-default"
+              >
+                {!form.published ? "Draft" : "Published"}
+              </Badge>
+            </CardTitle>
+            <CardDescription className="flex items-center justify-between p-0 text-sm text-muted-foreground">
+              {form.published && (
+                <span className="flex items-center gap-2">
+                  <ArrowRight className="text-muted-foreground" />
+                  <span>{form.visits.toLocaleString()}</span>
+                  <ArrowRight className="text-muted-foreground" />
+                  <span>{form.submissions.toLocaleString()}</span>
+                </span>
+              )}
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="h-[20px] truncate p-0 text-sm text-muted-foreground">
+            {form.description || "No description"}
+          </CardContent>
+        </Card>
+      </Link>
     </div>
   );
 };

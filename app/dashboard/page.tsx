@@ -5,9 +5,14 @@ import { FormCardLoader } from "features/forms/components/FormCard";
 import { FormsContainer } from "features/forms/components/FormsContainer";
 import { StatsCards } from "features/stats/components/StatsCards";
 import { StatsCardsWrapper } from "features/stats/components/StatsCardsWrapper";
+import { Metadata } from "next";
 import { Suspense } from "react";
 
 export const dashboardLink = "/dashboard";
+
+export const metadata: Metadata = {
+  title: "Dashboard | Form Editor"
+};
 
 const DashboardPage = async () => {
   const user = await currentUser();
