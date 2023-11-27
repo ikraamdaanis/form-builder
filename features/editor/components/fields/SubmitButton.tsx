@@ -1,6 +1,5 @@
 "use client";
 
-import { Tooltip } from "components/Tooltip";
 import { Input } from "components/styled-ui/Input";
 import { SelectItem } from "components/styled-ui/SelectItem";
 import { SelectTrigger } from "components/styled-ui/SelectTrigger";
@@ -8,6 +7,11 @@ import { Button } from "components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "components/ui/popover";
 import { Select, SelectContent, SelectValue } from "components/ui/select";
 import { Separator } from "components/ui/separator";
+import {
+  AttributeField,
+  AttributeSectionTitle,
+  AttributeTooltip
+} from "features/editor/components/AttributeComponents";
 import { useEditorStore } from "features/editor/hooks/useEditorStore";
 import {
   ElementsType,
@@ -127,15 +131,12 @@ export function SubmitButtonProperties() {
   return (
     <div className="mt-2 flex flex-col gap-4">
       <h2 className="text-sm font-semibold">{values.alias} Properties</h2>
-      <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-        <Tooltip message="Enter what text should be in the button">
-          <label
-            className="w-20 min-w-[80px] cursor-pointer text-xs font-semibold opacity-80"
-            htmlFor="content"
-          >
-            Content
-          </label>
-        </Tooltip>
+      <AttributeField>
+        <AttributeTooltip
+          tooltipMessage="Enter what text should be in the button"
+          label="Content"
+          htmlFor="content"
+        />
         <Input
           value={values.content}
           id="content"
@@ -149,14 +150,14 @@ export function SubmitButtonProperties() {
             }
           }}
         />
-      </div>
+      </AttributeField>
       <div className="flex flex-col">
-        <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-          <Tooltip message="Set the font colour for the button.">
-            <label className="w-20 min-w-[80px] text-xs font-semibold opacity-80">
-              Font Colour
-            </label>
-          </Tooltip>
+        <AttributeField>
+          <AttributeTooltip
+            tooltipMessage="Set the font colour for the button."
+            label="Font Colour"
+            htmlFor="color"
+          />
           <Popover>
             <PopoverTrigger asChild>
               <div className="relative cursor-pointer">
@@ -166,6 +167,7 @@ export function SubmitButtonProperties() {
                 />
                 <Input
                   readOnly
+                  id="color"
                   className="cursor-pointer pl-12"
                   value={values.color}
                 />
@@ -181,15 +183,15 @@ export function SubmitButtonProperties() {
               />
             </PopoverContent>
           </Popover>
-        </div>
+        </AttributeField>
       </div>
       <div className="flex flex-col">
-        <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-          <Tooltip message="Set the background for the button.">
-            <label className="w-20 min-w-[80px] text-xs font-semibold opacity-80">
-              Background
-            </label>
-          </Tooltip>
+        <AttributeField>
+          <AttributeTooltip
+            tooltipMessage="Set the background for the button."
+            label="Background"
+            htmlFor="background"
+          />
           <Popover>
             <PopoverTrigger asChild>
               <div className="relative cursor-pointer">
@@ -199,6 +201,7 @@ export function SubmitButtonProperties() {
                 />
                 <Input
                   readOnly
+                  id="background"
                   className="cursor-pointer pl-12"
                   value={values.background}
                 />
@@ -214,17 +217,14 @@ export function SubmitButtonProperties() {
               />
             </PopoverContent>
           </Popover>
-        </div>
+        </AttributeField>
       </div>
-      <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-        <Tooltip message="The font-size CSS property sets the size of the font for the button. Changing the font size also updates the sizes of the font size-relative units, such as em, ex, and so forth.">
-          <label
-            className="w-20 min-w-[80px] cursor-pointer text-xs font-semibold opacity-80"
-            htmlFor="fontSize"
-          >
-            Font Size
-          </label>
-        </Tooltip>
+      <AttributeField>
+        <AttributeTooltip
+          tooltipMessage="The font-size CSS property sets the size of the font for the button. Changing the font size also updates the sizes of the font size-relative units, such as em, ex, and so forth."
+          label="Font Size"
+          htmlFor="fontSize"
+        />
         <Input
           value={values.fontSize}
           id="fontSize"
@@ -238,16 +238,13 @@ export function SubmitButtonProperties() {
             }
           }}
         />
-      </div>
-      <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-        <Tooltip message="The font-weight CSS property sets the weight (or boldness) of the font.">
-          <label
-            className="w-20 min-w-[80px] cursor-pointer text-xs font-semibold opacity-80"
-            htmlFor="fontWeight"
-          >
-            Font Weight
-          </label>
-        </Tooltip>
+      </AttributeField>
+      <AttributeField>
+        <AttributeTooltip
+          tooltipMessage="The font-weight CSS property sets the weight (or boldness) of the font."
+          label="Font Weight"
+          htmlFor="fontWeight"
+        />
         <Select
           onValueChange={value => {
             applyChanges({ fontWeight: value });
@@ -267,19 +264,16 @@ export function SubmitButtonProperties() {
             })}
           </SelectContent>
         </Select>
-      </div>
+      </AttributeField>
       <Separator className="bg-zinc-300 dark:bg-zinc-800" />
-      <p className="text-sm font-semibold">Layout</p>
+      <AttributeSectionTitle>Layout</AttributeSectionTitle>
       <div className="flex flex-col">
-        <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-          <Tooltip message="The margin CSS shorthand property sets the margin area on all four sides of the button.">
-            <label
-              className="w-20 min-w-[80px] cursor-pointer text-xs font-semibold opacity-80"
-              htmlFor="margin"
-            >
-              Margin
-            </label>
-          </Tooltip>
+        <AttributeField>
+          <AttributeTooltip
+            tooltipMessage="The margin CSS shorthand property sets the margin area on all four sides of the button."
+            label="Margin"
+            htmlFor="margin"
+          />
           <Input
             value={values.margin}
             id="margin"
@@ -293,7 +287,7 @@ export function SubmitButtonProperties() {
               }
             }}
           />
-        </div>
+        </AttributeField>
       </div>
     </div>
   );

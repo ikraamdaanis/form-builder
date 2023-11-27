@@ -1,11 +1,15 @@
 "use client";
 
-import { Tooltip } from "components/Tooltip";
 import { Input } from "components/styled-ui/Input";
 import { SelectItem } from "components/styled-ui/SelectItem";
 import { SelectTrigger } from "components/styled-ui/SelectTrigger";
 import { Select, SelectContent, SelectValue } from "components/ui/select";
 import { Separator } from "components/ui/separator";
+import {
+  AttributeField,
+  AttributeSectionTitle,
+  AttributeTooltip
+} from "features/editor/components/AttributeComponents";
 import { useEditorStore } from "features/editor/hooks/useEditorStore";
 import {
   ElementsType,
@@ -21,8 +25,8 @@ const type: ElementsType = "Heading";
 
 export const headingAttributes = {
   content: "Heading",
-  fontSize: "16px",
-  fontWeight: "400",
+  fontSize: "24px",
+  fontWeight: "600",
   lineHeight: "1.5",
   padding: "0px 0px 0px 0px"
 };
@@ -59,20 +63,15 @@ type Props = {
 function HeadingEditor({ element }: Props) {
   const elementInstance = element as HeadingElement;
 
-  const {
-    content,
-    fontSize: size,
-    fontWeight: weight,
-    lineHeight,
-    padding
-  } = elementInstance.extraAttributes;
+  const { content, fontSize, fontWeight, lineHeight, padding } =
+    elementInstance.extraAttributes;
 
   return (
     <div className="flex w-full flex-col gap-2 bg-white text-zinc-950 outline-0 ring-0 focus-visible:outline-none">
       <h1
         style={{
-          fontSize: `${size || "16px"}`,
-          fontWeight: `${weight || "400"}`,
+          fontSize: `${fontSize || "16px"}`,
+          fontWeight: `${fontWeight || "400"}`,
           lineHeight: `${lineHeight || "1.5"}`,
           padding: `${padding || "0px 0px 0px 0px"}`
         }}
@@ -87,20 +86,15 @@ function HeadingEditor({ element }: Props) {
 function HeadingPreview({ element }: Props) {
   const elementInstance = element as HeadingElement;
 
-  const {
-    content,
-    fontSize: size,
-    fontWeight: weight,
-    lineHeight,
-    padding
-  } = elementInstance.extraAttributes;
+  const { content, fontSize, fontWeight, lineHeight, padding } =
+    elementInstance.extraAttributes;
 
   return (
     <div className="flex w-full flex-col gap-2 bg-white text-zinc-950 outline-0 ring-0 selection:bg-blue-300 focus-visible:outline-none">
       <h1
         style={{
-          fontSize: `${size || "16px"}`,
-          fontWeight: `${weight || "400"}`,
+          fontSize: `${fontSize || "16px"}`,
+          fontWeight: `${fontWeight || "400"}`,
           lineHeight: `${lineHeight || "1.5"}`,
           padding: `${padding || "0px 0px 0px 0px"}`
         }}
@@ -150,15 +144,12 @@ export function HeadingProperties() {
   return (
     <div className="mt-2 flex flex-col gap-4">
       <h2 className="text-sm font-semibold">{values.alias} Properties</h2>
-      <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-        <Tooltip message="Enter a custom alias for this element as it will be displayed within the editor interface.">
-          <label
-            className="w-20 min-w-[80px] cursor-pointer text-xs font-semibold opacity-80"
-            htmlFor="alias"
-          >
-            Alias
-          </label>
-        </Tooltip>
+      <AttributeField>
+        <AttributeTooltip
+          tooltipMessage="Enter a custom alias for this element as it will be displayed within the editor interface."
+          label="Alias"
+          htmlFor="alias"
+        />
         <Input
           value={values.alias}
           id="alias"
@@ -172,16 +163,13 @@ export function HeadingProperties() {
             }
           }}
         />
-      </div>
-      <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-        <Tooltip message="Enter what you want the heading to be.">
-          <label
-            className="w-20 min-w-[80px] cursor-pointer text-xs font-semibold opacity-80"
-            htmlFor="content"
-          >
-            Content
-          </label>
-        </Tooltip>
+      </AttributeField>
+      <AttributeField>
+        <AttributeTooltip
+          tooltipMessage="Enter what you want the heading to be."
+          label="Content"
+          htmlFor="content"
+        />
         <Input
           value={values.content}
           id="content"
@@ -195,16 +183,13 @@ export function HeadingProperties() {
             }
           }}
         />
-      </div>
-      <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-        <Tooltip message="The font-size CSS property sets the size of the font for the heading. Changing the font size also updates the sizes of the font size-relative units, such as em, ex, and so forth.">
-          <label
-            className="w-20 min-w-[80px] cursor-pointer text-xs font-semibold opacity-80"
-            htmlFor="fontSize"
-          >
-            Font Size
-          </label>
-        </Tooltip>
+      </AttributeField>
+      <AttributeField>
+        <AttributeTooltip
+          tooltipMessage="The font-size CSS property sets the size of the font for the heading. Changing the font size also updates the sizes of the font size-relative units, such as em, ex, and so forth."
+          label="Font Size"
+          htmlFor="fontSize"
+        />
         <Input
           value={values.fontSize}
           id="fontSize"
@@ -218,16 +203,13 @@ export function HeadingProperties() {
             }
           }}
         />
-      </div>
-      <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-        <Tooltip message="The font-weight CSS property sets the weight (or boldness) of the font.">
-          <label
-            className="w-20 min-w-[80px] cursor-pointer text-xs font-semibold opacity-80"
-            htmlFor="fontWeight"
-          >
-            Font Weight
-          </label>
-        </Tooltip>
+      </AttributeField>
+      <AttributeField>
+        <AttributeTooltip
+          tooltipMessage="The font-weight CSS property sets the weight (or boldness) of the font."
+          label="Font Weight"
+          htmlFor="fontWeight"
+        />
         <Select
           onValueChange={value => {
             applyChanges({ fontWeight: value });
@@ -247,16 +229,13 @@ export function HeadingProperties() {
             })}
           </SelectContent>
         </Select>
-      </div>
-      <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-        <Tooltip message="The line-height CSS property sets the height of the heading. It's commonly used to set the distance between lines of text.">
-          <label
-            className="w-20 min-w-[80px] cursor-pointer text-xs font-semibold opacity-80"
-            htmlFor="lineHeight"
-          >
-            Line Height
-          </label>
-        </Tooltip>
+      </AttributeField>
+      <AttributeField>
+        <AttributeTooltip
+          tooltipMessage="The line-height CSS property sets the height of the heading. It's commonly used to set the distance between lines of text."
+          label="Line Height"
+          htmlFor="lineHeight"
+        />
         <Input
           value={values.lineHeight}
           id="lineHeight"
@@ -270,18 +249,15 @@ export function HeadingProperties() {
             }
           }}
         />
-      </div>
+      </AttributeField>
       <Separator className="bg-zinc-300 dark:bg-zinc-800" />
-      <p className="text-sm font-semibold">Layout</p>
-      <div className="flex items-center gap-2 space-y-0 rounded-sm p-0">
-        <Tooltip message="The padding CSS shorthand property sets the padding area on all four sides of the heading at once.">
-          <label
-            className="w-20 min-w-[80px] cursor-pointer text-xs font-semibold opacity-80"
-            htmlFor="padding"
-          >
-            Padding
-          </label>
-        </Tooltip>
+      <AttributeSectionTitle>Layout</AttributeSectionTitle>
+      <AttributeField>
+        <AttributeTooltip
+          tooltipMessage="The padding CSS shorthand property sets the padding area on all four sides of the heading at once."
+          label="Padding"
+          htmlFor="padding"
+        />
         <Input
           value={values.padding}
           id="padding"
@@ -295,7 +271,7 @@ export function HeadingProperties() {
             }
           }}
         />
-      </div>
+      </AttributeField>
     </div>
   );
 }

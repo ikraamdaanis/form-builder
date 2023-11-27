@@ -38,3 +38,17 @@ export const AttributeTooltip = ({
     </Tooltip>
   );
 };
+
+/**
+ * Title for a section in the attributes panel.
+ */
+export const AttributeSectionTitle = ({
+  children,
+  ...props
+}: JSX.IntrinsicElements["p"]) => {
+  return (
+    <p className="text-sm font-semibold" {...props}>
+      {children}
+    </p>
+  );
+};
