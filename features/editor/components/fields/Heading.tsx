@@ -13,7 +13,6 @@ import {
 import { useEditorStore } from "features/editor/hooks/useEditorStore";
 import {
   ElementsType,
-  FontWeights,
   FormElement,
   FormElementInstance,
   fontWeights
@@ -31,9 +30,7 @@ export const headingAttributes = {
   padding: "0px 0px 0px 0px"
 };
 
-type PropertiesSchema = typeof headingAttributes & {
-  weight: FontWeights;
-};
+type PropertiesSchema = typeof headingAttributes;
 
 export type HeadingElement = FormElementInstance<PropertiesSchema>;
 

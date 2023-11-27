@@ -15,9 +15,9 @@ import {
 import { useEditorStore } from "features/editor/hooks/useEditorStore";
 import {
   ElementsType,
-  FontWeights,
   FormElement,
   FormElementInstance,
+  alignSelf,
   fontWeights
 } from "features/editor/types";
 import { Send } from "lucide-react";
@@ -27,17 +27,17 @@ import { useShallow } from "zustand/react/shallow";
 const type: ElementsType = "SubmitButton";
 
 export const submitButtonAttributes = {
+  alignSelf: "center",
   background: "#000",
   color: "#fff",
   content: "Submit",
   fontSize: "14px",
   fontWeight: "500",
-  margin: "0px 0px 0px 0px"
+  margin: "0px 0px 0px 0px",
+  width: "fit-content"
 };
 
-type PropertiesSchema = typeof submitButtonAttributes & {
-  weight: FontWeights;
-};
+type PropertiesSchema = typeof submitButtonAttributes;
 
 export type SubmitButtonElement = FormElementInstance<PropertiesSchema>;
 
@@ -67,12 +67,23 @@ type Props = {
 function SubmitButtonEditor({ element }: Props) {
   const elementInstance = element as SubmitButtonElement;
 
-  const { background, color, content, fontSize, fontWeight, margin } =
-    elementInstance.extraAttributes;
+  const {
+    background,
+    color,
+    content,
+    fontSize,
+    fontWeight,
+    width,
+    margin,
+    alignSelf
+  } = elementInstance.extraAttributes;
 
   return (
     <div className="flex w-full flex-col bg-white" style={{ margin }}>
-      <Button type="submit" style={{ background, color, fontSize, fontWeight }}>
+      <Button
+        type="submit"
+        style={{ background, color, fontSize, fontWeight, width, alignSelf }}
+      >
         {content}
       </Button>
     </div>
@@ -83,12 +94,23 @@ function SubmitButtonEditor({ element }: Props) {
 function SubmitButtonPreview({ element }: Props) {
   const elementInstance = element as SubmitButtonElement;
 
-  const { background, color, content, fontSize, fontWeight, margin } =
-    elementInstance.extraAttributes;
+  const {
+    background,
+    color,
+    content,
+    fontSize,
+    fontWeight,
+    width,
+    margin,
+    alignSelf
+  } = elementInstance.extraAttributes;
 
   return (
     <div className="flex w-full flex-col bg-white" style={{ margin }}>
-      <Button style={{ background, color, fontSize, fontWeight }}>
+      <Button
+        style={{ background, color, fontSize, fontWeight, width, alignSelf }}
+        className="self-start"
+      >
         {content}
       </Button>
     </div>
@@ -113,12 +135,14 @@ export function SubmitButtonProperties() {
 
   const values = {
     alias: element.alias,
+    alignSelf: element.extraAttributes.alignSelf,
     background: element.extraAttributes.background,
     color: element.extraAttributes.color,
     content: element.extraAttributes.content,
     fontSize: element.extraAttributes.fontSize,
     fontWeight: element.extraAttributes.fontWeight,
-    margin: element.extraAttributes.margin
+    margin: element.extraAttributes.margin,
+    width: element.extraAttributes.width
   };
 
   function applyChanges(values: Partial<PropertiesSchema>) {
@@ -247,7 +271,7 @@ export function SubmitButtonProperties() {
         />
         <Select
           onValueChange={value => {
-            applyChanges({ fontWeight: value });
+            applyChanges({ fontWeight: value as string });
           }}
           value={values.fontWeight}
         >
@@ -267,7 +291,57 @@ export function SubmitButtonProperties() {
       </AttributeField>
       <Separator className="bg-zinc-300 dark:bg-zinc-800" />
       <AttributeSectionTitle>Layout</AttributeSectionTitle>
-      <div className="flex flex-col">
+      <div className="flex flex-col gap-4">
+        <AttributeField>
+          <AttributeTooltip
+            tooltipMessage="The width CSS property sets the button's width. You can set any CSS width property."
+            label="Width"
+            htmlFor="width"
+          />
+          <Input
+            value={values.width}
+            id="width"
+            name="width"
+            onChange={({ target: { value } }) => {
+              applyChanges({ width: value });
+            }}
+            onBlur={({ target: { value } }) => {
+              if (!value.length) {
+                applyChanges({ width: submitButtonAttributes.width });
+              }
+            }}
+          />
+        </AttributeField>
+        <AttributeField>
+          <AttributeTooltip
+            tooltipMessage="Set the position of the button.."
+            label="Position"
+            htmlFor="alignSelf"
+          />
+          <Select
+            onValueChange={value => {
+              applyChanges({ alignSelf: value });
+            }}
+            value={values.alignSelf}
+          >
+            <SelectTrigger className="capitalize">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent className="selector dark:bg-zinc-800">
+              {alignSelf.map(option => {
+                return (
+                  <SelectItem
+                    value={option}
+                    key={option}
+                    className="capitalize"
+                  >
+                    {option}
+                  </SelectItem>
+                );
+              })}
+            </SelectContent>
+          </Select>
+        </AttributeField>
         <AttributeField>
           <AttributeTooltip
             tooltipMessage="The margin CSS shorthand property sets the margin area on all four sides of the button."

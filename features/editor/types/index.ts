@@ -50,5 +50,9 @@ export type FormElementInstance<T = Record<string, any>> = {
 };
 
 export const fontWeights = ["300", "400", "500", "600", "700"] as const;
-
 export type FontWeights = typeof fontWeights;
+export type FontWeight = (typeof fontWeights)[number];
+
+export const alignSelf = ["start", "center", "end"] as const;
+export type AlignSelfs = typeof alignSelf;
+export type AlignSelf = (typeof alignSelf)[number];
