@@ -24,7 +24,7 @@ type Props = {
  * name, preview button, and form-saving options.
  */
 export const EditorNavbar = ({ form }: Props) => {
-  const { formLink, isPreview } = useEditorLinks();
+  const { formLink, isPreview, formDashboardLink } = useEditorLinks();
 
   return (
     <nav className="flex items-center justify-between gap-3 border-b border-b-zinc-300 bg-primary bg-white px-4 py-2 dark:border-b-zinc-700 dark:bg-zinc-900">
@@ -44,7 +44,7 @@ export const EditorNavbar = ({ form }: Props) => {
             </>
           }
         >
-          <DashboardButton />
+          <DashboardButton customHref={formDashboardLink} />
           <FormName form={form} />
         </Show>
       </div>

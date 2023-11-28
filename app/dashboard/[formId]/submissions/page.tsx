@@ -1,4 +1,3 @@
-import { FormDashboard } from "features/dashboard/components/FormDashboard";
 import { getFormById } from "features/editor/actions/getFormById";
 import { getRecentFormSubmissions } from "features/editor/actions/getFormSubmissions";
 import { Metadata } from "next";
@@ -13,11 +12,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const form = await getFormById(params.formId);
 
   return {
-    title: `${form?.name} | Dashboard`
+    title: `${form?.name} | Submissions`
   };
 }
 
-const FormPage = async ({ params }: Props) => {
+const SubmissionsPage = async ({ params }: Props) => {
   const form = await getFormById(params.formId);
   const formSubmissions = await getRecentFormSubmissions(params.formId);
 
@@ -25,7 +24,12 @@ const FormPage = async ({ params }: Props) => {
     throw new Error("Form not found");
   }
 
-  return <FormDashboard form={form} formSubmissions={formSubmissions} />;
+  return (
+    <div className="mx-auto flex min-h-full w-full max-w-[1600px] flex-col pt-[50px]">
+      {form.name}
+      {formSubmissions.length}
+    </div>
+  );
 };
 
-export default FormPage;
+export default SubmissionsPage;

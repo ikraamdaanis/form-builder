@@ -9,6 +9,8 @@ type UseEditorLinks = {
   previewLink: string;
   /** `?preview=true` */
   isPreview: boolean;
+  /** `/dashboard/${formId}` */
+  formDashboardLink: string;
 };
 
 /** Links for Form Editor pages. */
@@ -22,6 +24,7 @@ export const useEditorLinks = (): UseEditorLinks => {
   const formLink = `${editorLink}/${formId}`;
   const previewLink = `${formLink}?preview=true`;
   const isPreview = searchParams.get("preview") === "true";
+  const formDashboardLink = `/dashboard/${formId}`;
 
-  return { editorLink, formLink, previewLink, isPreview };
+  return { editorLink, formLink, previewLink, isPreview, formDashboardLink };
 };

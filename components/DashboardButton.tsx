@@ -1,11 +1,15 @@
 import { Button } from "components/ui/button";
 import Link from "next/link";
 
+type Props = {
+  customHref?: string;
+};
+
 /** Button that redirects to the dashboard. */
-export const DashboardButton = () => {
+export const DashboardButton = ({ customHref }: Props) => {
   return (
-    <Link href="/dashboard">
-      <Button className="bg-brandColour hover:bg-brandColour h-8 text-xs font-semibold text-white transition hover:brightness-110">
+    <Link href={customHref || "/dashboard"}>
+      <Button className="h-8 bg-brandColour text-xs font-semibold text-white transition hover:bg-brandColour hover:brightness-110">
         Dashboard
       </Button>
     </Link>

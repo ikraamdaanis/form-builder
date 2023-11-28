@@ -32,7 +32,7 @@ export const FormDashboard = ({ form, formSubmissions }: Props) => {
   return (
     <div className="mx-auto flex min-h-full w-full max-w-[1600px] flex-col pt-[50px]">
       <div className="flex items-center gap-2 p-4">
-        <Button asChild className="text-md mt-2 w-full gap-4">
+        <Button asChild className="text-md w-full gap-4">
           <Link href={`/forms/${form.id}`} target="_blank">
             View Form <ArrowRight className="h-4 w-4" />
           </Link>
@@ -40,7 +40,7 @@ export const FormDashboard = ({ form, formSubmissions }: Props) => {
         <Button
           asChild
           variant="secondary"
-          className="text-md mt-2 w-full gap-4 border border-zinc-300 bg-zinc-50 hover:bg-zinc-50 hover:brightness-110 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-900"
+          className="text-md w-full gap-4 border border-zinc-300 bg-zinc-50 hover:bg-zinc-50 hover:brightness-110 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-900"
         >
           <Link href={`${editorLink}/${form.id}`}>
             Edit Form <Edit className="h-4 w-4" />
@@ -48,7 +48,7 @@ export const FormDashboard = ({ form, formSubmissions }: Props) => {
         </Button>
       </div>
       <div className="p-4">
-        <h2 className="mb-4 text-xl font-semibold">Recent Submissions</h2>
+        <h2 className="mb-4 text-lg font-semibold">Recent Submissions</h2>
         <div className="overflow-hidden rounded-sm border border-zinc-300 dark:border-zinc-700">
           <Table>
             <TableHeader>
