@@ -22,7 +22,7 @@ export default async function DashboardLayout({ children, params }: Props) {
       <Header form={form} />
       <div className="flex h-full w-full bg-zinc-50 dark:bg-zinc-900">
         <DashboardSidebar form={form} />
-        {children}H
+        {children}
       </div>
     </div>
   );

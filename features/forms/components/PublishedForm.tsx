@@ -1,9 +1,9 @@
 "use client";
 
 import { Content } from "database/schema";
-import { PublicForm } from "features/forms/types";
 import { FormElements } from "features/editor/types";
-import { submitForm } from "features/forms/actions/submitForm";
+import { PublicForm } from "features/forms/types";
+import { createSubmission } from "features/submissions/actions/createSubmission";
 
 type Props = {
   form: PublicForm;
@@ -23,7 +23,7 @@ export const PublishedForm = ({ form }: Props) => {
     const data = Object.fromEntries(e);
     console.log(data);
 
-    const response = await submitForm({
+    const response = await createSubmission({
       formId: form.id,
       content: JSON.stringify(data)
     });

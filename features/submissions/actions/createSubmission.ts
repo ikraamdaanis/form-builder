@@ -8,10 +8,8 @@ type SubmitFormArgs = {
   content: string;
 };
 
-/**
- * Creates a form submission for a created and published form.
- */
-export async function submitForm(args: SubmitFormArgs) {
+/** Creates a form submission for a published form. */
+export async function createSubmission(args: SubmitFormArgs) {
   const submission = db
     .insert(formSubmissions)
     .values({

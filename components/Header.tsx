@@ -16,8 +16,8 @@ type Props = {
 
 /**
  * Header for the application, displays the logo, theme toggler, and auth
- * buttons for users to sign in, login or check their profile. Used in the
- * home page of the website and the admin dashboard.
+ * buttons for users to sign in, login or check their profile. Used in
+ * the home page of the website and the admin dashboard.
  */
 export const Header = ({ form }: Props) => {
   const { isLoaded, isSignedIn } = useAuth();

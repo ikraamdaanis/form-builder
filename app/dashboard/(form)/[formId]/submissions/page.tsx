@@ -1,5 +1,6 @@
 import { getFormById } from "features/editor/actions/getFormById";
-import { getRecentFormSubmissions } from "features/editor/actions/getFormSubmissions";
+import { fetchSubmissions } from "features/submissions/actions/fetchSubmissions";
+import { SubmissionsTable } from "features/submissions/components/SubmissionsTable";
 import { Metadata } from "next";
 
 type Props = {
@@ -18,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const SubmissionsPage = async ({ params }: Props) => {
   const form = await getFormById(params.formId);
-  const formSubmissions = await getRecentFormSubmissions(params.formId);
+  const formSubmissions = await fetchSubmissions(params.formId, 10);
 
   if (!form) {
     throw new Error("Form not found");
@@ -26,8 +27,7 @@ const SubmissionsPage = async ({ params }: Props) => {
 
   return (
     <div className="mx-auto flex min-h-full w-full max-w-[1600px] flex-col pt-[50px]">
-      {form.name}
-      {formSubmissions.length}
+      <SubmissionsTable form={form} formSubmissions={formSubmissions} />
     </div>
   );
 };
