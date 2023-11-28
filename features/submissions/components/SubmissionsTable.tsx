@@ -23,7 +23,15 @@ export const SubmissionsTable = ({ form, formSubmissions }: Props) => {
 
   return (
     <div className="p-4">
-      <h2 className="mb-4 text-lg font-semibold">{form.name} Submissions</h2>
+      <div className="mb-4 flex items-center justify-between">
+        <h2 className="text-lg font-semibold">Submissions</h2>
+        <p className="rounded-sm bg-zinc-200 p-2 py-1 text-sm font-semibold dark:bg-zinc-800">
+          Total Submissions:
+          <span className="ml-2 inline-block text-right text-brandColour">
+            {formSubmissions.length}
+          </span>
+        </p>
+      </div>
       <div className="overflow-hidden rounded-sm border border-zinc-300 dark:border-zinc-700">
         <Table>
           <TableHeader>
