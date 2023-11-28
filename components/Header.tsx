@@ -5,16 +5,21 @@ import { DashboardButton } from "components/DashboardButton";
 import { Show } from "components/Show";
 import { ThemeToggler } from "components/ThemeToggler";
 import { Button } from "components/ui/button";
+import { Form } from "database/schema";
 import { ProfileButton } from "features/auth/components/ProfileButton";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
+type Props = {
+  form?: Form;
+};
 
 /**
  * Header for the application, displays the logo, theme toggler, and auth
  * buttons for users to sign in, login or check their profile. Used in the
  * home page of the website and the admin dashboard.
  */
-export const Header = () => {
+export const Header = ({ form }: Props) => {
   const { isLoaded, isSignedIn } = useAuth();
   const pathname = usePathname();
   const isDashboard = pathname.includes("dashboard");
@@ -22,11 +27,20 @@ export const Header = () => {
   return (
     <header className="fixed top-0 w-full border-b border-b-zinc-300 bg-primary bg-white py-2 dark:border-b-zinc-700 dark:bg-zinc-900">
       <nav className="mx-auto flex h-full w-full items-center justify-between px-4">
-        <Link href="/">
-          <h1 className="text-lg font-semibold text-black dark:text-white">
-            Form Editor
-          </h1>
-        </Link>
+        <div className="flex items-center gap-4">
+          <Link href="/dashboard">
+            <h2 className="text-lg font-semibold text-black dark:text-white">
+              Form Editor
+            </h2>
+          </Link>
+          <Show when={!!form}>
+            <Link href={`/dashboard/${form?.id}`}>
+              <p className="text-sm font-semibold text-black dark:text-white">
+                {form?.name}
+              </p>
+            </Link>
+          </Show>
+        </div>
         <div className="flex items-center gap-2">
           <ThemeToggler />
           <Show

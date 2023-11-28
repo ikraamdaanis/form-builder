@@ -22,9 +22,6 @@ export const DashboardSidebar = ({ form }: Props) => {
   return (
     <nav className="flex h-full w-[280px] max-w-[280px] flex-grow flex-col gap-2 overflow-y-auto border-r border-muted border-r-zinc-300 bg-zinc-50 pb-4 pt-[66px] dark:border-zinc-700 dark:bg-zinc-900">
       <div className="flex flex-col gap-1">
-        <Link href={`/dashboard/${form.id}`}>
-          <h2 className="mx-2 p-2 pt-0 text-xl font-semibold">{form.name}</h2>
-        </Link>
         <NavbarLink href={`/forms/${form?.id}`} target="_blank">
           Published Form
         </NavbarLink>
