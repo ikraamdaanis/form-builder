@@ -30,7 +30,7 @@ export const FormDashboard = ({ form, formSubmissions }: Props) => {
   const formFields = content.formFields;
 
   return (
-    <div className="flex min-h-full w-full flex-col bg-white pt-[50px] dark:bg-zinc-900">
+    <div className="mx-auto flex min-h-full w-full max-w-[1600px] flex-col pt-[50px]">
       <div className="flex items-center gap-2 p-4">
         <Button asChild className="text-md mt-2 w-full gap-4">
           <Link href={`/forms/${form.id}`} target="_blank">

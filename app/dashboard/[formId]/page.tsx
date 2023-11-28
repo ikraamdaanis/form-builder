@@ -1,3 +1,4 @@
+import { DashboardSidebar } from "features/dashboard/components/DashboardSidebar";
 import { FormDashboard } from "features/dashboard/components/FormDashboard";
 import { getFormById } from "features/editor/actions/getFormById";
 import { getRecentFormSubmissions } from "features/editor/actions/getFormSubmissions";
@@ -25,7 +26,12 @@ const FormPage = async ({ params }: Props) => {
     throw new Error("Form not found");
   }
 
-  return <FormDashboard form={form} formSubmissions={formSubmissions} />;
+  return (
+    <div className="flex h-full w-full bg-zinc-50 dark:bg-zinc-900">
+      <DashboardSidebar form={form} />
+      <FormDashboard form={form} formSubmissions={formSubmissions} />
+    </div>
+  );
 };
 
 export default FormPage;
