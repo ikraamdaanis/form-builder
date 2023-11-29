@@ -49,7 +49,10 @@ export const FormSettings = ({ form }: Props) => {
   });
 
   async function handleSubmit(values: UpdateFormSchema) {
-    console.log(values);
+    toast({
+      title: "Updating",
+      description: "Updating the form..."
+    });
 
     try {
       await updateForm({ ...values, updatedAt: new Date() });

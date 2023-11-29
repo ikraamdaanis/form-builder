@@ -33,7 +33,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "dayjs": "^1.11.10",
-    "drizzle-orm": "^0.28.6",
+    "drizzle-orm": "^0.29.1",
     "lucide-react": "^0.291.0",
     "next": "14.0.2",
     "next-themes": "^0.2.1",
