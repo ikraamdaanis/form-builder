@@ -5,43 +5,8 @@
     {
       "idx": 0,
       "version": "5",
-      "when": 1699130173761,
-      "tag": "0000_salty_wrecking_crew",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "5",
-      "when": 1699138204920,
-      "tag": "0001_real_gunslinger",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "5",
-      "when": 1699138538221,
-      "tag": "0002_chief_big_bertha",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "5",
-      "when": 1699138563346,
-      "tag": "0003_naive_fixer",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "5",
-      "when": 1699138586458,
-      "tag": "0004_left_namor",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "5",
-      "when": 1699143343561,
-      "tag": "0005_loose_titania",
+      "when": 1701289416578,
+      "tag": "0000_petite_mercury",
       "breakpoints": true
     }
   ]

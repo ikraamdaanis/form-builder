@@ -34,7 +34,8 @@ export const FormEditor = ({ form }: Props) => {
     addElement,
     removeElement,
     updateSettings,
-    hasLoaded
+    hasLoaded,
+    setHasLoaded
   } = useEditorStore(
     useShallow(state => ({
       elements: state.elements,
@@ -42,7 +43,8 @@ export const FormEditor = ({ form }: Props) => {
       addElement: state.addElement,
       removeElement: state.removeElement,
       updateSettings: state.updateSettings,
-      hasLoaded: state.hasLoaded
+      hasLoaded: state.hasLoaded,
+      setHasLoaded: state.setHasLoaded
     }))
   );
 
@@ -55,8 +57,16 @@ export const FormEditor = ({ form }: Props) => {
 
       content?.elements?.length && setElements(content.elements);
       content?.settings && updateSettings(content.settings);
+      setHasLoaded(true);
     }
-  }, [elements?.length, form, hasLoaded, setElements, updateSettings]);
+  }, [
+    elements?.length,
+    form,
+    hasLoaded,
+    setElements,
+    setHasLoaded,
+    updateSettings
+  ]);
 
   function onDragStart() {}
 

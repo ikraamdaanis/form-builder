@@ -1,1 +1,0 @@
-ALTER TABLE "formSumissions" ALTER COLUMN "form_id" SET DATA TYPE text;

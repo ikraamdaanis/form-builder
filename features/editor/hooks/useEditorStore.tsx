@@ -15,6 +15,7 @@ type EditorStore = {
   settings: FormSettings;
   updateSettings: (updateValue: UpdateSettingsValue) => void;
   hasLoaded: boolean;
+  setHasLoaded: (hasLoaded: boolean) => void;
 };
 
 type UpdateSettingsValue =
@@ -81,5 +82,8 @@ export const useEditorStore = create<EditorStore>((set, state) => ({
 
     set({ settings: formSettings, hasLoaded: true });
   },
-  hasLoaded: false
+  hasLoaded: false,
+  setHasLoaded: (hasLoaded: boolean) => {
+    set({ hasLoaded });
+  }
 }));

@@ -22,7 +22,6 @@ export const forms = pgTable(
     content: text("content").default("[]"),
     visits: integer("visits").default(0).notNull(),
     shareUrl: uuid("share_url").defaultRandom().notNull(),
-    submissions: integer("submissions").default(0).notNull(),
     createdAt: timestamp("created_at").defaultNow().notNull(),
     updatedAt: timestamp("updated_at").defaultNow().notNull()
   },
