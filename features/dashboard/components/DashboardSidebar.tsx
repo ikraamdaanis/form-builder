@@ -18,6 +18,7 @@ export const DashboardSidebar = ({ form }: Props) => {
   const pathname = usePathname();
 
   const isSubmissions = pathname.includes("submissions");
+  const isSettings = pathname.includes("settings");
 
   return (
     <nav className="flex h-full w-[280px] max-w-[280px] flex-grow flex-col gap-2 overflow-y-auto border-r border-muted border-r-zinc-300 bg-zinc-50 pb-4 pt-[66px] dark:border-zinc-700 dark:bg-zinc-900">
@@ -31,6 +32,12 @@ export const DashboardSidebar = ({ form }: Props) => {
           isActive={isSubmissions}
         >
           Submissions
+        </NavbarLink>
+        <NavbarLink
+          href={`/dashboard/${form?.id}/settings`}
+          isActive={isSettings}
+        >
+          Settings
         </NavbarLink>
       </div>
     </nav>
