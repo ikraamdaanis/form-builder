@@ -13,7 +13,7 @@ import {
 } from "components/ui/form";
 import { toast } from "components/ui/use-toast";
 import { Form as FormType } from "database/schema";
-import { updateForm } from "features/editor/actions/updateForm";
+import { updateForm } from "features/forms/actions/updateForm";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import dayjs from "dayjs";

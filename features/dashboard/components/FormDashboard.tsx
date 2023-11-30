@@ -11,6 +11,7 @@ import {
   TableRow
 } from "components/ui/table";
 import { Content, Form, FormSubmission } from "database/schema";
+import { PublishFormButton } from "features/dashboard/components/PublishFormButton";
 import { useEditorLinks } from "features/editor/hooks/useEditorLinks";
 import Link from "next/link";
 import { cn } from "utils/cn";
@@ -53,11 +54,14 @@ export const FormDashboard = ({ form, formSubmissions }: Props) => {
             {process.env.NEXT_PUBLIC_URL}/forms/{form.id}
           </Link>
         </div>
-        <Link href={`${editorLink}/${form.id}`}>
-          <Button className="bg-brandColour font-semibold text-white transition hover:bg-brandColour hover:brightness-110">
-            Form Editor
-          </Button>
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link href={`${editorLink}/${form.id}`}>
+            <Button className="h-8 bg-brandColour font-semibold text-white transition hover:bg-brandColour hover:brightness-110">
+              Form Editor
+            </Button>
+          </Link>
+          <PublishFormButton form={form} />
+        </div>
       </div>
       <div className="p-4">
         <h2 className="mb-4 text-lg font-semibold">Recent Submissions</h2>

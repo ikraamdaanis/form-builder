@@ -1,4 +1,6 @@
 import {
+  AlertDialogFooter,
+  AlertDialogHeader,
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -6,10 +8,6 @@ import {
   AlertDialogDescription,
   AlertDialogTitle,
   AlertDialogTrigger
-} from "@radix-ui/react-alert-dialog";
-import {
-  AlertDialogFooter,
-  AlertDialogHeader
 } from "components/ui/alert-dialog";
 import { Button } from "components/ui/button";
 import { BookPlus, Loader } from "lucide-react";
