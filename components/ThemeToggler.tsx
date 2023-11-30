@@ -11,7 +11,7 @@ import { Check, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { cn } from "utils/cn";
 
-/** Toggler for light/dark themes. */
+/** Toggler for light/dark themes. Can choose between dark, light and system. */
 export const ThemeToggler = () => {
   const { theme: currentTheme, setTheme, themes } = useTheme();
 
@@ -28,7 +28,7 @@ export const ThemeToggler = () => {
           <span className="sr-only">Toggle theme</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className=" dark:bg-zinc-800">
         {themes.map(theme => {
           return (
             <DropdownMenuItem
@@ -39,7 +39,7 @@ export const ThemeToggler = () => {
                 }, 200);
               }}
               className={cn(
-                "font-medium capitalize",
+                "font-medium capitalize hover:dark:bg-zinc-900 aria-[selected=false]:dark:bg-transparent data-[highlighted]:dark:bg-zinc-900",
                 theme === currentTheme && "font-bold"
               )}
             >
