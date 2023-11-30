@@ -2,6 +2,7 @@ import { Button } from "components/ui/button";
 import { toast } from "components/ui/use-toast";
 import { Form } from "database/schema";
 import { updateForm } from "features/forms/actions/updateForm";
+import { BookCheck } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useTransition } from "react";
 import { cn } from "utils/cn";
@@ -46,12 +47,13 @@ export const PublishFormButton = ({ form }: Props) => {
   return (
     <Button
       className={cn(
-        "h-8 bg-blue-500 font-semibold text-white transition hover:bg-blue-500 hover:brightness-110",
-        isPublished && "bg-zinc-800 hover:bg-zinc-500"
+        "h-8 gap-2 rounded-sm border border-zinc-300 bg-blue-500 px-2 text-xs font-semibold text-white hover:bg-blue-600 dark:border-zinc-700",
+        isPublished && "bg-zinc-700 hover:bg-zinc-700"
       )}
       disabled={loading}
       onClick={handleClick}
     >
+      <BookCheck className=" h-4 w-4" />
       {isPublished ? "Unpublish" : "Publish"}
     </Button>
   );

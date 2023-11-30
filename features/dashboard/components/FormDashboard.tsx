@@ -13,6 +13,7 @@ import {
 import { Content, Form, FormSubmission } from "database/schema";
 import { PublishFormButton } from "features/dashboard/components/PublishFormButton";
 import { useEditorLinks } from "features/editor/hooks/useEditorLinks";
+import { Brush } from "lucide-react";
 import Link from "next/link";
 import { cn } from "utils/cn";
 
@@ -56,8 +57,8 @@ export const FormDashboard = ({ form, formSubmissions }: Props) => {
         </div>
         <div className="flex items-center gap-2">
           <Link href={`${editorLink}/${form.id}`}>
-            <Button className="h-8 bg-brandColour font-semibold text-white transition hover:bg-brandColour hover:brightness-110">
-              Form Editor
+            <Button className="h-8 gap-2 rounded-sm border border-zinc-300 bg-brandColour px-2 text-xs font-semibold text-white hover:bg-brandColour dark:border-zinc-700">
+              <Brush className="h-4 w-4" /> Form Editor
             </Button>
           </Link>
           <PublishFormButton form={form} />
