@@ -15,24 +15,19 @@ type Props = {
 };
 
 /**
- * Header for the application, displays the logo, theme toggler, and auth
+ * Navbar for the application, displays the logo, theme toggler, and auth
  * buttons for users to sign in, login or check their profile. Used in
  * the home page of the website and the admin dashboard.
  */
-export const Header = ({ form }: Props) => {
+export const DashboardNavbar = ({ form }: Props) => {
   const { isLoaded, isSignedIn } = useAuth();
   const pathname = usePathname();
   const isDashboard = pathname.includes("dashboard");
 
   return (
-    <header className="fixed top-0 w-full border-b border-b-zinc-300 bg-primary bg-white py-2 dark:border-b-zinc-700 dark:bg-zinc-900">
-      <nav className="mx-auto flex h-full w-full items-center justify-between px-4">
+    <header className="fixed top-0 h-[50px] w-full border-b border-b-zinc-300 bg-primary bg-white py-2 pl-[260px] dark:border-b-zinc-800 dark:bg-zinc-900">
+      <nav className="mx-auto flex h-full w-full items-center justify-between pr-4">
         <div className="flex items-center gap-4">
-          <Link href="/dashboard">
-            <h2 className="text-lg font-semibold text-black dark:text-white">
-              Ignition
-            </h2>
-          </Link>
           <Show when={!!form}>
             <Link href={`/dashboard/${form?.id}`}>
               <p className="text-sm font-semibold text-black dark:text-white">
