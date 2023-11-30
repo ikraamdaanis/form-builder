@@ -116,7 +116,7 @@ export const FormSettings = ({ form }: Props) => {
             type="submit"
             className="h-8 bg-brandColour text-xs font-semibold text-white transition hover:bg-brandColour hover:brightness-110"
           >
-            Submit
+            Save Settings
           </Button>
           <small className="text-xs text-zinc-400">
             Last updated at:{" "}

@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge } from "components/ui/badge";
 import { Button } from "components/ui/button";
 import {
   Table,
@@ -11,8 +12,8 @@ import {
 } from "components/ui/table";
 import { Content, Form, FormSubmission } from "database/schema";
 import { useEditorLinks } from "features/editor/hooks/useEditorLinks";
-import { ArrowRight, Edit } from "lucide-react";
 import Link from "next/link";
+import { cn } from "utils/cn";
 
 type Props = {
   form: Form;
@@ -31,21 +32,32 @@ export const FormDashboard = ({ form, formSubmissions }: Props) => {
 
   return (
     <div className="mx-auto flex min-h-full w-full max-w-[1600px] flex-col pt-[50px]">
-      <div className="flex items-center gap-2 p-4">
-        <Button asChild className="text-md w-full gap-4">
-          <Link href={`/forms/${form.id}`} target="_blank">
-            View Form <ArrowRight className="h-4 w-4" />
+      <div className="flex items-center justify-between p-4">
+        <div className="flex cursor-default items-center">
+          <h1 className="flex items-center text-2xl font-bold">{form.name} </h1>
+          <Badge
+            className={cn(
+              "ml-4 text-white transition hover:brightness-110",
+              form.published
+                ? "bg-green-500 hover:bg-green-500"
+                : "bg-zinc-600 hover:bg-zinc-600"
+            )}
+          >
+            {form.published ? "Live" : "Unpublished"}
+          </Badge>
+          <Link
+            href={`/forms/${form.id}`}
+            target="_blank"
+            className="ml-2 text-sm text-blue-500"
+          >
+            {process.env.NEXT_PUBLIC_URL}/forms/{form.id}
           </Link>
-        </Button>
-        <Button
-          asChild
-          variant="secondary"
-          className="text-md w-full gap-4 border border-zinc-300 bg-zinc-50 hover:bg-zinc-50 hover:brightness-110 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-900"
-        >
-          <Link href={`${editorLink}/${form.id}`}>
-            Edit Form <Edit className="h-4 w-4" />
-          </Link>
-        </Button>
+        </div>
+        <Link href={`${editorLink}/${form.id}`}>
+          <Button className="bg-brandColour font-semibold text-white transition hover:bg-brandColour hover:brightness-110">
+            Form Editor
+          </Button>
+        </Link>
       </div>
       <div className="p-4">
         <h2 className="mb-4 text-lg font-semibold">Recent Submissions</h2>
