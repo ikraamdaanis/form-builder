@@ -47,7 +47,7 @@ export const PublishFormButton = ({ form }: Props) => {
   return (
     <Button
       className={cn(
-        "h-8 gap-2 rounded-sm border border-zinc-300 bg-blue-500 px-2 text-xs font-semibold text-white hover:bg-blue-600 dark:border-zinc-700",
+        "h-8 gap-2 rounded-sm border border-zinc-300 bg-blue-500 px-2 text-xs font-semibold text-white transition hover:bg-blue-500 hover:brightness-110 dark:border-zinc-700",
         isPublished && "bg-zinc-700 hover:bg-zinc-700"
       )}
       disabled={loading}

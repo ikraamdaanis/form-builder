@@ -57,7 +57,7 @@ export const FormDashboard = ({ form, formSubmissions }: Props) => {
         </div>
         <div className="flex items-center gap-2">
           <Link href={`${editorLink}/${form.id}`}>
-            <Button className="h-8 gap-2 rounded-sm border border-zinc-300 bg-brandColour px-2 text-xs font-semibold text-white hover:bg-brandColour dark:border-zinc-700">
+            <Button className="h-8 gap-2 rounded-sm border border-zinc-300 bg-brandColour px-2 text-xs font-semibold text-white transition hover:bg-brandColour hover:brightness-110 dark:border-zinc-700">
               <Brush className="h-4 w-4" /> Form Editor
             </Button>
           </Link>
