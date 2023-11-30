@@ -11,7 +11,7 @@ import { Suspense } from "react";
 export const dashboardLink = "/dashboard";
 
 export const metadata: Metadata = {
-  title: "Dashboard | Form Editor"
+  title: "Dashboard | Ignition"
 };
 
 const DashboardPage = async () => {

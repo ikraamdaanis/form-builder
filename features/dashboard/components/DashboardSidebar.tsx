@@ -1,6 +1,7 @@
 "use client";
 
 import { Form } from "database/schema";
+import { Cog, Home, Mails } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ComponentProps } from "react";
@@ -17,27 +18,27 @@ type Props = {
 export const DashboardSidebar = ({ form }: Props) => {
   const pathname = usePathname();
 
+  const isOverview = pathname === `/dashboard/${form.id}`;
   const isSubmissions = pathname.includes("submissions");
   const isSettings = pathname.includes("settings");
 
   return (
-    <nav className="flex h-full w-[280px] max-w-[280px] flex-grow flex-col gap-2 overflow-y-auto border-r border-muted border-r-zinc-300 bg-zinc-50 pb-4 pt-[66px] dark:border-zinc-700 dark:bg-zinc-900">
-      <div className="flex flex-col gap-1">
-        <NavbarLink href={`/forms/${form?.id}`} target="_blank">
-          Published Form
+    <nav className="z-10 flex h-full w-[280px] max-w-[280px] flex-grow flex-col gap-2 overflow-y-auto border-r border-muted border-r-zinc-300 bg-zinc-50 py-4 dark:border-zinc-700 dark:bg-zinc-900">
+      <div className="flex flex-col gap-4">
+        <NavbarLink href={`/dashboard/${form?.id}`} isActive={isOverview}>
+          <Home className="h-4 w-4" /> Overview
         </NavbarLink>
-        <NavbarLink href={`/editor/${form?.id}`}>Form Editor</NavbarLink>
         <NavbarLink
           href={`/dashboard/${form?.id}/submissions`}
           isActive={isSubmissions}
         >
-          Submissions
+          <Mails className="h-4 w-4" /> Submissions
         </NavbarLink>
         <NavbarLink
           href={`/dashboard/${form?.id}/settings`}
           isActive={isSettings}
         >
-          Settings
+          <Cog className="h-4 w-4" /> Settings
         </NavbarLink>
       </div>
     </nav>
@@ -52,7 +53,7 @@ const NavbarLink = ({
   return (
     <Link
       className={cn(
-        "hover:bg-zincHover mx-2 rounded-sm p-2 text-sm font-semibold transition hover:dark:bg-zinc-800",
+        "mx-2 flex items-center gap-2 rounded-sm p-2 text-sm font-semibold transition hover:bg-zincHover hover:dark:bg-zinc-800",
         isActive && "bg-zincHover dark:bg-zinc-800"
       )}
       {...props}

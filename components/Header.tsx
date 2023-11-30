@@ -30,7 +30,7 @@ export const Header = ({ form }: Props) => {
         <div className="flex items-center gap-4">
           <Link href="/dashboard">
             <h2 className="text-lg font-semibold text-black dark:text-white">
-              Form Editor
+              Ignition
             </h2>
           </Link>
           <Show when={!!form}>

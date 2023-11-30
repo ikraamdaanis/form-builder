@@ -9,8 +9,9 @@ import { ReactNode } from "react";
 const manrope = Manrope({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Form Editor",
-  description: "Form Editor"
+  title: "Ignition",
+  description:
+    "Ignition is a versatile form creation tool that allows users to effortlessly design and customize forms for various purposes."
 };
 
 type Props = {
