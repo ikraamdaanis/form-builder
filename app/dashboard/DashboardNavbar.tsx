@@ -25,8 +25,8 @@ export const DashboardNavbar = ({ form }: Props) => {
   const isDashboard = pathname.includes("dashboard");
 
   return (
-    <header className="fixed top-0 h-[50px] w-full border-b border-b-zinc-300 bg-primary bg-white py-2 pl-[260px] dark:border-b-zinc-800 dark:bg-zinc-900">
-      <nav className="mx-auto flex h-full w-full items-center justify-between pr-4">
+    <header className="fixed top-0 h-[50px] w-full border-b border-b-zinc-300 bg-primary bg-white py-2 pl-[280px] dark:border-b-zinc-800 dark:bg-zinc-900">
+      <nav className="mx-auto flex h-full w-full items-center justify-between px-4">
         <div className="flex items-center gap-4">
           <Show when={!!form}>
             <Link href={`/dashboard/${form?.id}`}>

@@ -18,12 +18,10 @@ export default async function DashboardLayout({ children, params }: Props) {
   }
 
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full bg-zinc-50 dark:bg-zinc-900">
       <DashboardNavbar form={form} />
-      <div className="flex h-full w-full bg-zinc-50 dark:bg-zinc-900">
-        <DashboardSidebar form={form} />
-        {children}
-      </div>
+      <DashboardSidebar form={form} />
+      <div className="flex h-full w-full pl-[280px]">{children}</div>
     </div>
   );
 }

@@ -4,16 +4,18 @@ import { ReactNode } from "react";
 
 type Props = {
   children: ReactNode;
+  params: {
+    formId: string;
+  };
 };
 
-export default function DashboardLayout({ children }: Props) {
+export default function DashboardLayout({ children, params }: Props) {
+  console.log("hi", params.formId);
   return (
     <div className="h-full w-full bg-zinc-50 dark:bg-zinc-900">
       <DashboardNavbar />
-      <div className="flex h-full w-full pl-[280px]">
-        <DashboardSidebar />
-        {children}
-      </div>
+      <DashboardSidebar />
+      <div className="flex h-full w-full pl-[280px]">{children}</div>
     </div>
   );
 }
