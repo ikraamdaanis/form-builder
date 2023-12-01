@@ -1,9 +1,11 @@
 "use client";
 
+import { Show } from "components/Show";
 import { Content } from "database/schema";
 import { FormElements } from "features/editor/types";
 import { PublicForm } from "features/forms/types";
 import { createSubmission } from "features/submissions/actions/createSubmission";
+import Link from "next/link";
 
 type Props = {
   form: PublicForm;
@@ -33,6 +35,21 @@ export const PublishedForm = ({ form }: Props) => {
 
   return (
     <div className="flex h-full w-full flex-grow flex-col items-center justify-start overflow-y-auto bg-white">
+      <Show when={!form.published}>
+        <div className="flex h-10 w-full items-center justify-center bg-brandColour">
+          <p className="font-medium text-white">
+            This form is not published. Please go to the{" "}
+            <Link
+              href={`/dashboard/${form.id}`}
+              target="_blank"
+              className="font-semibold underline transition hover:text-blue-100"
+            >
+              form settings
+            </Link>{" "}
+            to publish it.
+          </p>
+        </div>
+      </Show>
       <form
         action={handleSubmit}
         className="flex h-full w-full flex-col p-4"

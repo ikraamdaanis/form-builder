@@ -4,13 +4,9 @@ import { ReactNode } from "react";
 
 type Props = {
   children: ReactNode;
-  params: {
-    formId: string;
-  };
 };
 
-export default function DashboardLayout({ children, params }: Props) {
-  console.log("hi", params.formId);
+export default function DashboardLayout({ children }: Props) {
   return (
     <div className="h-full w-full bg-zinc-50 dark:bg-zinc-900">
       <DashboardNavbar />

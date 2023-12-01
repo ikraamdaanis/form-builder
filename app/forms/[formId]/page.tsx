@@ -1,6 +1,7 @@
-import { getPublicFormById } from "features/editor/actions/getFormById";
+import { fetchPublicForm } from "features/forms/actions/fetchPublicForm";
 import { PublishedForm } from "features/forms/components/PublishedForm";
 import { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 type Props = {
   params: {
@@ -9,7 +10,7 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const form = await getPublicFormById(params.formId);
+  const form = await fetchPublicForm(params.formId);
 
   return {
     title: form?.name
@@ -24,10 +25,10 @@ export const dynamic = "force-dynamic";
  * and displays it for the users to fill in and submit.
  */
 const FormPage = async ({ params }: Props) => {
-  const form = await getPublicFormById(params.formId);
+  const form = await fetchPublicForm(params.formId);
 
   if (!form) {
-    throw new Error("Form not found");
+    return redirect("/not-found");
   }
 
   return <PublishedForm form={form} />;
