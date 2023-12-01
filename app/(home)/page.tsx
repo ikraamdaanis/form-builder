@@ -1,6 +1,5 @@
+import { GetStarted } from "app/(home)/GetStarted";
 import { HomeHeader } from "app/(home)/HomeHeader";
-import { Button } from "components/ui/button";
-import Link from "next/link";
 
 /**
  * The homepage for the application. Displays the product features and links to
@@ -16,11 +15,7 @@ export default async function HomePage() {
             Effortless Form Creation for Every Purpose
           </h1>
           <div className="flex items-center justify-center gap-2">
-            <Link href="/sign-up">
-              <Button className="bg-brandColour font-semibold text-white transition hover:bg-brandColour hover:brightness-110">
-                Get Started
-              </Button>
-            </Link>
+            <GetStarted />
           </div>
         </div>
       </section>
