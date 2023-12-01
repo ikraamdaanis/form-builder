@@ -8,6 +8,13 @@
       "when": 1701289416578,
       "tag": "0000_petite_mercury",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1701463850919,
+      "tag": "0001_white_shooting_star",
+      "breakpoints": true
     }
   ]
 }

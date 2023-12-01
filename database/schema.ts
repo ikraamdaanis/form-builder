@@ -11,6 +11,15 @@ import {
 } from "drizzle-orm/pg-core";
 import { FormElementInstance } from "features/editor/types";
 
+const contentDefault: Content = {
+  settings: {
+    maxWidth: "1024px",
+    gap: "16px"
+  },
+  elements: [],
+  formFields: []
+};
+
 export const forms = pgTable(
   "forms",
   {
@@ -19,7 +28,7 @@ export const forms = pgTable(
     name: varchar("name", { length: 256 }).default("default_name").notNull(),
     published: boolean("published").default(false).notNull(),
     description: text("description"),
-    content: text("content").default("[]"),
+    content: text("content").default(JSON.stringify(contentDefault)),
     visits: integer("visits").default(0).notNull(),
     shareUrl: uuid("share_url").defaultRandom().notNull(),
     createdAt: timestamp("created_at").defaultNow().notNull(),

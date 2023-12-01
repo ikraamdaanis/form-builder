@@ -1,0 +1,1 @@
+ALTER TABLE "forms" ALTER COLUMN "content" SET DEFAULT '{"settings":{"maxWidth":"1024px","gap":"16px"},"elements":[],"formFields":[]}';

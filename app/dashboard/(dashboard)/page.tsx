@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: "Dashboard | Ignition"
 };
 
-const DashboardPage = async () => {
+export default async function DashboardPage() {
   const user = await currentUser();
 
   if (!user) {
@@ -42,6 +42,4 @@ const DashboardPage = async () => {
       </div>
     </div>
   );
-};
-
-export default DashboardPage;
+}
