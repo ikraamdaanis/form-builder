@@ -1,6 +1,7 @@
 import "app/globals.css";
 import { Toaster } from "components/ui/toaster";
 import type { Metadata } from "next";
+import { CookiesProvider } from "next-client-cookies/server";
 import { Manrope } from "next/font/google";
 import { ClerkProvider } from "providers/ClerkProvider";
 import { ThemeProvider } from "providers/ThemeProvider";
@@ -21,13 +22,15 @@ type Props = {
 
 export default function RootLayout({ children }: Props) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={cn("bg-zinc-50 dark:bg-zinc-900", manrope.className)}>
-        <ThemeProvider>
-          <Toaster />
-          <ClerkProvider>{children}</ClerkProvider>
-        </ThemeProvider>
-      </body>
-    </html>
+    <CookiesProvider>
+      <html lang="en" suppressHydrationWarning>
+        <body className={cn("bg-zinc-50 dark:bg-zinc-900", manrope.className)}>
+          <ThemeProvider>
+            <Toaster />
+            <ClerkProvider>{children}</ClerkProvider>
+          </ThemeProvider>
+        </body>
+      </html>
+    </CookiesProvider>
   );
 }

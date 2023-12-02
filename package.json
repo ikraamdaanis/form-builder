@@ -36,6 +36,7 @@
     "drizzle-orm": "^0.29.1",
     "lucide-react": "^0.291.0",
     "next": "14.0.2",
+    "next-client-cookies": "^1.1.0",
     "next-themes": "^0.2.1",
     "pg": "^8.11.3",
     "postgres": "^3.4.3",
