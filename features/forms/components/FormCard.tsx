@@ -10,7 +10,6 @@ import {
 } from "components/ui/card";
 import { Skeleton } from "components/ui/skeleton";
 import { Form } from "database/schema";
-import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 type Props = {
@@ -39,10 +38,8 @@ export const FormCard = ({ form }: Props) => {
             <CardDescription className="flex items-center justify-between p-0 text-sm text-muted-foreground">
               {form.published && (
                 <span className="flex items-center gap-2">
-                  <ArrowRight className="text-muted-foreground" />
-                  <span>{form.views.toLocaleString()}</span>
-                  <ArrowRight className="text-muted-foreground" />
-                  <span>{form.submissions.toLocaleString()}</span>
+                  <span>Views: {form.views.toLocaleString()}</span>
+                  <span>Submissions: {form.submissions.toLocaleString()}</span>
                 </span>
               )}
             </CardDescription>
