@@ -29,7 +29,7 @@ export async function getFormStats() {
     submissionRate = (submissions / views) * 100;
   }
 
-  const bounceRate = 100 - submissionRate;
+  const bounceRate = ((views - submissions) / views) * 100;
 
   return { views, submissions, submissionRate, bounceRate };
 }

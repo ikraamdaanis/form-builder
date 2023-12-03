@@ -39,7 +39,7 @@ export const StatsCards = ({ data, loading }: Props) => {
         title="Bounce rate"
         icon={<LogOut className="h-5 w-5 text-zinc-500" />}
         helperText="Views that leaves without interacting"
-        value={data?.submissionRate.toLocaleString() + "%" || ""}
+        value={data?.bounceRate.toLocaleString() + "%" || ""}
         loading={loading}
       />
     </div>
