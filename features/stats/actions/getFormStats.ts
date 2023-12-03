@@ -15,21 +15,21 @@ export async function getFormStats() {
   const stats = await db.query.forms.findFirst({
     where: eq(forms.userId, user.id),
     columns: {
-      visits: true,
+      views: true,
       submissions: true
     }
   });
 
-  const visits = stats?.visits || 0;
+  const views = stats?.views || 0;
   const submissions = stats?.submissions || 0;
 
   let submissionRate = 0;
 
-  if (visits > 0) {
-    submissionRate = (submissions / visits) * 100;
+  if (views > 0) {
+    submissionRate = (submissions / views) * 100;
   }
 
   const bounceRate = 100 - submissionRate;
 
-  return { visits, submissions, submissionRate, bounceRate };
+  return { views, submissions, submissionRate, bounceRate };
 }

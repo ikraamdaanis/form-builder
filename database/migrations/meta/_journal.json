@@ -22,6 +22,13 @@
       "when": 1701471747837,
       "tag": "0002_narrow_onslaught",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1701604138607,
+      "tag": "0003_wide_jimmy_woo",
+      "breakpoints": true
     }
   ]
 }

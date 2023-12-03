@@ -5,7 +5,10 @@ import { Content } from "database/schema";
 import { FormElements } from "features/editor/types";
 import { PublicForm } from "features/forms/types";
 import { createSubmission } from "features/submissions/actions/createSubmission";
+import { useCookies } from "next-client-cookies";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 type Props = {
   form: PublicForm;
@@ -16,7 +19,18 @@ type Props = {
  * created it in the form editor.
  */
 export const PublishedForm = ({ form }: Props) => {
+  const router = useRouter();
+
   const formContent = JSON.parse(form.content || "") as Content;
+
+  const cookies = useCookies();
+  const formCookie = cookies.get(form.id);
+
+  useEffect(() => {
+    if (!formCookie) {
+      cookies.set(form.id, "Hello");
+    }
+  }, [cookies, form.id, formCookie]);
 
   const currentElements = formContent.elements;
   const currentSettings = formContent.settings;
@@ -31,6 +45,7 @@ export const PublishedForm = ({ form }: Props) => {
     });
 
     console.log("RESPONSE: ", response);
+    router.refresh();
   }
 
   return (
