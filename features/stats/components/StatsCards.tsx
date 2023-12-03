@@ -8,17 +8,17 @@ type Props = {
 };
 
 /**
- * A component that displays statistics about forms, such as total visits
+ * A component that displays statistics about forms, such as total views
  * submissions, submission rate, and bounce rate.
  */
 export const StatsCards = ({ data, loading }: Props) => {
   return (
     <div className="grid w-full grid-cols-1 gap-4 p-4 md:grid-cols-2 lg:grid-cols-4">
       <StatsCard
-        title="Total visits"
+        title="Total Views"
         icon={<Eye className="h-5 w-5 text-zinc-500" />}
-        helperText="All time form visits"
-        value={data?.visits.toLocaleString() || ""}
+        helperText="All time form views"
+        value={data?.views.toLocaleString() || ""}
         loading={loading}
       />
       <StatsCard
@@ -31,14 +31,14 @@ export const StatsCards = ({ data, loading }: Props) => {
       <StatsCard
         title="Submission rate"
         icon={<Percent className="h-5 w-5 text-zinc-500" />}
-        helperText="Visits that result in form submission"
+        helperText="Views that result in form submission"
         value={data?.submissionRate.toLocaleString() + "%" || ""}
         loading={loading}
       />
       <StatsCard
         title="Bounce rate"
         icon={<LogOut className="h-5 w-5 text-zinc-500" />}
-        helperText="Visits that leaves without interacting"
+        helperText="Views that leaves without interacting"
         value={data?.submissionRate.toLocaleString() + "%" || ""}
         loading={loading}
       />

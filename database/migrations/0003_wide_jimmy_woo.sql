@@ -1,0 +1,1 @@
+ALTER TABLE "forms" RENAME COLUMN "visits" TO "views";

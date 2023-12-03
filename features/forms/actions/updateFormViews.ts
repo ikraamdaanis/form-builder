@@ -5,10 +5,10 @@ import { FormUpdateSchema, forms } from "database/schema";
 import { eq } from "drizzle-orm";
 
 /** Updates a form. */
-export async function updateFormViews(formId: string, count: number) {
+export async function updateFormViews(formId: string, viewCount: number) {
   const values: Partial<FormUpdateSchema> = {
     id: formId,
-    visits: count,
+    views: viewCount,
     updatedAt: new Date()
   };
 

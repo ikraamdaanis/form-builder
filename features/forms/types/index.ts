@@ -10,5 +10,5 @@ export type CreateFormSchema = z.infer<typeof createFormSchema>;
 
 export type PublicForm = Omit<
   Form,
-  "submissions" | "visits" | "userId" | "formSubmissions"
+  "submissions" | "views" | "userId" | "formSubmissions"
 >;

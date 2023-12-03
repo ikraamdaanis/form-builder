@@ -2,7 +2,7 @@
 
 import { currentUser } from "@clerk/nextjs";
 import { db } from "database/db";
-import { Form, forms } from "database/schema";
+import { forms } from "database/schema";
 import { eq } from "drizzle-orm";
 import { updateFormViews } from "features/forms/actions/updateFormViews";
 import { PublicForm } from "features/forms/types";
@@ -12,7 +12,7 @@ import { getCookies } from "next-client-cookies/server";
 /**
  * Fetches a form for the public. If the form isn't published then it can only
  * be accessed by its admin who is currently signed into the application. The
- * visits count for the form is increased only if it's the first time the user
+ * views count for the form is increased only if it's the first time the user
  * has seen the form. We're tracking this via a local cookie.
  */
 export async function fetchPublicForm(
@@ -27,7 +27,7 @@ export async function fetchPublicForm(
     where: eq(forms.id, formId)
   });
 
-  const updatedVisits = (form?.visits || 0) + 1;
+  const updatedViewCount = (form?.views || 0) + 1;
 
   if (!form?.published) {
     // If there's no user then we return null.
@@ -35,7 +35,7 @@ export async function fetchPublicForm(
 
     // If the user is the admin for the form we return the form.
     if (user.id === form?.userId) {
-      if (!formCookie) updateFormViews(formId, updatedVisits);
+      if (!formCookie) updateFormViews(formId, updatedViewCount);
 
       return generatePublicForm(form);
     }
@@ -44,13 +44,6 @@ export async function fetchPublicForm(
     return null;
   }
 
-  const publicForm = form as Omit<Form, "userId" | "visits"> & {
-    userId?: string;
-    visits?: number;
-  };
-  delete publicForm["userId"];
-  delete publicForm["visits"];
-
-  if (!formCookie) updateFormViews(formId, updatedVisits);
+  if (!formCookie) updateFormViews(formId, updatedViewCount);
   return generatePublicForm(form);
 }

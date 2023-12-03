@@ -40,7 +40,7 @@ export const FormCard = ({ form }: Props) => {
               {form.published && (
                 <span className="flex items-center gap-2">
                   <ArrowRight className="text-muted-foreground" />
-                  <span>{form.visits.toLocaleString()}</span>
+                  <span>{form.views.toLocaleString()}</span>
                   <ArrowRight className="text-muted-foreground" />
                   <span>{form.submissions.toLocaleString()}</span>
                 </span>
