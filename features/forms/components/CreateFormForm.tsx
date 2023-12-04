@@ -96,9 +96,9 @@ export const CreateFormForm = ({ closeModal }: Props) => {
         <Button
           onClick={form.handleSubmit(onSubmit)}
           disabled={form.formState.isSubmitting}
-          className="mt-4 w-full bg-brandColour text-white transition hover:bg-brandColour hover:brightness-110"
+          className="mt-4 w-full bg-brandColour font-semibold text-white transition hover:bg-brandColour hover:brightness-110"
         >
-          {!form.formState.isSubmitting && <span>Save</span>}
+          {!form.formState.isSubmitting && <span>Create Form</span>}
           {form.formState.isSubmitting && <Loader className="animate-spin" />}
         </Button>
       </form>
