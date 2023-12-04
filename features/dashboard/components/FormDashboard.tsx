@@ -33,7 +33,7 @@ export const FormDashboard = ({ form, formSubmissions }: Props) => {
   const formFields = content.formFields;
 
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-[1600px] flex-col pt-[50px]">
+    <div className="mx-auto flex min-h-full w-full max-w-[1600px] flex-col">
       <div className="flex items-center justify-between p-4">
         <div className="flex cursor-default items-center">
           <h1 className="flex items-center text-2xl font-bold">{form.name} </h1>

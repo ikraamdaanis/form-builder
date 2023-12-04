@@ -22,11 +22,15 @@ export const DashboardSidebar = ({ form }: Props) => {
 
   const HomeSidebar = () => {
     const isHome = pathname === `/dashboard`;
+    const isForms = pathname === `/dashboard/forms`;
 
     return (
       <>
-        <NavbarLink href={`/dashboard`} isActive={isHome}>
+        <NavbarLink href="/dashboard" isActive={isHome}>
           <Home className="h-4 w-4" /> Home
+        </NavbarLink>
+        <NavbarLink href="/dashboard/forms" isActive={isForms}>
+          <Mails className="h-4 w-4" /> Forms
         </NavbarLink>
       </>
     );
