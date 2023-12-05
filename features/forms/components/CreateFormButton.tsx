@@ -22,15 +22,15 @@ export const CreateFormButton = () => {
   return (
     <Dialog open={isOpen} onOpenChange={open => setIsOpen(open)}>
       <DialogTrigger asChild>
-        <Button variant={"outline"} className="">
-          <p className="">Create new form</p>
+        <Button className="h-8 bg-brandColour font-semibold text-white transition hover:bg-brandColour hover:brightness-110">
+          Create new Form
         </Button>
       </DialogTrigger>
       <DialogContent className="bg-zinc-50 dark:bg-zinc-900">
         <DialogHeader>
-          <DialogTitle>Create form</DialogTitle>
+          <DialogTitle>Create a new Form</DialogTitle>
           <DialogDescription>
-            Create a new form to start collecting responses
+            Make a form to start collecting submissions.
           </DialogDescription>
         </DialogHeader>
         <CreateFormForm closeModal={() => setIsOpen(false)} />
