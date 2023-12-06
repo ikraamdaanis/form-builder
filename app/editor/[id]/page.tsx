@@ -1,5 +1,5 @@
 import { Show } from "components/Show";
-import { getFormById } from "features/editor/actions/getFormById";
+import { fetchForm } from "features/forms/actions/fetchForm";
 import { FormEditor } from "features/editor/components";
 import { EditorNavbar } from "features/editor/components/EditorNavbar";
 import { EditorProperties } from "features/editor/components/EditorProperties";
@@ -16,7 +16,7 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const form = await getFormById(params.id);
+  const form = await fetchForm(params.id);
 
   return {
     title: `${form?.name} | Editor`
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const EditorPage = async ({ params, searchParams }: Props) => {
-  const form = await getFormById(params.id);
+  const form = await fetchForm(params.id);
   const isPreview = searchParams.preview === "true";
 
   if (!form) {

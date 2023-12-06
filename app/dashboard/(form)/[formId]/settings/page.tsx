@@ -1,4 +1,4 @@
-import { getFormById } from "features/editor/actions/getFormById";
+import { fetchForm } from "features/forms/actions/fetchForm";
 import { FormSettings } from "features/forms/components/FormSettings";
 import { Metadata } from "next";
 
@@ -9,7 +9,7 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const form = await getFormById(params.formId);
+  const form = await fetchForm(params.formId);
 
   return {
     title: `${form?.name} | Settings`
@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function SettingsPage({ params }: Props) {
-  const form = await getFormById(params.formId);
+  const form = await fetchForm(params.formId);
 
   if (!form) {
     throw new Error("Form not found");

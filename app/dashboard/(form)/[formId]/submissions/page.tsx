@@ -1,4 +1,4 @@
-import { getFormById } from "features/editor/actions/getFormById";
+import { fetchForm } from "features/forms/actions/fetchForm";
 import { fetchSubmissions } from "features/submissions/actions/fetchSubmissions";
 import { SubmissionsTable } from "features/submissions/components/SubmissionsTable";
 import { Metadata } from "next";
@@ -10,7 +10,7 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const form = await getFormById(params.formId);
+  const form = await fetchForm(params.formId);
 
   return {
     title: `${form?.name} | Submissions`
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const SubmissionsPage = async ({ params }: Props) => {
-  const form = await getFormById(params.formId);
+  const form = await fetchForm(params.formId);
   const formSubmissions = await fetchSubmissions(params.formId, 10);
 
   if (!form) {

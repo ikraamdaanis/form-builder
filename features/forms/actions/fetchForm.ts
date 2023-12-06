@@ -6,7 +6,7 @@ import { forms } from "database/schema";
 import { and, eq } from "drizzle-orm";
 
 /** Fetches a form via an id. */
-export async function getFormById(formId: string) {
+export async function fetchForm(formId: string) {
   const user = await currentUser();
 
   if (!user) {

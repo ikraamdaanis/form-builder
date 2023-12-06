@@ -1,6 +1,6 @@
 import { DashboardNavbar } from "app/dashboard/DashboardNavbar";
 import { DashboardSidebar } from "app/dashboard/DashboardSidebar";
-import { getFormById } from "features/editor/actions/getFormById";
+import { fetchForm } from "features/forms/actions/fetchForm";
 import { ReactNode } from "react";
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 };
 
 export default async function DashboardLayout({ children, params }: Props) {
-  const form = await getFormById(params.formId);
+  const form = await fetchForm(params.formId);
 
   if (!form) {
     throw new Error("Form not found");

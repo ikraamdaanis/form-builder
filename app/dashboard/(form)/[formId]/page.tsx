@@ -1,5 +1,5 @@
 import { FormDashboard } from "features/dashboard/components/FormDashboard";
-import { getFormById } from "features/editor/actions/getFormById";
+import { fetchForm } from "features/forms/actions/fetchForm";
 import { fetchRecentSubmissions } from "features/submissions/actions/fetchRecentSubmissions";
 import { Metadata } from "next";
 
@@ -10,7 +10,7 @@ type Props = {
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const form = await getFormById(params.formId);
+  const form = await fetchForm(params.formId);
 
   return {
     title: `${form?.name} | Dashboard`
@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 const FormPage = async ({ params }: Props) => {
-  const form = await getFormById(params.formId);
+  const form = await fetchForm(params.formId);
   const formSubmissions = await fetchRecentSubmissions(params.formId);
 
   if (!form) {
