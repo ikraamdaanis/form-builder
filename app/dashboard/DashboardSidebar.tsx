@@ -1,8 +1,10 @@
 "use client";
 
+import { useUser } from "@clerk/nextjs";
 import { Show } from "components/Show";
 import { Separator } from "components/ui/separator";
 import { Form } from "database/schema";
+import { ProfileButton } from "features/auth/components/ProfileButton";
 import { Cog, GanttChartSquare, Home, Mails } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -19,6 +21,7 @@ type Props = {
  */
 export const DashboardSidebar = ({ form }: Props) => {
   const pathname = usePathname();
+  const { user } = useUser();
 
   const HomeSidebar = () => {
     const isHome = pathname === `/dashboard`;
@@ -78,6 +81,18 @@ export const DashboardSidebar = ({ form }: Props) => {
         <Show when={!!form}>
           <FormSidebar />
         </Show>
+      </div>
+      <div className="mt-auto p-4">
+        <Separator className="mb-4" />
+        <div className="flex items-center gap-2">
+          <ProfileButton className="h-9 w-9" />
+          <div className="flex flex-col gap-0">
+            <p className="text-sm">{user?.firstName}</p>
+            <p className="text-xs text-zinc-400">
+              {user?.primaryEmailAddress?.emailAddress}
+            </p>
+          </div>
+        </div>
       </div>
     </nav>
   );
