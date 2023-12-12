@@ -11,6 +11,7 @@ namespace NodeJS {
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: string;
     NEXT_PUBLIC_CLERK_SIGN_IN_URL: string;
     NEXT_PUBLIC_CLERK_SIGN_UP_URL: string;
+    NEXT_PUBLIC_VERCEL_URL: string;
     NODE_ENV: "development" | "production";
     PORT: string;
     PWD: string;
