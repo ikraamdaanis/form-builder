@@ -1,4 +1,3 @@
-import { DashboardNavbar } from "app/dashboard/DashboardNavbar";
 import { DashboardSidebar } from "app/dashboard/DashboardSidebar";
 import { fetchForm } from "features/forms/actions/fetchForm";
 import { ReactNode } from "react";
@@ -19,9 +18,12 @@ export default async function DashboardLayout({ children, params }: Props) {
 
   return (
     <div className="h-full w-full">
-      <DashboardNavbar form={form} />
       <DashboardSidebar form={form} />
-      <div className="flex h-full w-full pl-[280px] pt-[50px]">{children}</div>
+      <div className="flex h-full w-full p-4 pl-[280px]">
+        <div className="border-borderLight dark:border-borderDark dark:bg-backgroundDark2 bg-backgroundLight2 h-full w-full rounded-md border">
+          {children}
+        </div>
+      </div>
     </div>
   );
 }

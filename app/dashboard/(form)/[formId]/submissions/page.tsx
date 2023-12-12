@@ -26,7 +26,7 @@ const SubmissionsPage = async ({ params }: Props) => {
   }
 
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-[1600px] flex-col">
+    <div className="mx-auto flex min-h-full w-full flex-col">
       <SubmissionsTable form={form} formSubmissions={formSubmissions} />
     </div>
   );

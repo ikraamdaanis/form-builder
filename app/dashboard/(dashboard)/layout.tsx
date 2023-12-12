@@ -1,4 +1,3 @@
-import { DashboardNavbar } from "app/dashboard/DashboardNavbar";
 import { DashboardSidebar } from "app/dashboard/DashboardSidebar";
 import { ReactNode } from "react";
 
@@ -9,9 +8,12 @@ type Props = {
 export default function DashboardLayout({ children }: Props) {
   return (
     <div className="h-full w-full">
-      <DashboardNavbar />
       <DashboardSidebar />
-      <div className="flex h-full w-full pl-[280px] pt-[50px]">{children}</div>
+      <div className="flex h-full w-full p-4 pl-[280px]">
+        <div className="border-borderLight dark:border-borderDark dark:bg-backgroundDark2 bg-backgroundLight2 h-full w-full rounded-md border">
+          {children}
+        </div>
+      </div>
     </div>
   );
 }
