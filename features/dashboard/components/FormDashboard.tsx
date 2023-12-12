@@ -52,7 +52,7 @@ export const FormDashboard = ({ form, formSubmissions }: Props) => {
             target="_blank"
             className="ml-2 text-sm text-blue-500"
           >
-            {process.env.NEXT_PUBLIC_URL}/forms/{form.id}
+            {window.origin}/forms/{form.id}
           </Link>
         </div>
         <div className="flex items-center gap-2">
