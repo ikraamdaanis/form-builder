@@ -1,10 +1,9 @@
 "use client";
 
-import { useUser } from "@clerk/nextjs";
+import { SidebarMenu } from "app/dashboard/SidebarMenu";
 import { Show } from "components/Show";
 import { Separator } from "components/ui/separator";
 import { Form } from "database/schema";
-import { ProfileButton } from "features/auth/components/ProfileButton";
 import { Cog, GanttChartSquare, Home, Mails } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -21,7 +20,6 @@ type Props = {
  */
 export const DashboardSidebar = ({ form }: Props) => {
   const pathname = usePathname();
-  const { user } = useUser();
 
   const HomeSidebar = () => {
     const isHome = pathname === `/dashboard`;
@@ -68,7 +66,7 @@ export const DashboardSidebar = ({ form }: Props) => {
   };
 
   return (
-    <nav className="border-r-borderLight dark:border-r-borderDark fixed left-0 top-0 z-10 flex h-full w-[280px] max-w-[280px] flex-grow flex-col gap-2 overflow-y-auto border-r border-muted">
+    <nav className="fixed left-0 top-0 z-10 flex h-full w-[280px] max-w-[280px] flex-grow flex-col gap-2 overflow-y-auto">
       <div className="flex h-[50px] items-center gap-4 px-4 py-2">
         <Link href="/dashboard">
           <h2 className="text-lg font-semibold text-black dark:text-white">
@@ -82,17 +80,9 @@ export const DashboardSidebar = ({ form }: Props) => {
           <FormSidebar />
         </Show>
       </div>
-      <div className="mt-auto p-4">
-        <Separator className="mb-4" />
-        <div className="flex items-center gap-2">
-          <ProfileButton className="h-9 w-9" />
-          <div className="flex flex-col gap-0">
-            <p className="text-sm">{user?.firstName}</p>
-            <p className="text-xs text-zinc-400">
-              {user?.primaryEmailAddress?.emailAddress}
-            </p>
-          </div>
-        </div>
+      <div className="mt-auto p-2">
+        <Separator className="mb-2" />
+        <SidebarMenu />
       </div>
     </nav>
   );
