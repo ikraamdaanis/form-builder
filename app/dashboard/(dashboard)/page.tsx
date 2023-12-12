@@ -23,7 +23,7 @@ export default async function DashboardPage() {
   }
 
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-[1600px] flex-col bg-white dark:bg-zinc-900">
+    <div className="dark:bg-backgroundDark2 bg-backgroundLight mx-auto flex min-h-full w-full max-w-[1600px] flex-col">
       <Suspense fallback={<StatsCards loading={true} />}>
         <StatsCardsWrapper />
       </Suspense>

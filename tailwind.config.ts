@@ -20,6 +20,12 @@ module.exports = {
     extend: {
       colors: {
         brandColour: "#F6565F",
+        backgroundDark: "#1d1e1e",
+        backgroundDark2: "#181a1b",
+        backgroundLight: "#fff",
+        backgroundLight2: "#fafafa",
+        borderDark: "#2d3232",
+        borderLight: "#ececec",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",

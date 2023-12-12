@@ -24,7 +24,12 @@ export default function RootLayout({ children }: Props) {
   return (
     <CookiesProvider>
       <html lang="en" suppressHydrationWarning>
-        <body className={cn("bg-zinc-50 dark:bg-zinc-900", manrope.className)}>
+        <body
+          className={cn(
+            "bg-backgroundLight dark:bg-backgroundDark",
+            manrope.className
+          )}
+        >
           <ThemeProvider>
             <Toaster />
             <ClerkProvider>{children}</ClerkProvider>
