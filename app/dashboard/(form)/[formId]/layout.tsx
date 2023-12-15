@@ -19,10 +19,8 @@ export default async function DashboardLayout({ children, params }: Props) {
   return (
     <div className="h-full w-full">
       <DashboardSidebar form={form} />
-      <div className="flex h-full w-full p-4 pl-[280px]">
-        <div className="border-borderLight dark:border-borderDark dark:bg-backgroundDark2 bg-backgroundLight2 h-full w-full rounded-md border">
-          {children}
-        </div>
+      <div className="flex h-full w-full bg-backgroundLight2 pl-[280px] dark:bg-backgroundDark2">
+        {children}
       </div>
     </div>
   );

@@ -66,7 +66,7 @@ export const DashboardSidebar = ({ form }: Props) => {
   };
 
   return (
-    <nav className="fixed left-0 top-0 z-10 flex h-full w-[280px] max-w-[280px] flex-grow flex-col gap-2 overflow-y-auto">
+    <nav className="fixed left-0 top-0 z-10 flex h-full w-[280px] max-w-[280px] flex-grow flex-col gap-2 overflow-y-auto border-r border-r-borderLight bg-backgroundLight dark:border-r-borderDark dark:bg-backgroundDark">
       <div className="flex h-[50px] items-center gap-4 px-4 py-2">
         <Link href="/dashboard">
           <h2 className="text-lg font-semibold text-black dark:text-white">
