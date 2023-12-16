@@ -12,10 +12,6 @@ type Props = {
 export default async function DashboardLayout({ children, params }: Props) {
   const form = await fetchForm(params.formId);
 
-  if (!form) {
-    throw new Error("Form not found");
-  }
-
   return (
     <div className="h-full w-full">
       <DashboardSidebar form={form} />

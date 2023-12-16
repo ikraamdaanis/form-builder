@@ -19,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const form = await fetchForm(params.id);
 
   return {
-    title: `${form?.name} | Editor`
+    title: `${form?.name ? `${form.name} | ` : ""}Editor`
   };
 }
 

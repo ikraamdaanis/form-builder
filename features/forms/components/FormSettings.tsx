@@ -77,53 +77,48 @@ export const FormSettings = ({ form }: Props) => {
   }
 
   return (
-    <div className="p-4">
-      <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-lg font-semibold">Settings</h2>
-      </div>
-      <Form {...formRef}>
-        <form
-          onSubmit={formRef.handleSubmit(handleSubmit)}
-          className="flex w-full flex-col items-start gap-4"
+    <Form {...formRef}>
+      <form
+        onSubmit={formRef.handleSubmit(handleSubmit)}
+        className="flex w-full flex-col items-start gap-4"
+      >
+        <FormField
+          control={formRef.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem className="flex w-full flex-col gap-2 space-y-0">
+              <FormLabel>Form name</FormLabel>
+              <FormControl>
+                <Input {...field} className="w-full" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={formRef.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem className="flex w-full flex-col gap-2 space-y-0">
+              <FormLabel>Description</FormLabel>
+              <FormControl>
+                <Input {...field} className="w-full" />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button
+          type="submit"
+          className="h-8 bg-brandColour text-xs font-semibold text-white transition hover:bg-brandColour hover:brightness-110"
         >
-          <FormField
-            control={formRef.control}
-            name="name"
-            render={({ field }) => (
-              <FormItem className="flex w-full flex-col gap-2 space-y-0">
-                <FormLabel>Form name</FormLabel>
-                <FormControl>
-                  <Input {...field} className="w-full" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={formRef.control}
-            name="description"
-            render={({ field }) => (
-              <FormItem className="flex w-full flex-col gap-2 space-y-0">
-                <FormLabel>Description</FormLabel>
-                <FormControl>
-                  <Input {...field} className="w-full" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <Button
-            type="submit"
-            className="h-8 bg-brandColour text-xs font-semibold text-white transition hover:bg-brandColour hover:brightness-110"
-          >
-            Save Settings
-          </Button>
-          <small className="text-xs text-zinc-400">
-            Last updated at:{" "}
-            {dayjs(form.updatedAt).format("HH:mm dddd DD MMMM YYYY")}
-          </small>
-        </form>
-      </Form>
-    </div>
+          Save Settings
+        </Button>
+        <small className="text-xs text-zinc-400">
+          Last updated at:{" "}
+          {dayjs(form.updatedAt).format("HH:mm dddd DD MMMM YYYY")}
+        </small>
+      </form>
+    </Form>
   );
 };
