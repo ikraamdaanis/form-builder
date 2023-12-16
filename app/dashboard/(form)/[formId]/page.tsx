@@ -25,7 +25,11 @@ const FormPage = async ({ params }: Props) => {
     throw new Error("Form not found");
   }
 
-  return <FormDashboard form={form} formSubmissions={formSubmissions} />;
+  return (
+    <div className="mx-auto flex min-h-full w-full max-w-screen-2xl flex-col">
+      <FormDashboard form={form} formSubmissions={formSubmissions} />
+    </div>
+  );
 };
 
 export default FormPage;

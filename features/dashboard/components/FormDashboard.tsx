@@ -33,7 +33,7 @@ export const FormDashboard = ({ form, formSubmissions }: Props) => {
   const formFields = content.formFields;
 
   return (
-    <div className="mx-auto flex min-h-full w-full flex-col">
+    <>
       <div className="flex items-center justify-between p-4">
         <div className="flex cursor-default items-center">
           <h1 className="flex items-center text-2xl font-bold">{form.name} </h1>
@@ -66,10 +66,10 @@ export const FormDashboard = ({ form, formSubmissions }: Props) => {
       </div>
       <div className="p-4">
         <h2 className="mb-4 text-lg font-semibold">Recent Submissions</h2>
-        <div className="border-borderLight dark:border-borderDark overflow-hidden rounded-sm border">
+        <div className="overflow-hidden rounded-sm border border-borderLight dark:border-borderDark">
           <Table>
             <TableHeader>
-              <TableRow className="border-borderLight dark:border-borderDark hover:bg-backgroundLight dark:hover:bg-backgroundDark">
+              <TableRow className="border-borderLight hover:bg-backgroundLight dark:border-borderDark dark:hover:bg-backgroundDark">
                 <TableHead className="w-10">ID</TableHead>
                 {formFields?.map(field => {
                   return <TableHead key={field}>{field}</TableHead>;
@@ -83,7 +83,7 @@ export const FormDashboard = ({ form, formSubmissions }: Props) => {
                 return (
                   <TableRow
                     key={submission.id}
-                    className="border-borderLight dark:border-borderDark hover:bg-backgroundLight dark:hover:bg-backgroundDark"
+                    className="border-borderLight hover:bg-backgroundLight dark:border-borderDark dark:hover:bg-backgroundDark"
                   >
                     <TableCell>{submission.id.slice(0, 4)}</TableCell>
                     {formFields?.map(field => {
@@ -98,6 +98,6 @@ export const FormDashboard = ({ form, formSubmissions }: Props) => {
           </Table>
         </div>
       </div>
-    </div>
+    </>
   );
 };
