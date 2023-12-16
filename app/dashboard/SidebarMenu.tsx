@@ -1,4 +1,5 @@
 import { useClerk, useUser } from "@clerk/nextjs";
+import { ThemeToggler } from "components/ThemeToggler";
 import { Button } from "components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "components/ui/popover";
 import { LogOut, User } from "lucide-react";
@@ -15,7 +16,7 @@ export const SidebarMenu = () => {
 
   return (
     <Popover>
-      <PopoverTrigger className="bg-backgroundLight dark:bg-backgroundDark hover:bg-backgroundLight dark:hover:bg-backgroundDark w-full rounded-md p-2 outline-none transition hover:brightness-125">
+      <PopoverTrigger className="w-full rounded-md bg-backgroundLight p-2 outline-none transition hover:bg-backgroundLight hover:brightness-125 dark:bg-backgroundDark dark:hover:bg-backgroundDark">
         <div className="flex items-center gap-2">
           <div
             className={cn(
@@ -41,15 +42,16 @@ export const SidebarMenu = () => {
           </div>
         </div>
       </PopoverTrigger>
-      <PopoverContent className="dark:bg-backgroundDark ml-2 flex flex-col bg-zinc-50 p-0 py-4 shadow-none">
+      <PopoverContent className="ml-2 flex flex-col bg-zinc-50 p-0 py-4 shadow-none dark:bg-backgroundDark">
         <Button
-          className="bg-backgroundLight dark:bg-backgroundDark hover:bg-backgroundLight dark:hover:bg-backgroundDark flex w-full items-center justify-start gap-2 rounded-none p-0 px-4 text-left text-zinc-900 transition hover:brightness-125 dark:text-zinc-50"
+          className="flex w-full items-center justify-start gap-2 rounded-none bg-backgroundLight p-0 px-4 text-left text-zinc-900 transition hover:bg-backgroundLight hover:brightness-125 dark:bg-backgroundDark dark:text-zinc-50 dark:hover:bg-backgroundDark"
           onClick={() => openUserProfile()}
         >
           <User className="h-4 w-4" /> Manage Account
         </Button>
+        <ThemeToggler />
         <Button
-          className="bg-backgroundLight dark:hover:bg-backgroundDark dark:bg-backgroundDark hover:bg-backgroundLight flex w-full items-center justify-start gap-2 rounded-none p-0 px-4 text-left text-zinc-900 transition hover:brightness-125 dark:text-zinc-50"
+          className="flex w-full items-center justify-start gap-2 rounded-none bg-backgroundLight p-0 px-4 text-left text-zinc-900 transition hover:bg-backgroundLight hover:brightness-125 dark:bg-backgroundDark dark:text-zinc-50 dark:hover:bg-backgroundDark"
           onClick={() => signOut()}
         >
           <LogOut className="h-4 w-4" /> Logout
