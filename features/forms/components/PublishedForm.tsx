@@ -37,7 +37,7 @@ export const PublishedForm = ({ form }: Props) => {
 
   async function handleSubmit(e: FormData) {
     const data = Object.fromEntries(e);
-    console.log(data);
+    console.log("DATA: ", data);
 
     const response = await createSubmission({
       formId: form.id,
