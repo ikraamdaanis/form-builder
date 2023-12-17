@@ -2,7 +2,7 @@ import { useClerk, useUser } from "@clerk/nextjs";
 import { ThemeToggler } from "components/ThemeToggler";
 import { Button } from "components/ui/button";
 import { Popover, PopoverContent, PopoverTrigger } from "components/ui/popover";
-import { LogOut, User } from "lucide-react";
+import { LogOut, Moon, Sun, User } from "lucide-react";
 import Image from "next/image";
 import { cn } from "utils/cn";
 
@@ -49,7 +49,15 @@ export const SidebarMenu = () => {
         >
           <User className="h-4 w-4" /> Manage Account
         </Button>
-        <ThemeToggler />
+        <ThemeToggler
+          trigger={
+            <Button className="flex w-full items-center justify-start gap-2 rounded-none bg-backgroundLight p-0 px-4 text-left text-zinc-900 transition hover:bg-backgroundLight hover:brightness-125 dark:bg-backgroundDark dark:text-zinc-50 dark:hover:bg-backgroundDark">
+              <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <span>Toggle theme</span>
+            </Button>
+          }
+        />
         <Button
           className="flex w-full items-center justify-start gap-2 rounded-none bg-backgroundLight p-0 px-4 text-left text-zinc-900 transition hover:bg-backgroundLight hover:brightness-125 dark:bg-backgroundDark dark:text-zinc-50 dark:hover:bg-backgroundDark"
           onClick={() => signOut()}

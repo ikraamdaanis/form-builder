@@ -9,20 +9,32 @@ import {
 } from "components/ui/dropdown-menu";
 import { Check, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
+import { ReactNode } from "react";
 import { cn } from "utils/cn";
 
+type Props = {
+  /** Optional trigger component to overwrite the current one. */
+  trigger?: ReactNode;
+};
+
 /** Toggler for light/dark themes. Can choose between dark, light and system. */
-export const ThemeToggler = () => {
+export const ThemeToggler = ({ trigger }: Props) => {
   const { theme: currentTheme, setTheme, themes } = useTheme();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button className="flex w-full items-center justify-start gap-2 rounded-none bg-backgroundLight p-0 px-4 text-left text-zinc-900 transition hover:bg-backgroundLight hover:brightness-125 dark:bg-backgroundDark dark:text-zinc-50 dark:hover:bg-backgroundDark">
-          <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-          <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-          <span>Toggle theme</span>
-        </Button>
+        {trigger || (
+          <Button
+            variant="outline"
+            size="icon"
+            className="h-8 w-8 transition hover:brightness-90 dark:border-0 dark:bg-zinc-700"
+          >
+            <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+            <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            <span className="sr-only">Toggle theme</span>
+          </Button>
+        )}
       </DropdownMenuTrigger>
       <DropdownMenuContent
         align="center"
@@ -35,7 +47,7 @@ export const ThemeToggler = () => {
               onClick={() => {
                 setTimeout(() => {
                   setTheme(theme);
-                }, 200);
+                }, 1);
               }}
               className={cn(
                 "font-medium capitalize transition hover:brightness-125 data-[highlighted]:brightness-125 aria-[selected=false]:dark:bg-transparent",
