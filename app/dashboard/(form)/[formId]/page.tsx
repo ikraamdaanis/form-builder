@@ -1,7 +1,14 @@
-import { FormDashboard } from "features/dashboard/components/FormDashboard";
+import {
+  DashboardHeader,
+  DashboardHeaderLoader
+} from "features/dashboard/components/DashboardHeader";
 import { fetchForm } from "features/forms/actions/fetchForm";
-import { fetchRecentSubmissions } from "features/submissions/actions/fetchRecentSubmissions";
+import {
+  SubmissionsTable,
+  SubmissionsTableLoader
+} from "features/submissions/components/SubmissionsTable";
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 type Props = {
   params: {
@@ -19,15 +26,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const FormPage = async ({ params }: Props) => {
   const form = await fetchForm(params.formId);
-  const formSubmissions = await fetchRecentSubmissions(params.formId);
 
   if (!form) {
     throw new Error("Form not found");
   }
 
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-screen-2xl flex-col">
-      <FormDashboard form={form} formSubmissions={formSubmissions} />
+    <div className="mx-auto flex min-h-full w-full max-w-screen-2xl flex-col gap-4 p-4">
+      <Suspense fallback={<DashboardHeaderLoader />}>
+        <DashboardHeader formId={params.formId} />
+      </Suspense>
+      <div className="flex flex-col gap-2">
+        <div className="flex items-center justify-between">
+          <h2 className="text-xl font-semibold">Recent Submissions</h2>
+        </div>
+        <Suspense fallback={<SubmissionsTableLoader />}>
+          <SubmissionsTable formId={params.formId} />
+        </Suspense>
+      </div>
     </div>
   );
 };

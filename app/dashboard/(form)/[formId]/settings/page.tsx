@@ -1,6 +1,7 @@
 import { fetchForm } from "features/forms/actions/fetchForm";
 import { FormSettings } from "features/forms/components/FormSettings";
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 type Props = {
   params: {
@@ -25,10 +26,16 @@ export default async function SettingsPage({ params }: Props) {
 
   return (
     <div className="mx-auto flex min-h-full w-full max-w-screen-2xl flex-col p-4">
-      <div className="mb-4 flex items-center justify-between">
-        <h2 className="text-lg font-semibold">Settings</h2>
+      <div className="mb-4 flex items-center">
+        <h2 className="text-2xl font-semibold">Settings</h2>
       </div>
-      <FormSettings form={form} />
+      <Suspense
+        fallback={
+          <div className="h-60 w-full animate-pulse rounded-sm bg-zinc-300 dark:bg-zinc-800" />
+        }
+      >
+        <FormSettings form={form} />
+      </Suspense>
     </div>
   );
 }
