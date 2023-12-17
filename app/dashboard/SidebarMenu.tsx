@@ -1,3 +1,5 @@
+"use client";
+
 import { useClerk, useUser } from "@clerk/nextjs";
 import { ThemeToggler } from "components/ThemeToggler";
 import { Button } from "components/ui/button";

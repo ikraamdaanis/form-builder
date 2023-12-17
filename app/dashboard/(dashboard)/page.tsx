@@ -1,4 +1,3 @@
-import { RedirectToSignIn, currentUser } from "@clerk/nextjs";
 import { Button } from "components/ui/button";
 import { Separator } from "components/ui/separator";
 import { FormCardLoader } from "features/forms/components/FormCard";
@@ -16,12 +15,6 @@ export const metadata: Metadata = {
 };
 
 export default async function DashboardPage() {
-  const user = await currentUser();
-
-  if (!user) {
-    return <RedirectToSignIn />;
-  }
-
   return (
     <div className="mx-auto flex min-h-full w-full max-w-screen-2xl flex-col">
       <Suspense fallback={<StatsCards loading={true} />}>
