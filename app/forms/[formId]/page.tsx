@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const form = await fetchPublicForm(params.formId);
 
   return {
-    title: `${form?.name ? `${form.name} | ` : "Form"}`
+    title: form?.name || "Form"
   };
 }
 
