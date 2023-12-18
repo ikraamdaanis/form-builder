@@ -7,8 +7,6 @@ import { and, eq } from "drizzle-orm";
 
 /** Fetches a form via an id. */
 export async function fetchForm(formId: string) {
-  // await new Promise(r => setTimeout(r, 5000));
-
   try {
     const user = await currentUser();
 
