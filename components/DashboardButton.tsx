@@ -5,7 +5,7 @@ type Props = {
   customHref?: string;
 };
 
-/** Button that redirects to the dashboard. */
+/** Button that redirects to the dashboard. Used in editor & homepage navbars */
 export const DashboardButton = ({ customHref }: Props) => {
   return (
     <Link href={customHref || "/dashboard"}>
