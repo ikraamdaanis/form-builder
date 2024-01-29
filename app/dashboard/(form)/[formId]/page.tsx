@@ -26,7 +26,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 const FormPage = async ({ params }: Props) => {
   return (
-    <div className="mx-auto flex min-h-full w-full max-w-screen-2xl flex-col gap-4 p-4">
+    <div className="mx-auto flex min-h-full w-full max-w-screen-2xl flex-col gap-8 p-4">
       <Suspense fallback={<DashboardHeaderLoader />}>
         <DashboardHeader formId={params.formId} />
       </Suspense>
